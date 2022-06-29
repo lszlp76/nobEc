@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907C6F02867144E0049F4CB /* ResponseJson.swift */; };
 		F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4B285E456300676DCB /* AppDelegate.swift */; };
 		F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4D285E456300676DCB /* SceneDelegate.swift */; };
 		F9149C50285E456300676DCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4F285E456300676DCB /* ViewController.swift */; };
@@ -15,9 +16,14 @@
 		F9149C58285E456400676DCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9149C57285E456400676DCB /* Assets.xcassets */; };
 		F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9149C59285E456400676DCB /* LaunchScreen.storyboard */; };
 		F9149C63285E692700676DCB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C62285E692700676DCB /* FirstViewController.swift */; };
+		F91589C9286355670018181C /* PharmacyFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91589C8286355670018181C /* PharmacyFinder.swift */; };
+		F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C94286736D0001E103A /* TurkishConverter.swift */; };
+		F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */; };
+		F9F93C9928676BCD001E103A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C9828676BCD001E103A /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F907C6F02867144E0049F4CB /* ResponseJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseJson.swift; sourceTree = "<group>"; };
 		F9149C48285E456300676DCB /* travelguide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = travelguide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9149C4B285E456300676DCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9149C4D285E456300676DCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +34,10 @@
 		F9149C5A285E456400676DCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9149C5C285E456400676DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9149C62285E692700676DCB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		F91589C8286355670018181C /* PharmacyFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFinder.swift; sourceTree = "<group>"; };
+		F9F93C94286736D0001E103A /* TurkishConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishConverter.swift; sourceTree = "<group>"; };
+		F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFoundedData.swift; sourceTree = "<group>"; };
+		F9F93C9828676BCD001E103A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +72,44 @@
 			children = (
 				F9149C4B285E456300676DCB /* AppDelegate.swift */,
 				F9149C4D285E456300676DCB /* SceneDelegate.swift */,
-				F9149C4F285E456300676DCB /* ViewController.swift */,
-				F9149C62285E692700676DCB /* FirstViewController.swift */,
-				F9149C51285E456300676DCB /* Main.storyboard */,
+				F97E3508286C47D9003146F2 /* Model */,
+				F97E3507286C47C6003146F2 /* View */,
+				F97E3509286C47FB003146F2 /* Controller */,
 				F9149C57285E456400676DCB /* Assets.xcassets */,
-				F9149C59285E456400676DCB /* LaunchScreen.storyboard */,
 				F9149C5C285E456400676DCB /* Info.plist */,
 				F9149C54285E456300676DCB /* travelguide.xcdatamodeld */,
 			);
 			path = travelguide;
+			sourceTree = "<group>";
+		};
+		F97E3507286C47C6003146F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F9149C59285E456400676DCB /* LaunchScreen.storyboard */,
+				F9149C51285E456300676DCB /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F97E3508286C47D9003146F2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F91589C8286355670018181C /* PharmacyFinder.swift */,
+				F9F93C9828676BCD001E103A /* Location.swift */,
+				F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */,
+				F9F93C94286736D0001E103A /* TurkishConverter.swift */,
+				F907C6F02867144E0049F4CB /* ResponseJson.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F97E3509286C47FB003146F2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9149C4F285E456300676DCB /* ViewController.swift */,
+				F9149C62285E692700676DCB /* FirstViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,11 +183,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91589C9286355670018181C /* PharmacyFinder.swift in Sources */,
+				F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */,
+				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
 				F9149C63285E692700676DCB /* FirstViewController.swift in Sources */,
+				F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */,
 				F9149C56285E456300676DCB /* travelguide.xcdatamodeld in Sources */,
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
 				F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */,
+				F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,17 +344,20 @@
 				DEVELOPMENT_TEAM = GZ94AWJKRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = travelguide/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NobetciEczane;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "to get your position";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = lszlp.travelguide;
+				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -328,17 +375,20 @@
 				DEVELOPMENT_TEAM = GZ94AWJKRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = travelguide/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NobetciEczane;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "to get your position";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = lszlp.travelguide;
+				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
