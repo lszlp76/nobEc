@@ -48,7 +48,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization() //use gps when app is running
-        locationManager.requestLocation()
+        
+        locationManager.startUpdatingLocation()
         // find user's position
         // infoplist altında izinleri ayarla
         //uzun basıcı hareket algılayıcı
@@ -70,6 +71,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             mapView.setRegion(region, animated: true)
         }
+        
+        
     }
     
     @objc func chooseLocation(gestureRecognizer:UILongPressGestureRecognizer){
@@ -87,16 +90,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     //location un alınması
+ 
+   
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if (error) != nil {
             print(error)
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        // stop u buraya koyarsan birden fazla taramayı engellersin
         if selectedTitle == ""{
-            
+          
             location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude:locations[0].coordinate.longitude )
+            
+           
             GetLocation.sharedInstance.location = location
             let myLocation : CLLocation = locations[0]
             CLGeocoder().reverseGeocodeLocation(myLocation,
@@ -119,14 +126,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                     DispatchQueue.main.async {
                         let p = CLPlacemark(placemark: (placemarks?[0] as CLPlacemark?)!)
+                        self.locationManager.stopUpdatingLocation()
                         if ((p.administrativeArea) != nil) {
                             self.city = p.administrativeArea!
                         }
                         if ((p.subAdministrativeArea) != nil) {
                             self.county = p.subAdministrativeArea!
-                            
+                            self.findPharmacyOnDuty(city: self.city, county: self.county)
                         }
-                        self.findPharmacyOnDuty(city: self.city, county: self.county)
+                        
+                        
                     }
                     //haritada göstermek
                     let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
@@ -140,8 +149,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     annotation.title = " Buradasınız "
                     self.mapView.addAnnotation(annotation)
                     mapView.selectAnnotation(mapView.annotations[0], animated: true)
-                    self.connectionGPSExist = true // bağlantı var
-                    
+                    self.connectionGPSExist = true //bağlantı var
+                    print("jjjj \(GetLocation.sharedInstance.eczaneStored)")
                 }   // end else no error
             }       // end CLGeocoder reverseGeocodeLocation
             )       // end CLGeocoder
@@ -149,55 +158,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         
     }
-    func getDistance (endLocation : CLLocationCoordinate2D,  completion: @escaping (_ double: Double?
-                                                                                    , _ error : Error?) -> (Void))
-    {
-        // NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newPlace"), object: nil)
-        
-        let request = MKDirections.Request()
-        
-        let source = MKPlacemark( coordinate: GetLocation.sharedInstance.location)//CLLocationCoordinate2D(latitude: 40.2145, longitude: 28.981821))
-        
-        
-        var msf : Double?
-        let destination = MKPlacemark( coordinate: endLocation)
-        request.source =  MKMapItem(placemark: source)
-        request.destination = MKMapItem(placemark: destination)
-        request.transportType = MKDirectionsTransportType.automobile
-        request.requestsAlternateRoutes = false
-        let directions = MKDirections ( request: request)
-        directions.calculate { (response, error) in
-            if let route = response?.routes.first {
-                msf = route.distance/1000
-                
-            }
-            // en karışık kod bu fonskiyon. asenkron çalıştırma örneği . completion handler olayı
-            completion  (msf, error)
-            
-        }
-        return
-        
-    }
+    
     
     func didUpdateFirstVC(pharmacy: [PharmacyFoundedData]){
         
         let getLocation = GetLocation.sharedInstance
         getLocation.eczaneStored.removeAll()
-        
-        
+       
         for phar in pharmacy   {
             
             /*
              asenkron task olduğu için taskın içinde yazılıyor Dikkat !
              */
-            self.getDistance(endLocation: CLLocationCoordinate2DMake(phar.pharmacyLatitude, phar.pharmacyLongitude))
-            {  distance, error in
+            
+            pharmacyFinderManager.getDistance(endLocation: CLLocationCoordinate2DMake(phar.pharmacyLatitude, phar.pharmacyLongitude))
+            {  distance, travelTime, error in
                 
                 if let distance = distance
                     
-                { let eczaneStored = EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance)
+                { let eczaneStored = EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance ,travelTime: travelTime!)
                     
-                    getLocation.eczaneStored.append(eczaneStored)}
+                    getLocation.eczaneStored.append(eczaneStored)
+                    
+                    
+                }
                 else {
                     let unitAlert = UIAlertController (title:"Konum Hatası",message: "Herhangi bir ağa bağlı değilsiniz.\nAğa bağlandıktan sonra uygulamayı tekrar açabilirsiniz", preferredStyle: .alert)
                     unitAlert.addAction(UIAlertAction (title: "OK", style: .default,handler: { UIAlertAction in
@@ -230,6 +214,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //MKAnnotationview döndürmek ister
+        
+        
+    
         if annotation is MKUserLocation {
             return nil // kullanıcı yerini pin le göstermek istemezsen
         }
@@ -271,6 +258,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     func findPharmacyOnDuty (city: String , county : String){
         // buradan pharcmacyfindeer üzerinden konuma göre JSOn dosyasını pars ederek, eczane listesini oluşturur
+        // önce burası çalışır, burası locationmanager üzerinden tetiklenir.
         self.pharmacyFinderManager.fetchPharmacy(cityName: turkishConverter.convertToLatin(word: city), countyName: turkishConverter.convertToLatin(word: county))
         
         

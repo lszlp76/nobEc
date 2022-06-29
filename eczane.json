@@ -1,0 +1,55 @@
+{
+   "status":"success",
+   "message":"ok",
+   "rowCount":2,
+   "data":[
+      {
+         "EczaneAdi":"Begonya Eczanesi",
+         "Adresi":"G\u00fczelyal\u0131 Siteler Mahallesi, Orhangazi Caddesi, No:19 Mudanya \/ Bursa",
+         "Semt":"G\u00fczelyal\u0131",
+         "YolTarifi":"sdsd",
+         "Telefon":"0(224)234-66-92",
+         "Telefon2":"dsadsa",
+         "Sehir":"Bursa",
+         "ilce":"Mudanya",
+         "latitude":40.3520243,
+         "longitude":28.9137554
+      },
+      {
+         "EczaneAdi":"Mavi Ada Eczanesi",
+         "Adresi":"Halitpa\u015fa Mahallesi, Mustafakemalpa\u015fa Caddesi, Ay Apt. A-Blok No:155 Mudanya \/ Bursa",
+         "Semt":"null",
+         "YolTarifi":"null",
+         "Telefon":"0 (533) 638-42-32",
+         "Telefon2":"null",
+         "Sehir":"Bursa",
+         "ilce":"Mudanya",
+         "latitude":40.380705,
+         "longitude":28.875885
+      },
+      {
+         "EczaneAdi":"Sümbül Eczanesi",
+         "Adresi":"Halitpa\u015fa Mahallesi, Mustafakemalpa\u015fa Caddesi, Ay Apt. A-Blok No:155 Mudanya \/ Bursa",
+         "Semt":"null",
+         "YolTarifi":"null",
+         "Telefon":"0 (533) 638-42-32",
+         "Telefon2":"null",
+         "Sehir":"Bursa",
+         "ilce":"Mudanya",
+         "latitude":40.390705,
+         "longitude":28.895885
+      },
+      {
+         "EczaneAdi":"Sinameke Eczanesi",
+         "Adresi":"Halitpa\u015fa Mahallesi, Mustafakemalpa\u015fa Caddesi, Ay Apt. A-Blok No:155 Mudanya \/ Bursa",
+         "Semt":"null",
+         "YolTarifi":"null",
+         "Telefon":"0 (533) 638-42-32",
+         "Telefon2":"null",
+         "Sehir":"Bursa",
+         "ilce":"Mudanya",
+         "latitude":40.391705,
+         "longitude":28.835885
+      }
+   ]
+}

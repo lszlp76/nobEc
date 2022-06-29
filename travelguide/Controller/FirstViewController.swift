@@ -23,13 +23,14 @@ class FirstViewController: UIViewController , UITableViewDelegate,
     
     
     @IBOutlet weak var tableView: UITableView!
-    var values = [Double]()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
        
-        eczaneStored = GetLocation.sharedInstance.eczaneStored
-        
+        eczaneStored = (GetLocation.sharedInstance.eczaneStored).sorted(by: {$0.distance < $1.distance}) // en yakın 1nci sıraya yazdırma
+   
+        print(eczaneStored)
         tableView.delegate = self
         tableView.dataSource = self
        
@@ -60,7 +61,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return eczaneStored.count//pharmacyOnDutyName.count
+        return eczaneStored.count
         
         
     }

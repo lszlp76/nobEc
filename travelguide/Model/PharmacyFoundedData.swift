@@ -20,4 +20,6 @@ struct EczaneVeri {
     let pharmacyLongitude : Double
     let pharmacyName : String
     let distance : Double
+    let travelTime :String
 }
+
