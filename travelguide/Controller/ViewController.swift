@@ -15,14 +15,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     @IBOutlet weak var saveButton: UIButton!
-    
+    /*
     @IBAction func ShowButtonClicked(_ sender: Any) {
         
         
         //self.getDirections(loc1: self.location)
         self.performSegue(withIdentifier: "toListViewController", sender: nil)
         
-    }
+   // }
+     */
     
     @IBOutlet weak var mapView: MKMapView!
     //to get user's position use location manager
@@ -93,9 +94,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
  
    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if (error) != nil {
+      
             print(error)
-        }
+       
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // stop u buraya koyarsan birden fazla taramayı engellersin
@@ -176,7 +177,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
                 if let distance = distance
                     
-                { let eczaneStored = EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance ,travelTime: travelTime!)
+                { let eczaneStored = EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance ,travelTime: travelTime!,pharmacyCounty: phar.pharmacyCounty)
                     
                     getLocation.eczaneStored.append(eczaneStored)
                     
@@ -196,7 +197,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     return
                 }
             }
-            
+         
         }
         
     }
@@ -207,7 +208,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toListViewController" {
-            let destinationVC = segue.destination as! FirstViewController
+            _ = segue.destination as! FirstViewController
             // İhtiyaç halinde taşıma yapılır
             
         }

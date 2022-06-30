@@ -18,6 +18,10 @@
 		F9149C63285E692700676DCB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C62285E692700676DCB /* FirstViewController.swift */; };
 		F91589C9286355670018181C /* PharmacyFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91589C8286355670018181C /* PharmacyFinder.swift */; };
 		F97E350D286C9F84003146F2 /* eczane.json in Resources */ = {isa = PBXBuildFile; fileRef = F97E350C286C9F84003146F2 /* eczane.json */; };
+		F97E350F286CB59E003146F2 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E350E286CB59E003146F2 /* CellModel.swift */; };
+		F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */; };
+		F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3512286DF121003146F2 /* SettingsViewController.swift */; };
+		F97E3515286DF4D5003146F2 /* tumbursa.json in Resources */ = {isa = PBXBuildFile; fileRef = F97E3514286DF4D5003146F2 /* tumbursa.json */; };
 		F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C94286736D0001E103A /* TurkishConverter.swift */; };
 		F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */; };
 		F9F93C9928676BCD001E103A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C9828676BCD001E103A /* Location.swift */; };
@@ -38,6 +42,10 @@
 		F91589C8286355670018181C /* PharmacyFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFinder.swift; sourceTree = "<group>"; };
 		F97E350B286C8C6D003146F2 /* bursa.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = bursa.gpx; sourceTree = "<group>"; };
 		F97E350C286C9F84003146F2 /* eczane.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = eczane.json; sourceTree = "<group>"; };
+		F97E350E286CB59E003146F2 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosenLocationViewViewController.swift; sourceTree = "<group>"; };
+		F97E3512286DF121003146F2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F97E3514286DF4D5003146F2 /* tumbursa.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tumbursa.json; sourceTree = "<group>"; };
 		F9F93C94286736D0001E103A /* TurkishConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishConverter.swift; sourceTree = "<group>"; };
 		F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFoundedData.swift; sourceTree = "<group>"; };
 		F9F93C9828676BCD001E103A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -57,6 +65,7 @@
 		F9149C3F285E456300676DCB = {
 			isa = PBXGroup;
 			children = (
+				F97E3514286DF4D5003146F2 /* tumbursa.json */,
 				F97E350C286C9F84003146F2 /* eczane.json */,
 				F97E350B286C8C6D003146F2 /* bursa.gpx */,
 				F9149C4A285E456300676DCB /* travelguide */,
@@ -99,6 +108,7 @@
 		F97E3508286C47D9003146F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F97E350E286CB59E003146F2 /* CellModel.swift */,
 				F91589C8286355670018181C /* PharmacyFinder.swift */,
 				F9F93C9828676BCD001E103A /* Location.swift */,
 				F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */,
@@ -113,6 +123,8 @@
 			children = (
 				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F9149C62285E692700676DCB /* FirstViewController.swift */,
+				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
+				F97E3512286DF121003146F2 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -175,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F97E3515286DF4D5003146F2 /* tumbursa.json in Resources */,
 				F97E350D286C9F84003146F2 /* eczane.json in Resources */,
 				F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */,
 				F9149C58285E456400676DCB /* Assets.xcassets in Resources */,
@@ -189,14 +202,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F97E350F286CB59E003146F2 /* CellModel.swift in Sources */,
 				F91589C9286355670018181C /* PharmacyFinder.swift in Sources */,
 				F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */,
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
+				F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */,
 				F9149C63285E692700676DCB /* FirstViewController.swift in Sources */,
 				F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */,
 				F9149C56285E456300676DCB /* travelguide.xcdatamodeld in Sources */,
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
+				F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */,
 				F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */,
 				F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */,
 			);

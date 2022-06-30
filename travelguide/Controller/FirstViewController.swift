@@ -33,10 +33,12 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         print(eczaneStored)
         tableView.delegate = self
         tableView.dataSource = self
-       
+       print("ok")
         tableView.reloadData()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,12 +46,12 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         choosenTitle = eczaneStored[indexPath.row].pharmacyName
         choosenLatitude = eczaneStored[indexPath.row].pharmacyLatitude
         choosenLongitude = eczaneStored[indexPath.row].pharmacyLongitude
-        performSegue(withIdentifier: "toViewController", sender: nil)
+        performSegue(withIdentifier: "toChoosenLocation", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toViewController" {
-            let destinationVC = segue.destination as! ViewController
+        if segue.identifier == "toChoosenLocation" {
+            let destinationVC = segue.destination as! ChoosenLocationViewViewController
             destinationVC.selectedTitle = choosenTitle
             destinationVC.annotationTitle = choosenTitle
             destinationVC.annotationLatitude = choosenLatitude
@@ -70,10 +72,14 @@ class FirstViewController: UIViewController , UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let cell = UITableViewCell()
-       
-        cell.textLabel?.text = eczaneStored[indexPath.row].pharmacyName + "   --->  " + String(eczaneStored[indexPath.row].distance)
-       
+       // let cell = UITableViewCell()
+        //cell.textLabel?.text = eczaneStored[indexPath.row].pharmacyName + "   --->  " + String(eczaneStored[indexPath.row].distance)
+        
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CellModel
+        cell.pharmacyNameText.text = eczaneStored[indexPath.row].pharmacyName
+        cell.distanceText.text = String(eczaneStored[indexPath.row].distance) + " km"
+        cell.timeText.text = eczaneStored[indexPath.row].travelTime + " dak."
+        cell.textLabel?.text = eczaneStored[indexPath.row].pharmacyCounty
         return cell
     }
     

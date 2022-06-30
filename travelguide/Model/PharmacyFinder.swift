@@ -21,9 +21,25 @@ struct PharmacyFinder {
      bunlar user dan gelecek
      city=bursa&county=mudanya"
      */
-    
-   func fetchPharmacy(cityName: String,countyName: String){
-        let urlString = "\(pharmacyURL)&city=\(cityName)&county=\(countyName)"
+    var allPharmacy = Bool()
+
+    mutating func fetchPharmacy(cityName: String,countyName: String){
+       var urlString = String()
+       allPharmacy = true
+       switch allPharmacy{
+       case true :
+             urlString = "\(pharmacyURL)&city=\(cityName)"
+        break
+       case false :
+           urlString = "\(pharmacyURL)&city=\(cityName)&county=\(countyName)"
+       break
+       default :
+           urlString = "\(pharmacyURL)&city=\(cityName)&county=\(countyName)"
+       break
+       }
+           
+       
+       
         print(urlString)
        //performRequest(urlString: urlString) //gerçek datalarla çalışmak için
        performRequestFromLocalJson(urlString: urlString) //local json ile çalışmak için
@@ -34,13 +50,20 @@ struct PharmacyFinder {
             BU kod json üzerinden çalımak için . API'yi denemesini azaltmak amacıyla kullanılıyor. App storea giderken
             devre dışında kalacak
             */
-            let bundlePath = Bundle.main.path(forResource: "eczane", ofType: "json")
+        
+        var resourceJSONName = String()
+        if allPharmacy {
+            resourceJSONName = "tumbursa"
+        }else {
+            resourceJSONName = "eczane"
+        }
+            let bundlePath = Bundle.main.path(forResource: resourceJSONName, ofType: "json")
           
                     let URL = URL(fileURLWithPath: bundlePath!)
            
             do {
                 let datas = try Data(contentsOf: URL)
-                let results = try JSONDecoder().decode(ResponseJson.self , from : datas)
+               // let results = try JSONDecoder().decode(ResponseJson.self , from : datas)
                 
                 if let phFounded = parseJSON (pharymacyData: datas){
                     let ViewControllerVC = ViewController()
@@ -74,11 +97,17 @@ struct PharmacyFinder {
         request.transportType = MKDirectionsTransportType.automobile
         request.requestsAlternateRoutes = false
         let directions = MKDirections ( request: request)
+        
+        
         directions.calculate { (response, error) in
-            if let route = response?.routes.first {
-                msf = route.distance/1000
-                travelTime = String(format: "%.2f",route.expectedTravelTime/60)
-                print("zaman --> \(travelTime)")
+          
+            if let route = response?.routes{
+        
+                let sortedRoutes = route.sorted(by: { $0.distance < $1.distance}) // en küçüğe göre sort ediyor
+                let shortestRoute = sortedRoutes.first // sonra o dizinin ilk elemanını alıyor, böylece en kısa mesafeyi buluş oluyor
+                msf = shortestRoute!.distance/1000
+                travelTime = String(format: "%.0f",shortestRoute!.expectedTravelTime/60)
+              
             }
             // en karışık kod bu fonskiyon. asenkron çalıştırma örneği . completion handler olayı
             completion  (msf,travelTime, error)
@@ -146,7 +175,7 @@ struct PharmacyFinder {
        
              for result in decodedData.data {
                 
-                 ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi))
+                 ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi, pharmacyCounty: result.ilce))
                 
             
             }

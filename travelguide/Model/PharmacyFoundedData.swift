@@ -12,6 +12,7 @@ struct PharmacyFoundedData {
         let pharmacyLatitude : Double
         let pharmacyLongitude : Double
         let pharmacyName : String
+    let pharmacyCounty : String
     
 }
 
@@ -21,5 +22,6 @@ struct EczaneVeri {
     let pharmacyName : String
     let distance : Double
     let travelTime :String
+    let pharmacyCounty : String
 }
 
