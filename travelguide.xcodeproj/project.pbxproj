@@ -17,11 +17,16 @@
 		F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9149C59285E456400676DCB /* LaunchScreen.storyboard */; };
 		F9149C63285E692700676DCB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C62285E692700676DCB /* FirstViewController.swift */; };
 		F91589C9286355670018181C /* PharmacyFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91589C8286355670018181C /* PharmacyFinder.swift */; };
+		F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94CB9B6286E12F40038D47B /* UserDefaults.swift */; };
+		F94CB9BA2870F92D0038D47B /* PhoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94CB9B92870F92D0038D47B /* PhoneButton.swift */; };
 		F97E350D286C9F84003146F2 /* eczane.json in Resources */ = {isa = PBXBuildFile; fileRef = F97E350C286C9F84003146F2 /* eczane.json */; };
 		F97E350F286CB59E003146F2 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E350E286CB59E003146F2 /* CellModel.swift */; };
 		F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */; };
 		F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3512286DF121003146F2 /* SettingsViewController.swift */; };
 		F97E3515286DF4D5003146F2 /* tumbursa.json in Resources */ = {isa = PBXBuildFile; fileRef = F97E3514286DF4D5003146F2 /* tumbursa.json */; };
+		F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */; };
+		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
+		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C94286736D0001E103A /* TurkishConverter.swift */; };
 		F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */; };
 		F9F93C9928676BCD001E103A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C9828676BCD001E103A /* Location.swift */; };
@@ -40,12 +45,18 @@
 		F9149C5C285E456400676DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9149C62285E692700676DCB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		F91589C8286355670018181C /* PharmacyFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFinder.swift; sourceTree = "<group>"; };
+		F94CB9B6286E12F40038D47B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		F94CB9B92870F92D0038D47B /* PhoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneButton.swift; sourceTree = "<group>"; };
+		F95B919E28718E4100ABE100 /* hatalar.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = hatalar.md; sourceTree = "<group>"; };
 		F97E350B286C8C6D003146F2 /* bursa.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = bursa.gpx; sourceTree = "<group>"; };
 		F97E350C286C9F84003146F2 /* eczane.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = eczane.json; sourceTree = "<group>"; };
 		F97E350E286CB59E003146F2 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosenLocationViewViewController.swift; sourceTree = "<group>"; };
 		F97E3512286DF121003146F2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F97E3514286DF4D5003146F2 /* tumbursa.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tumbursa.json; sourceTree = "<group>"; };
+		F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModelTableViewCell.swift; sourceTree = "<group>"; };
+		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
+		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9F93C94286736D0001E103A /* TurkishConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishConverter.swift; sourceTree = "<group>"; };
 		F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFoundedData.swift; sourceTree = "<group>"; };
 		F9F93C9828676BCD001E103A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -65,6 +76,7 @@
 		F9149C3F285E456300676DCB = {
 			isa = PBXGroup;
 			children = (
+				F95B919E28718E4100ABE100 /* hatalar.md */,
 				F97E3514286DF4D5003146F2 /* tumbursa.json */,
 				F97E350C286C9F84003146F2 /* eczane.json */,
 				F97E350B286C8C6D003146F2 /* bursa.gpx */,
@@ -96,6 +108,17 @@
 			path = travelguide;
 			sourceTree = "<group>";
 		};
+		F94CB9B8286F15940038D47B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F9F93C94286736D0001E103A /* TurkishConverter.swift */,
+				F94CB9B6286E12F40038D47B /* UserDefaults.swift */,
+				F97E351C286E0CD3003146F2 /* Notifications.swift */,
+				F91589C8286355670018181C /* PharmacyFinder.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		F97E3507286C47C6003146F2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,12 +131,14 @@
 		F97E3508286C47D9003146F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F97E350E286CB59E003146F2 /* CellModel.swift */,
-				F91589C8286355670018181C /* PharmacyFinder.swift */,
-				F9F93C9828676BCD001E103A /* Location.swift */,
+				F94CB9B8286F15940038D47B /* Service */,
 				F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */,
-				F9F93C94286736D0001E103A /* TurkishConverter.swift */,
+				F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */,
+				F97E350E286CB59E003146F2 /* CellModel.swift */,
+				F9F93C9828676BCD001E103A /* Location.swift */,
 				F907C6F02867144E0049F4CB /* ResponseJson.swift */,
+				F97E351A286E0560003146F2 /* SettingsModelStructure.swift */,
+				F94CB9B92870F92D0038D47B /* PhoneButton.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,10 +146,10 @@
 		F97E3509286C47FB003146F2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F9149C62285E692700676DCB /* FirstViewController.swift */,
 				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
 				F97E3512286DF121003146F2 /* SettingsViewController.swift */,
+				F9149C4F285E456300676DCB /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,8 +231,13 @@
 				F91589C9286355670018181C /* PharmacyFinder.swift in Sources */,
 				F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */,
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
+				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,
+				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
 				F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */,
+				F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */,
+				F94CB9BA2870F92D0038D47B /* PhoneButton.swift in Sources */,
 				F9149C63285E692700676DCB /* FirstViewController.swift in Sources */,
+				F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */,
 				F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */,
 				F9149C56285E456300676DCB /* travelguide.xcdatamodeld in Sources */,
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,

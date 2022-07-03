@@ -1,23 +1,20 @@
 //
-//  CellModel.swift
+//  SettingsCellModelTableViewCell.swift
 //  travelguide
 //
-//  Created by ulas özalp on 29.06.2022.
+//  Created by ulas özalp on 30.06.2022.
 //
 
 import UIKit
 
-class CellModel: UITableViewCell {
+class SettingsCellModelTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var phoneNumberText: UILabel!
-    @IBOutlet weak var timeText: UILabel!
-    @IBOutlet weak var pharmacyNameText: UILabel!
-    @IBOutlet weak var distanceText: UILabel!
+    @IBOutlet weak var labelText: UILabel!
+    @IBAction func toggleSwitced(_ sender: Any) {
+    }
     
-    @IBOutlet weak var countyText: UILabel!
+    @IBOutlet weak var toggleSwitch: UISwitch!
     
-    
-  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

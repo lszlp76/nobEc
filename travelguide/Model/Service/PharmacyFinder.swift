@@ -22,27 +22,37 @@ struct PharmacyFinder {
      city=bursa&county=mudanya"
      */
     var allPharmacy = Bool()
-
+ 
     mutating func fetchPharmacy(cityName: String,countyName: String){
        var urlString = String()
-       allPharmacy = true
-       switch allPharmacy{
+       
+        print("allPharmacy değeri \(GetLocation.sharedInstance.allPharmacy)")
+    allPharmacy = GetLocation.sharedInstance.allPharmacy
+        urlString = "\(pharmacyURL)&city=\(cityName)"
+        
+        
+        print("allpharmacy \(allPharmacy)")
+       /*
+        switch allPharmacy{
        case true :
              urlString = "\(pharmacyURL)&city=\(cityName)"
+           print("tüm şehirler")
         break
        case false :
            urlString = "\(pharmacyURL)&city=\(cityName)&county=\(countyName)"
+           print("sadece ilçe")
        break
        default :
            urlString = "\(pharmacyURL)&city=\(cityName)&county=\(countyName)"
        break
        }
-           
+          */
        
        
         print(urlString)
-       //performRequest(urlString: urlString) //gerçek datalarla çalışmak için
-       performRequestFromLocalJson(urlString: urlString) //local json ile çalışmak için
+         
+//   performRequest(urlString: urlString) //gerçek datalarla çalışmak için
+performRequestFromLocalJson(urlString: urlString) //local json ile çalışmak için
     }
     
     func performRequestFromLocalJson(urlString: String) {
@@ -50,18 +60,23 @@ struct PharmacyFinder {
             BU kod json üzerinden çalımak için . API'yi denemesini azaltmak amacıyla kullanılıyor. App storea giderken
             devre dışında kalacak
             */
-        
+       
         var resourceJSONName = String()
+       resourceJSONName = "tumbursa"
+        
+        /*
         if allPharmacy {
             resourceJSONName = "tumbursa"
         }else {
             resourceJSONName = "eczane"
         }
-            let bundlePath = Bundle.main.path(forResource: resourceJSONName, ofType: "json")
+         */
+         let bundlePath = Bundle.main.path(forResource: resourceJSONName, ofType: "json")
           
                     let URL = URL(fileURLWithPath: bundlePath!)
            
             do {
+               
                 let datas = try Data(contentsOf: URL)
                // let results = try JSONDecoder().decode(ResponseJson.self , from : datas)
                 
@@ -74,14 +89,17 @@ struct PharmacyFinder {
                 }catch {
                 print(error)
               
-            }
+         
         }
+    }
     /*
      Mesafeler ve süreleri alan fonksiyon. Esas işi bu yapıyor. pharmacyManager'in içinde alınıyor.
      */
     func getDistance (endLocation : CLLocationCoordinate2D,  completion: @escaping (_ distance: Double?,_ travelTime : String?
                                                                                     , _ error : Error?) -> (Void))
     {
+       
+        
         // NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newPlace"), object: nil)
         
         let request = MKDirections.Request()
@@ -117,10 +135,13 @@ struct PharmacyFinder {
         
     }
 
-      
+    func alertMessaage(){
+        
+    }
 
     }
 
+   
    func performRequest(urlString: String){
         //1.create URL
         
@@ -135,6 +156,8 @@ struct PharmacyFinder {
                     
                     
                     print (error as Any)
+                   
+                    
                     return
                     
                 }
@@ -175,18 +198,44 @@ struct PharmacyFinder {
        
              for result in decodedData.data {
                 
-                 ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi, pharmacyCounty: result.ilce))
+                 ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi, pharmacyCounty: result.ilce, pharmacyPhoneNumber: result.Telefon))
                 
             
             }
+            print("fetch ederkern gelen deata \(ph)")
            return ph
         }catch {
             print(error)
             return nil
         }
        
+            }
+
+func isConnectionGPSOK() -> Bool {
+    let locationManager = CLLocationManager()
+    
+    if CLLocationManager.locationServicesEnabled()
+    { switch CLLocationManager.authorizationStatus() {
         
+    case .denied,.restricted,.notDetermined:
+        print ("NOK connections")
+        return false
+        break
+    case .authorized,.authorizedWhenInUse, .authorizedAlways :
+        print("Connection OK")
+        return true
+        break
+    default:
+        print("Connection OK")
+        return true
+    }
+        }
+    else
+    {
+       print (" okok")
         
     }
+    return false
+}
 
 

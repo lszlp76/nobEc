@@ -20,6 +20,9 @@ class GetLocation {
     var distance = [Double]()
     var location = CLLocationCoordinate2D()
     var eczaneStored = [EczaneVeri]()
+    var allPharmacy = Bool()
+    var connectionGPSExist = Bool()
+    var county = String()
     private init(){
         
     }
