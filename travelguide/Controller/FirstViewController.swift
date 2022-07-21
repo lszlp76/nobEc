@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 class FirstViewController: UIViewController , UITableViewDelegate,
-                           CLLocationManagerDelegate,UITableViewDataSource,MKMapViewDelegate{
+                           CLLocationManagerDelegate,UITableViewDataSource,MKMapViewDelegate, UIGestureRecognizerDelegate{
     /**
      --> Nöbetçi eczaneyi share etme olmalı, uzun basınca share etsin
      */
@@ -46,10 +46,12 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         if UserDefaults.standard.bool(forKey: "allPharmacyOption")  == true {
             
             eczaneStored = eczaneStoredFull
+            
         }
         else {
             eczaneStoredFull = (GetLocation.sharedInstance.eczaneStored).sorted(by: {$0.distance < $1.distance}) // en yakın 1nci sıraya yazdırma
             print("eczaneStoredFull \(eczaneStoredFull)")
+            print(eczaneStoredFull.count)
             for eczane in eczaneStoredFull {
                
                 if (eczane.pharmacyCounty == GetLocation.sharedInstance.county) {
@@ -59,12 +61,18 @@ class FirstViewController: UIViewController , UITableViewDelegate,
                  
                 }
                 
-               eczaneStored = eczaneStoredByCounty
+               eczaneStored = eczaneStoredByCounty 
             }
                 
                 
           
         }
+        
+        
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -99,7 +107,11 @@ class FirstViewController: UIViewController , UITableViewDelegate,
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        print("eczaneStoredFull --> \(eczaneStoredFull.count)")
+        print("eczaneStored --> \(eczaneStored.count)")
+        print("eczaneStoredByCounty --> \(eczaneStoredByCounty.count)")
+        
+        
         return eczaneStored.count
         
         
@@ -119,10 +131,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         dateFormatter.dateFormat = "dd-MMM-YY"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-        let headerTitles =  dateString + " NÖBETÇİ ECZANELER"
-        
-       
-        
+        let headerTitles =  dateString + " NÖBETÇİ ECZANELER" 
         return headerTitles
     }
     
@@ -142,7 +151,35 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         return cell
     }
     
+    @objc func longPress(_ longPressGestureRecognizer : UILongPressGestureRecognizer){
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            // Make the activityViewContoller which shows the share-view
+            let touchPoint = longPressGestureRecognizer.location(in: tableView)
+           
+            if let indexPath = tableView.indexPathForRow(at: touchPoint){
+                let url = ("https://maps.apple.com/?daddr=\(eczaneStored[indexPath.row].pharmacyLatitude),\(eczaneStored[indexPath.row].pharmacyLongitude)")
+                
+                print("-->\(url)")
+                // let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(to.latitude),\(to.longitude)"
+                
+                let itemToSend = ["\(eczaneStored[indexPath.row].pharmacyName)", url] as [Any]
+                
+               
+                let activityViewController = UIActivityViewController(activityItems: itemToSend ,applicationActivities: nil)
+               
+                /*
+                 Share menu if user's Ipad is active
+                 */
+                if  ((activityViewController.popoverPresentationController) != nil){
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
+                }
+                // Show the share-view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            }
+       
     
+            }
+        }
     
-}
-

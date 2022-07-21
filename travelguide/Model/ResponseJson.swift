@@ -7,27 +7,38 @@
 
 import Foundation
 struct ResponseJson : Decodable {
+ 
+    let status : String
+    let message : String
+    let rowCount : Int
+    let data : [ResponseJsonData]
     struct ResponseJsonData : Decodable {
         /*
          optional olması gerekiyor, cunki json dosyada boş değer olabilir.
          */
-        let EczaneAdi : String
+        let EczaneAdi : String?
         let Adresi : String?
         let Semt : String?
         let YolTarifi : String?
         let Telefon : String?
         let Telefon2 : String?
-        let Sehir : String
-        let ilce : String
+        let Sehir : String?
+        let ilce : String?
         let latitude : Double
         let longitude : Double
         
+        
     }
-    let status : String
-    let message : String
-    let rowCount : Int
-    let data : [ResponseJsonData]
-    
 }
 
 
+struct PharmacyData {
+    let pharmacy : ResponseJson
+    
+    var data : [ResponseJson.ResponseJsonData] {
+        pharmacy.data
+    }
+    
+   
+    
+}

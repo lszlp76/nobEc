@@ -91,12 +91,14 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
              // kullanıcı yerini pin le göstermek istemezsen
         }
         let reuseId = "MyAnnotation"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
         if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true// baloncukla bilrlikte ekstra bilgi gösterir
+          
             pinView?.autoresizesSubviews = true
-            pinView?.tintColor = UIColor.purple
+           
+            pinView?.glyphImage = UIImage(named: "pharmacyRedLogo")
             // let button1 = UIButton(type: UIButton.ButtonType.detailDisclosure)
             
             let smallSquare = CGSize(width: 50, height: 30)
@@ -166,19 +168,25 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
             /*
              ancak burada button yerine view atadık, o nedenle çalışmıyor, adDtarget ile düzelttik.
              */
-        } else {
-            pinView?.annotation = annotation
+        
         }
         
         return pinView
     }
     @objc func callPhoneNumber (sender: PhoneCallButton) {
-        
+        print("tel://\(sender.phoneNumber)")
         if let phoneCallURL = URL(string: "tel://\(sender.phoneNumber)") {
-            
+        //if let phoneCallURL = URL(string: "www.google.com") {
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
-                application.open(phoneCallURL, options: [:], completionHandler: nil)
+                application.open(phoneCallURL, options: [:], completionHandler:  { error in
+                    
+                    if error != nil {
+                        print("telefon \(error)")
+                        return
+                    }
+                  
+                })
             }
         }
     }

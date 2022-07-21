@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import UIKit
-import MapKit
 import CoreLocation
+import MapKit
 
-class GetLocation {
+class GetLocation  {
     
     static let sharedInstance = GetLocation()
     
@@ -23,22 +22,27 @@ class GetLocation {
     var allPharmacy = Bool()
     var connectionGPSExist = Bool()
     var county = String()
-    private init(){
+    var pharmacyForOpening = [PharmacyFoundedData]()
+    var travelTime = String()
+    
+    private  init(){
         
     }
-        
+   
 }
 class MyAnnotation: NSObject,MKAnnotation {
     
 var title : String?
 var subTit : String?
 var coordinate : CLLocationCoordinate2D
+    var travelTime : String?
 
-init(title:String,coordinate : CLLocationCoordinate2D,subtitle:String){
+    init(title:String,coordinate : CLLocationCoordinate2D,subtitle:String,travelTime:String){
 
     self.title = title;
     self.coordinate = coordinate;
     self.subTit = subtitle;
+    self.travelTime? = travelTime
 
 }
     

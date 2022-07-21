@@ -13,7 +13,6 @@
 		F9149C50285E456300676DCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4F285E456300676DCB /* ViewController.swift */; };
 		F9149C53285E456300676DCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9149C51285E456300676DCB /* Main.storyboard */; };
 		F9149C56285E456300676DCB /* travelguide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9149C54285E456300676DCB /* travelguide.xcdatamodeld */; };
-		F9149C58285E456400676DCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9149C57285E456400676DCB /* Assets.xcassets */; };
 		F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9149C59285E456400676DCB /* LaunchScreen.storyboard */; };
 		F9149C63285E692700676DCB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C62285E692700676DCB /* FirstViewController.swift */; };
 		F91589C9286355670018181C /* PharmacyFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91589C8286355670018181C /* PharmacyFinder.swift */; };
@@ -27,6 +26,8 @@
 		F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */; };
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
+		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
+		F9E3C8D62874AA3900FCD722 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3C8D52874AA3900FCD722 /* LocationManager.swift */; };
 		F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C94286736D0001E103A /* TurkishConverter.swift */; };
 		F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */; };
 		F9F93C9928676BCD001E103A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C9828676BCD001E103A /* Location.swift */; };
@@ -40,7 +41,6 @@
 		F9149C4F285E456300676DCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F9149C52285E456300676DCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F9149C55285E456300676DCB /* travelguide.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = travelguide.xcdatamodel; sourceTree = "<group>"; };
-		F9149C57285E456400676DCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9149C5A285E456400676DCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9149C5C285E456400676DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9149C62285E692700676DCB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +57,8 @@
 		F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModelTableViewCell.swift; sourceTree = "<group>"; };
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
+		F9E3C8D52874AA3900FCD722 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F9F93C94286736D0001E103A /* TurkishConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishConverter.swift; sourceTree = "<group>"; };
 		F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFoundedData.swift; sourceTree = "<group>"; };
 		F9F93C9828676BCD001E103A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -101,7 +103,7 @@
 				F97E3508286C47D9003146F2 /* Model */,
 				F97E3507286C47C6003146F2 /* View */,
 				F97E3509286C47FB003146F2 /* Controller */,
-				F9149C57285E456400676DCB /* Assets.xcassets */,
+				F9BA4A7B28800A6E000B295F /* Assets.xcassets */,
 				F9149C5C285E456400676DCB /* Info.plist */,
 				F9149C54285E456300676DCB /* travelguide.xcdatamodeld */,
 			);
@@ -115,6 +117,7 @@
 				F94CB9B6286E12F40038D47B /* UserDefaults.swift */,
 				F97E351C286E0CD3003146F2 /* Notifications.swift */,
 				F91589C8286355670018181C /* PharmacyFinder.swift */,
+				F9E3C8D52874AA3900FCD722 /* LocationManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -215,7 +218,7 @@
 				F97E3515286DF4D5003146F2 /* tumbursa.json in Resources */,
 				F97E350D286C9F84003146F2 /* eczane.json in Resources */,
 				F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */,
-				F9149C58285E456400676DCB /* Assets.xcassets in Resources */,
+				F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */,
 				F9149C53285E456300676DCB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +247,7 @@
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
 				F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */,
 				F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */,
+				F9E3C8D62874AA3900FCD722 /* LocationManager.swift in Sources */,
 				F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,7 +400,7 @@
 				DEVELOPMENT_TEAM = GZ94AWJKRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = travelguide/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NobetciEczane;
+				INFOPLIST_KEY_CFBundleDisplayName = NobEc;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "to get your position";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -427,7 +431,7 @@
 				DEVELOPMENT_TEAM = GZ94AWJKRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = travelguide/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NobetciEczane;
+				INFOPLIST_KEY_CFBundleDisplayName = NobEc;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "to get your position";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

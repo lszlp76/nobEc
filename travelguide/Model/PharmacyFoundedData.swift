@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 /**
   *A description field*
   - important: This is
@@ -28,6 +29,7 @@ struct PharmacyFoundedData {
         let pharmacyName : String
     let pharmacyCounty : String
     let pharmacyPhoneNumber : String?
+    let pharmacyAddress : String?
     
 }
 
@@ -41,6 +43,11 @@ struct EczaneVeri {
     let travelTime :String
     let pharmacyCounty : String
     let phoneNumber : String
+    let pharmacyAddress : String?
 }
 
-
+struct PharmacyItem : Identifiable {
+    var id = UUID().uuidString
+    var mapItem: MKMapItem
+    
+}

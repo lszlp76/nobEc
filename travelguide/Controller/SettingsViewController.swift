@@ -36,7 +36,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     func configureSettingsList () {
         
-        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Tüm eczaneleri göster"))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Tüm nöbetçi eczaneleri göster"))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir"))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Hakkında"))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy"))
@@ -98,8 +98,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     
     @objc func toggleTriggered (_ sender: UISwitch) {
         print("ulas swcth sender tag => \(sender.tag)")
-        if GetLocation.sharedInstance.connectionGPSExist {
-            
+        if GetLocation.sharedInstance.connectionGPSExist {   // --> connection varlığına bakıyor
             if userDefaults.bool(forKey: "allPharmacyOption") == true {
                 userDefaults.setValueForAllPharmacyOption(value: false, keyName: "allPharmacyOption")
             }else {
