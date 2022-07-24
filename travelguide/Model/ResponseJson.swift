@@ -32,7 +32,7 @@ struct ResponseJson : Decodable {
 }
 
 
-struct PharmacyData {
+struct PharmacyData : Decodable {
     let pharmacy : ResponseJson
     
     var data : [ResponseJson.ResponseJsonData] {

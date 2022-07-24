@@ -28,6 +28,9 @@
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
 		F9E3C8D62874AA3900FCD722 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3C8D52874AA3900FCD722 /* LocationManager.swift */; };
+		F9E5A32528896F0300883D11 /* PharmacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */; };
+		F9E5A3272889759B00883D11 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5A3262889759B00883D11 /* Webservice.swift */; };
+		F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5A32828897DCC00883D11 /* JSONFile.swift */; };
 		F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C94286736D0001E103A /* TurkishConverter.swift */; };
 		F9F93C97286760BF001E103A /* PharmacyFoundedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */; };
 		F9F93C9928676BCD001E103A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F93C9828676BCD001E103A /* Location.swift */; };
@@ -59,6 +62,9 @@
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
 		F9E3C8D52874AA3900FCD722 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewModel.swift; sourceTree = "<group>"; };
+		F9E5A3262889759B00883D11 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		F9E5A32828897DCC00883D11 /* JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFile.swift; sourceTree = "<group>"; };
 		F9F93C94286736D0001E103A /* TurkishConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishConverter.swift; sourceTree = "<group>"; };
 		F9F93C96286760BF001E103A /* PharmacyFoundedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFoundedData.swift; sourceTree = "<group>"; };
 		F9F93C9828676BCD001E103A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -118,6 +124,9 @@
 				F97E351C286E0CD3003146F2 /* Notifications.swift */,
 				F91589C8286355670018181C /* PharmacyFinder.swift */,
 				F9E3C8D52874AA3900FCD722 /* LocationManager.swift */,
+				F9E5A3262889759B00883D11 /* Webservice.swift */,
+				F9E5A32828897DCC00883D11 /* JSONFile.swift */,
+				F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -233,10 +242,13 @@
 				F97E350F286CB59E003146F2 /* CellModel.swift in Sources */,
 				F91589C9286355670018181C /* PharmacyFinder.swift in Sources */,
 				F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */,
+				F9E5A32528896F0300883D11 /* PharmacyViewModel.swift in Sources */,
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
 				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,
 				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
+				F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */,
 				F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */,
+				F9E5A3272889759B00883D11 /* Webservice.swift in Sources */,
 				F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */,
 				F94CB9BA2870F92D0038D47B /* PhoneButton.swift in Sources */,
 				F9149C63285E692700676DCB /* FirstViewController.swift in Sources */,

@@ -22,6 +22,7 @@ class GetLocation  {
     var allPharmacy = Bool()
     var connectionGPSExist = Bool()
     var county = String()
+    var todaysDutyPhars = [PharmacyFoundedData]()
     var pharmacyForOpening = [PharmacyFoundedData]()
     var travelTime = String()
     

@@ -43,35 +43,77 @@ struct PharmacyFinder {
 //         json web result denemesi
 //         */
 //        
-        performRequest(urlString: urlString) { result in
+//        performRequest(urlString: urlString) { result in
+//
+//print("JSON okuma başladı")
+//            switch result {
+//            case .failure(let error ):
+//                print(error.localizedDescription)
+//
+//            case .success(let JSONData):
+//                if let JSONData = JSONData {
+//                    print(JSONData)
 
-print("JSON okuma başladı")
-            switch result {
-            case .failure(let error ):
-                print(error.localizedDescription)
-
-            case .success(let JSONData):
-                if let JSONData = JSONData {
-
-                    for result in JSONData.pharmacy.data {
-                        ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi!, pharmacyCounty: result.ilce!, pharmacyPhoneNumber: result.Telefon, pharmacyAddress: result.Adresi))
-                        /*Sadece ilçedeki eczaneler
-                         bunları açılışta kullanmak için alıyor
-                         */
-                        if result.ilce == GetLocation.sharedInstance.county
-                        {GetLocation.sharedInstance.pharmacyForOpening.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi!, pharmacyCounty: result.ilce!, pharmacyPhoneNumber: result.Telefon, pharmacyAddress: result.Adresi))
-                        }
-                    }
-                    print("JSON'da veri geldi\(ph.count)")
-
-                    ViewControllerVC.didUpdateFirstVC(pharmacy: ph)
-                }
-            }
-        }
-      
+//                    for result in JSONData.pharmacy.data {
+//                        ph.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi!, pharmacyCounty: result.ilce!, pharmacyPhoneNumber: result.Telefon, pharmacyAddress: result.Adresi))
+//                        /*Sadece ilçedeki eczaneler
+//                         bunları açılışta kullanmak için alıyor
+//                         */
+//                        if result.ilce == GetLocation.sharedInstance.county
+//                        {GetLocation.sharedInstance.pharmacyForOpening.append(PharmacyFoundedData(pharmacyLatitude: result.latitude, pharmacyLongitude: result.longitude, pharmacyName: result.EczaneAdi!, pharmacyCounty: result.ilce!, pharmacyPhoneNumber: result.Telefon, pharmacyAddress: result.Adresi))
+//                        }
+//                    }
+//                    print("JSON'da veri geldi \(ph.count)")
+//                    GetLocation.sharedInstance.todaysDutyPhars = ph
+                   // ViewControllerVC.didUpdateFirstVC(pharmacy: ph)
+//                }
+//            }
+//        }
+//
   }
 //
-
+    func performRequest(urlString: String , completion:  @escaping  (Result<PharmacyData?,ResponseJSONError>) -> ()){
+        //1.create URL
+        DispatchQueue.main.async {
+            
+        if let url = URL(string: urlString){
+            //2.create a url Session
+            let session = URLSession(configuration: .default)
+            //3.give the session a task
+            let task = session.dataTask(with: url)
+            { data, response, error in
+                
+                if error != nil {
+                    print (error as Any)
+                    
+                    completion(.failure(.badURL))
+                    return
+                    
+                }
+                
+                if let safeData = data {
+    //                let dataString = String(data: safeData, encoding: .utf8)
+    //
+    //                print(dataString)
+                    do{
+                        let phFounded = parseJSON(pharymacyData: safeData)
+               //completion önüne ve arkasına işlem koyma
+                        completion(.success(phFounded))
+                      
+                    }catch {
+                        print("error \(error.localizedDescription)")
+                        completion(.failure(.noDATA))
+                    }
+                    
+                }
+                
+            }//data end
+            
+            //4.start the task
+            task.resume()
+        }
+        }
+    }
    
 }
 
@@ -118,7 +160,7 @@ func performRequestFromLocalJson(urlString: String) {
            
             let ViewControllerVC = ViewController()
             
-            ViewControllerVC.didUpdateFirstVC(pharmacy: ph)
+          //  ViewControllerVC.didUpdateFirstVC(pharmacy: ph)
             
         }
         
