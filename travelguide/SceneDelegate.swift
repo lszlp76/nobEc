@@ -16,14 +16,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        
         let board = UIStoryboard (name: "Main", bundle: nil)
         let tabBar = board.instantiateViewController(identifier: "tabBarController") as! UITabBarController
-        window?.rootViewController = tabBar
-       
-        tabBar.selectedIndex = 0 // her zaman konum sayfası önce açılsın
+        let firstusage = UserDefaults.standard
+        
+        if UserDefaults().getValueForSwitch(keyName: "firstUsage")  == true {
+//            firstusage.integer(forKey: "firstUsage") == 1 {
+            print("onboarding doesnt start")
+        
+            self.window?.rootViewController?.dismiss(animated: true, completion: {
+                self.window?.rootViewController?.performSegue(withIdentifier: "toTabView", sender: nil)
+            })
+            
+            window?.rootViewController = tabBar
+           
+            tabBar.selectedIndex = 0 // her zaman konum sayfası önce açılsın
+           
+        } else
+        {
+            
+            UserDefaults().setValueForAllPharmacyOption(value: true, keyName: "firstUsage")
+//            firstusage.set(1,forKey: "firstUsage")
+//            firstusage.synchronize()
+//
+            print("onboarding starts")
+//            self.window?.rootViewController?.dismiss(animated: true, completion: {
+//                self.window?.rootViewController = onBoardingView
+//            })
+        }
+        
           
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

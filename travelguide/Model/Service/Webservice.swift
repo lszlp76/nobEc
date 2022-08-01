@@ -12,7 +12,7 @@ class Webservice {
     func downloadPharmacyInCity(url : URL, completion: @escaping (ResponseJson?)->()){
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print(error.localizedDescription)
+                print("JSON tarafı \(error.localizedDescription)")
                 return
             }else if let data = data {
             

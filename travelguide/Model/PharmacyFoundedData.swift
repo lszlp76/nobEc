@@ -39,8 +39,8 @@ struct EczaneVeri {
     let pharmacyLatitude : Double
     let pharmacyLongitude : Double
     let pharmacyName : String
-    let distance : Double
-    let travelTime :String
+    var distance : Double?
+    let travelTime :String?
     let pharmacyCounty : String
     let phoneNumber : String
     let pharmacyAddress : String?

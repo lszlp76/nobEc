@@ -16,10 +16,16 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
  --> Hakkında olacak
 
  */
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toWebView"
+        {
+            let destinationVC = segue.destination as! webViewController
+            
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
     
-   
+    
     
    
     var switchON = false
@@ -27,6 +33,22 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     
     @IBOutlet weak var ss: UISwitch!
     let userDefaults = UserDefaults.standard
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        tableView.reloadData()
+    }
+    @objc func turnOnAllPharmacyOption (){
+        
+        if userDefaults.getValueForSwitch(keyName: "tutorial") == false {
+         
+           // allPharmacyOption = true
+           // GetLocation.sharedInstance.allPharmacy = allPharmacyOption
+           print("kapandı")
+           
+           // userDefault.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -36,9 +58,14 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     func configureSettingsList () {
         
-        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Tüm nöbetçi eczaneleri göster"))
+self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç "))
+        /*
+         Tüm eczaneleri göster gereksiz bir özellik olduğu için iptal edildi.
+         ancak tüm detayları duruyor code içinde
+         */
+        
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir"))
-        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Hakkında"))
+       // self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Hakkında"))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy"))
         
     }
@@ -51,6 +78,15 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         return settingsListElement.count
         
     }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+            header.textLabel?.textColor = UIColor.init(named: "SpesificColor")
+            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            header.textLabel?.frame = header.bounds
+           // header.textLabel?.textAlignment = .center
+     
+        
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
         
@@ -61,11 +97,12 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         case 1:
             rateApp()
             break
-        case 2:(
-        print("hakkında"))
-            break
-        case 3: (
-        print("policy"))
+//        case 2:(
+//        print("hakkında"))
+//            break
+    case 2: 
+        self.performSegue(withIdentifier: "toWebView", sender: nil)
+    
             break
         default : ( print("default"))
         }
@@ -73,18 +110,19 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let settingsCell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsCellModelTableViewCell
         tableView.rowHeight = 50
-        
+        settingsCell.labelText.textColor = UIColor.init(named: "ColorForListView")
         settingsCell.labelText.text = settingsListElement[indexPath.row].settingsCellText
         
         
         if settingsListElement[indexPath.row].switchOff {
             settingsCell.toggleSwitch.isHidden = false
             settingsCell.toggleSwitch .addTarget(self, action: #selector(self.toggleTriggered), for: .primaryActionTriggered)
-           
-            if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == false
+//            if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == false
+//
+            if userDefaults.getValueForSwitch(keyName: "tutorial") == false
             {
                 settingsCell.toggleSwitch.setOn(false, animated: true) // sayfa açıldığında swici off tutacak
-            }else if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == true {
+            }else if userDefaults.getValueForSwitch(keyName: "tutorial") == true {
                 settingsCell.toggleSwitch.setOn(true, animated: true)
             }
         }else {
@@ -97,41 +135,33 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     
     @objc func toggleTriggered (_ sender: UISwitch) {
-        print("ulas swcth sender tag => \(sender.tag)")
-        if GetLocation.sharedInstance.connectionGPSExist {   // --> connection varlığına bakıyor
-            if userDefaults.bool(forKey: "allPharmacyOption") == true {
-                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "allPharmacyOption")
-            }else {
-                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "allPharmacyOption")
-            }
-            
-        NotificationCenter.default.post(name: .allPharmacy, object: nil)
-        }else {
-            let unitAlert = UIAlertController (title:"Konum Hatası",message: "Çok sayıda talep yaptınız.\nBiraz bekledikten sonra deneyin", preferredStyle: .alert)
-            unitAlert.addAction(UIAlertAction (title: "OK", style: .default,handler: { UIAlertAction in
-                
-                
-                 // bağlantı yok
-                
-                return
-            }))
-            self.present(unitAlert,animated: true,completion: nil)
-            
-            if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == false {
+     
+      // --> öğretici açık kapalı kontrolu
+        // eğer aç talebi geldiyse, userdefaults a kapat yazdırıyor
+//            if userDefaults.bool(forKey: "tutorial") == true {
+//                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
+//            }else {
+//                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
+//            }
+//            
+            if userDefaults.getValueForSwitch(keyName: "tutorial") == false {
                
                 GetLocation.sharedInstance.allPharmacy = true
-            print( "allPharmacyOption is ON")
+            print( "tutorial is ON")
               
-                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "allPharmacyOption")
+                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
              
             }else {
                  
-                print( "allPharmacyOption is Off")
+                print( "tutorial off")
                 GetLocation.sharedInstance.allPharmacy = false
                 
-                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "allPharmacyOption")
+                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
               
             }
+        NotificationCenter.default.post(name: .allPharmacy, object: nil)
+      
+       
         }
     }
     func rateApp() {
@@ -146,7 +176,8 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
                 UIApplication.shared.openURL(url)
             }
         }
+       
     }
   
             
-}
+

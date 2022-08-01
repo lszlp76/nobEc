@@ -1,0 +1,39 @@
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "6vQ-Gs-3qW"; */
+"6vQ-Gs-3qW.title" = "Title";
+
+/* Class = "UIButton"; configuration.title = "Başlayalım"; ObjectID = "ANa-vh-CDc"; */
+"ANa-vh-CDc.configuration.title" = "Başlayalım";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ANa-vh-CDc"; */
+"ANa-vh-CDc.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Ayarlar"; ObjectID = "MC7-Pr-VMj"; */
+"MC7-Pr-VMj.title" = "Ayarlar";
+
+/* Class = "UILabel"; text = "countyText"; ObjectID = "R2b-Va-J7U"; */
+"R2b-Va-J7U.text" = "countyText";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "Sw9-fk-qSW"; */
+"Sw9-fk-qSW.title" = "Back";
+
+/* Class = "UITabBarItem"; title = "Yakındakiler"; ObjectID = "YW9-2x-jpb"; */
+"YW9-2x-jpb.title" = "Yakındakiler";
+
+/* Class = "UILabel"; text = "distanceText"; ObjectID = "d6j-ZZ-5ER"; */
+"d6j-ZZ-5ER.text" = "distanceText";
+
+/* Class = "UITabBarItem"; title = "Nöbetçi Eczaneler"; ObjectID = "jEl-JZ-MOq"; */
+"jEl-JZ-MOq.title" = "Nöbetçi Eczaneler";
+
+/* Class = "UILabel"; text = "pharmacyNameText"; ObjectID = "qgE-bN-0ug"; */
+"qgE-bN-0ug.text" = "pharmacyNameText";
+
+/* Class = "UILabel"; text = "phoneNumber"; ObjectID = "sU3-px-PbU"; */
+"sU3-px-PbU.text" = "phoneNumber";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "txG-WJ-5Oj"; */
+"txG-WJ-5Oj.text" = "Label";
+
+/* Class = "UILabel"; text = "timeText"; ObjectID = "xX0-Yy-d25"; */
+"xX0-Yy-d25.text" = "timeText";

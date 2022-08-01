@@ -14,7 +14,7 @@ extension UserDefaults {
     func setValueForAllPharmacyOption(value : Bool, keyName: String){
         if value != nil{
             
-                var allPharmacyOption = UserDefaults.standard.set(value, forKey: keyName)
+                var m = UserDefaults.standard.set(value, forKey: keyName)
            
            
                 return
@@ -27,4 +27,6 @@ extension UserDefaults {
     func getValueForSwitch(keyName: String) -> Bool? {
         return UserDefaults.standard.bool(forKey: keyName)
     }
+    
+    
 }
