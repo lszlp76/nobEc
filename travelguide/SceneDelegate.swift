@@ -34,8 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            
         } else
         {
-            
-            UserDefaults().setValueForAllPharmacyOption(value: true, keyName: "firstUsage")
+            //true set etmeyi içerde yap. Burda yapma karışıyor
+//            UserDefaults().setValueForAllPharmacyOption(value: true, keyName: "firstUsage")
 //            firstusage.set(1,forKey: "firstUsage")
 //            firstusage.synchronize()
 //

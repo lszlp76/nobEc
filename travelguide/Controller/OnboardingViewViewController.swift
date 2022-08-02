@@ -81,6 +81,8 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
         onBoardingView.delegate = self
         
         onBoardingButton.alpha = 0
+        
+        
     }
     
     func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {

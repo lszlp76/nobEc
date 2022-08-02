@@ -7,6 +7,8 @@
 
 import Foundation
 import Network
+import CoreLocation
+import UIKit
 
 class CheckInternetConnection {
 
@@ -18,6 +20,7 @@ class CheckInternetConnection {
         print("Connected")
     } else if path.status == NWPath.Status.unsatisfied {
         print("unsatisfied")
+       
     } else if path.status == NWPath.Status.requiresConnection {
         print("requiresConnection")
     }
@@ -40,4 +43,6 @@ init() {
         }
        return false
    }
+   
+    
  }

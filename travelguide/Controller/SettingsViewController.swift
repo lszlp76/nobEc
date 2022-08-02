@@ -7,15 +7,16 @@
 
 import UIKit
 import StoreKit
+import CoreLocation
 class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource{
-/*
- Settings te neler olacak ? :
- --> Şehirdeki tüm eczaneleri göster toogle buton ile
- --> Default olarak bulunduğu il ve ilçe gelecek
- --> Rate me olacak
- --> Hakkında olacak
-
- */
+    /*
+     Settings te neler olacak ? :
+     --> Şehirdeki tüm eczaneleri göster toogle buton ile
+     --> Default olarak bulunduğu il ve ilçe gelecek
+     --> Rate me olacak
+     --> Hakkında olacak
+     
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toWebView"
         {
@@ -27,7 +28,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     
     
     
-   
+    
     var switchON = false
     var settingsListElement = [SettingsModelStructure]()
     
@@ -41,37 +42,37 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     @objc func turnOnAllPharmacyOption (){
         
         if userDefaults.getValueForSwitch(keyName: "tutorial") == false {
-         
-           // allPharmacyOption = true
-           // GetLocation.sharedInstance.allPharmacy = allPharmacyOption
-           print("kapandı")
-           
-           // userDefault.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
+            
+            // allPharmacyOption = true
+            // GetLocation.sharedInstance.allPharmacy = allPharmacyOption
+            print("kapandı")
+            
+            // userDefault.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-       
+        
         configureSettingsList()
     }
     func configureSettingsList () {
         
-self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç "))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç "))
         /*
          Tüm eczaneleri göster gereksiz bir özellik olduğu için iptal edildi.
          ancak tüm detayları duruyor code içinde
          */
         
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir"))
-       // self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Hakkında"))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uydu sinyal seviyesi"))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy"))
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let headerTitles = "AYARLAR"
-    
+        
         return headerTitles
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,15 +81,15 @@ self.settingsListElement.append(SettingsModelStructure(switchOff: true, settings
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-            header.textLabel?.textColor = UIColor.init(named: "SpesificColor")
-            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            header.textLabel?.frame = header.bounds
-           // header.textLabel?.textAlignment = .center
-     
+        header.textLabel?.textColor = UIColor.init(named: "SpesificColor")
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        header.textLabel?.frame = header.bounds
+        // header.textLabel?.textAlignment = .center
+        
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+        
         
         switch indexPath.row {
         case 0 :
@@ -97,12 +98,12 @@ self.settingsListElement.append(SettingsModelStructure(switchOff: true, settings
         case 1:
             rateApp()
             break
-//        case 2:(
-//        print("hakkında"))
-//            break
-    case 2: 
-        self.performSegue(withIdentifier: "toWebView", sender: nil)
-    
+        case 2:
+            gpsSignalLevel()
+            break
+        case 3:
+            self.performSegue(withIdentifier: "toWebView", sender: nil)
+            
             break
         default : ( print("default"))
         }
@@ -117,8 +118,8 @@ self.settingsListElement.append(SettingsModelStructure(switchOff: true, settings
         if settingsListElement[indexPath.row].switchOff {
             settingsCell.toggleSwitch.isHidden = false
             settingsCell.toggleSwitch .addTarget(self, action: #selector(self.toggleTriggered), for: .primaryActionTriggered)
-//            if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == false
-//
+            //            if userDefaults.getValueForSwitch(keyName: "allPharmacyOption") == false
+            //
             if userDefaults.getValueForSwitch(keyName: "tutorial") == false
             {
                 settingsCell.toggleSwitch.setOn(false, animated: true) // sayfa açıldığında swici off tutacak
@@ -135,49 +136,86 @@ self.settingsListElement.append(SettingsModelStructure(switchOff: true, settings
     }
     
     @objc func toggleTriggered (_ sender: UISwitch) {
-     
-      // --> öğretici açık kapalı kontrolu
+        
+        // --> öğretici açık kapalı kontrolu
         // eğer aç talebi geldiyse, userdefaults a kapat yazdırıyor
-//            if userDefaults.bool(forKey: "tutorial") == true {
-//                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
-//            }else {
-//                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
-//            }
-//            
-            if userDefaults.getValueForSwitch(keyName: "tutorial") == false {
-               
-                GetLocation.sharedInstance.allPharmacy = true
+        //            if userDefaults.bool(forKey: "tutorial") == true {
+        //                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
+        //            }else {
+        //                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
+        //            }
+        //
+        if userDefaults.getValueForSwitch(keyName: "tutorial") == false {
+            
+            GetLocation.sharedInstance.allPharmacy = true
             print( "tutorial is ON")
-              
-                userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
-             
-            }else {
-                 
-                print( "tutorial off")
-                GetLocation.sharedInstance.allPharmacy = false
-                
-                userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
-              
-            }
-        NotificationCenter.default.post(name: .allPharmacy, object: nil)
-      
-       
+            
+            userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
+            
+        }else {
+            
+            print( "tutorial off")
+            GetLocation.sharedInstance.allPharmacy = false
+            
+            userDefaults.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
+            
         }
+        NotificationCenter.default.post(name: .allPharmacy, object: nil)
+        
+        
     }
+    func gpsSignalLevel () {
+        let getLocation = GetLocation.sharedInstance
+        let location = CLLocation(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
+       
+        if (location.horizontalAccuracy < 0)
+                {
+            showSimpleAlert(title: "Uydu Bağlantısı", message: "Uydu bağlantısı yok !")
+                }
+        else if (location.horizontalAccuracy > 163)
+                {
+            showSimpleAlert(title: "Uydu Bağlantısı", message: "Uydu bağlantısı zayıf!")
+                }
+        else if (location.horizontalAccuracy > 48)
+                {
+            showSimpleAlert(title: "Uydu Bağlantısı", message: "Uydu bağlantısı iyi!")
+                }
+                else
+                {
+            showSimpleAlert(title: "Uydu Bağlantısı", message: "Uydu bağlantısı çok iyi !")
+                }
+    }
+
+    func showSimpleAlert(title: String?,message: String?) {
+        let alert = UIAlertController(title: title, message: message,         preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
+            //Cancel Action
+        }))
+        //            alert.addAction(UIAlertAction(title: "Sign out",
+        //                                          style: UIAlertAction.Style.default,
+        //                                          handler: {(_: UIAlertAction!) in
+        //                                            //Sign out action
+        //            }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func rateApp() {
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
-
+            
         } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" +  "GZ94AWJKRA") {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-
+                
             } else {
                 UIApplication.shared.openURL(url)
             }
         }
-       
+        
     }
-  
-            
+
+
+}
+
 
