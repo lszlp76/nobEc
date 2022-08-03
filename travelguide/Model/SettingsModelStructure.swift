@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct SettingsModelStructure {
     
     var switchOff = Bool()
     var settingsCellText = String()
+    var settingsIcon = UIImage()
 }

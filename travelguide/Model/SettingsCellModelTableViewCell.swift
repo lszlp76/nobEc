@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsCellModelTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var labelText: UILabel!
     @IBAction func toggleSwitced(_ sender: Any) {
     }

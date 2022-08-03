@@ -59,15 +59,15 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     func configureSettingsList () {
         
-        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç "))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç ",settingsIcon: UIImage(named: "teach")!))
         /*
          Tüm eczaneleri göster gereksiz bir özellik olduğu için iptal edildi.
          ancak tüm detayları duruyor code içinde
          */
         
-        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir"))
-        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uydu sinyal seviyesi"))
-        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy"))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir", settingsIcon: UIImage(named: "star")!))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uydu sinyal seviyesi",settingsIcon: UIImage(named: "satel")!))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy",settingsIcon: UIImage(named: "policy")!))
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -82,7 +82,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = UIColor.init(named: "SpesificColor")
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         header.textLabel?.frame = header.bounds
         // header.textLabel?.textAlignment = .center
         
@@ -113,8 +113,8 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         tableView.rowHeight = 50
         settingsCell.labelText.textColor = UIColor.init(named: "ColorForListView")
         settingsCell.labelText.text = settingsListElement[indexPath.row].settingsCellText
-        
-        
+        settingsCell.iconImage.image = settingsListElement[indexPath.row].settingsIcon
+        settingsCell.iconImage.tintColor = UIColor(named: "ColorForListView")
         if settingsListElement[indexPath.row].switchOff {
             settingsCell.toggleSwitch.isHidden = false
             settingsCell.toggleSwitch .addTarget(self, action: #selector(self.toggleTriggered), for: .primaryActionTriggered)
@@ -151,7 +151,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
             print( "tutorial is ON")
             
             userDefaults.setValueForAllPharmacyOption(value: true, keyName: "tutorial")
-            
+            self.performSegue(withIdentifier: "toMainView", sender: nil)
         }else {
             
             print( "tutorial off")

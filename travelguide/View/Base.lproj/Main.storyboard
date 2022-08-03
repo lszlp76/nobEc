@@ -51,11 +51,11 @@
             <objects>
                 <viewController id="ujE-Lc-Xqo" customClass="webViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1ye-Yg-IQV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xyr-VQ-T1H">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -97,21 +97,28 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settingsCell" rowHeight="109" id="ezl-0s-AGV" customClass="SettingsCellModelTableViewCell" customModule="travelguide" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ezl-0s-AGV" id="2qV-wY-MbM">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ezl-0s-AGV" id="2qV-wY-MbM">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="iKQ-Z4-hFM">
-                                                    <rect key="frame" x="20" y="11" width="374" height="87"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i5D-ym-C25">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oib-p8-U1v">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="109"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="9zC-gG-GdP"/>
+                                                                <constraint firstAttribute="height" constant="30" id="lME-ZX-lda"/>
+                                                            </constraints>
+                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txG-WJ-5Oj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="87"/>
+                                                            <rect key="frame" x="40" y="0.0" width="315" height="109"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YH3-J3-yVN">
-                                                            <rect key="frame" x="325" y="0.0" width="51" height="87"/>
+                                                            <rect key="frame" x="365" y="0.0" width="51" height="109"/>
                                                             <connections>
                                                                 <action selector="toggleSwitced:" destination="ezl-0s-AGV" eventType="valueChanged" id="gt2-As-691"/>
                                                             </connections>
@@ -120,13 +127,14 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="iKQ-Z4-hFM" secondAttribute="trailing" id="Db2-nU-Whn"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="iKQ-Z4-hFM" secondAttribute="bottom" id="Jx2-YA-eU1"/>
-                                                <constraint firstItem="iKQ-Z4-hFM" firstAttribute="top" secondItem="2qV-wY-MbM" secondAttribute="topMargin" id="N73-Sn-xEN"/>
-                                                <constraint firstItem="iKQ-Z4-hFM" firstAttribute="leading" secondItem="2qV-wY-MbM" secondAttribute="leadingMargin" id="hVj-dn-OeQ"/>
+                                                <constraint firstItem="i5D-ym-C25" firstAttribute="leading" secondItem="2qV-wY-MbM" secondAttribute="leading" id="Kz9-2r-kO9"/>
+                                                <constraint firstAttribute="trailing" secondItem="i5D-ym-C25" secondAttribute="trailing" id="V1X-la-ave"/>
+                                                <constraint firstAttribute="bottom" secondItem="i5D-ym-C25" secondAttribute="bottom" id="iXU-WD-G4H"/>
+                                                <constraint firstItem="i5D-ym-C25" firstAttribute="top" secondItem="2qV-wY-MbM" secondAttribute="top" id="qlu-qk-ZdR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="iconImage" destination="oib-p8-U1v" id="ixD-Xv-sHW"/>
                                             <outlet property="labelText" destination="txG-WJ-5Oj" id="sLw-wN-4vy"/>
                                             <outlet property="toggleSwitch" destination="YH3-J3-yVN" id="yQb-K8-Zou"/>
                                         </connections>
@@ -147,6 +155,7 @@
                     <connections>
                         <outlet property="tableView" destination="eBi-vj-kqy" id="gb9-2U-drb"/>
                         <segue destination="ujE-Lc-Xqo" kind="show" identifier="toWebView" id="5hz-zc-U4t"/>
+                        <segue destination="ZGR-tL-Ucr" kind="presentation" identifier="toMainView" modalPresentationStyle="fullScreen" id="9nJ-5P-Sf6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2C-Qe-KQf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -178,11 +187,11 @@
             <objects>
                 <viewController id="0zh-oy-kWw" customClass="FirstViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VNX-cn-4aX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-ZP-3T9">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="98" id="afE-cq-tUR" customClass="CellModel" customModule="travelguide" customModuleProvider="target">
@@ -329,11 +338,11 @@
             <objects>
                 <viewController id="sxl-9x-tnf" customClass="ChoosenLocationViewViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uUJ-G6-B5S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kus-VM-9Jt">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xrV-wY-dg9"/>
@@ -362,7 +371,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="UuI-Xb-eIX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xuy-Xj-9Mt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -443,7 +452,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PFk-Ew-Zb3"/>
+        <segue reference="JvF-4D-wQc"/>
+        <segue reference="9nJ-5P-Sf6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="car" catalog="system" width="128" height="93"/>
