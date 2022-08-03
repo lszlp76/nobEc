@@ -160,7 +160,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //2 - JSON file üzerinden şehire göre veriyi al.
         
         mapView?.delegate = self
-        //rmapView.showsUserLocation = true
+        //mapView.showsUserLocation = true
         
         //haritada basılan bir noktada eczane arama
         let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
@@ -380,7 +380,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print("Find distance for  -->\(self.pharmacyOnDutyList.numberOfDutyPharmacies() )")
         print("location bilgisi \(getLocation.location)")
         
-        
+        if self.getLocation.eczaneStored.count>0{
+            getLocation.eczaneStored.removeAll()
+        }
         /*
          asenkron task olduğu için taskın içinde yazılıyor Dikkat !
          */
