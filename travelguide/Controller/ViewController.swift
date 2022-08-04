@@ -34,10 +34,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pharmacyDutyListTab : UIImageView!
     var settingsTab: UIImageView!
     var locateButton : UIImageView!
+    var circle = MKCircle()
+    var circle2 = MKCircle()
     var  didTutorialEnd = Bool()
     //to get user's position use location manager
     var allPharmacyOption = Bool()
     var locationManager = CLLocationManager()
+    var userLocation:CLLocation!
     let userDefault = UserDefaults.standard
     var choosenLatitude = Double()
     var choosenLongtitude = Double()
@@ -63,14 +66,34 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pharmacyOnDuty = [EczaneVeri]()
     var annotaitonsCoordinates = [CLLocation]()
     var nearByPharmacies = [PharmacyNearByAnnotation]()
-    
+    let annotation = MKPointAnnotation()
     var pharmacyOnDutyList : PharmacyListViewModel!
-    
+    let anno = MKPointAnnotation();
+    var newNearByPharmacies = [PharmacyNearByAnnotation]()
     
     let stackView = UIStackView()
     let stackViewUp = UIStackView()
     let updateLocationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     @IBOutlet weak var update: UIImageView!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        print("ulas")
+       
+        guard  connectionManager.isNetworkAvailable()  else {
+            print("no connection to internet")
+            CheckGPSSignal().alert(title: " İnternet Bağlantısı", message: "Bağlantı yok ⚠️")
+            
+            return
+            
+        }
+        
+        if CLLocationManager.locationServicesEnabled() == false {
+        
+            CheckGPSSignal().alert(title: "Konum", message: "Konum bilgisi yok ⚠️")
+            
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear çalıştır")
         
@@ -91,11 +114,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewdidLoad çalıştır")
-        guard  connectionManager.isNetworkAvailable()  else {
-            print("no connection to internet")
-            showSimpleAlert(title: "İnternet Bağlantısı", message: "Bağlantı yok!")
-            return
-        }
+        
         self.tabBarController?.delegate = self
         
         if userDefault.getValueForSwitch(keyName: "tutorial")! ||
@@ -128,25 +147,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         // Check for Location Services
+        
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
             
             
             locationManager.startUpdatingLocation()
         }else {
-            let unitAlert = UIAlertController (title:"Konum Hatası",message: "Çok sayıda talep yaptınız.\nBiraz bekledikten sonra deneyin", preferredStyle: .alert)
-            unitAlert.addAction(UIAlertAction (title: "OK", style: .default,handler: { UIAlertAction in
-                
-                
-                // bağlantı yok
-                
-                return
-            }))
+            
+            CheckGPSSignal().alert(title: "Konum", message: "Konum bilgisi yok ⚠️")
+            
+            
+         
             
         }
         
         //---> şehir bilgisi yok hala
-        //  getDataFromLocal()
+      //  getDataFromLocal()
         
         
         /***Tutorial Kısmı****/
@@ -181,21 +199,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let CLLCoordType = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude,
                                                       longitude: newLocation.coordinate.longitude);
             
-            let anno = MKPointAnnotation();
+            
             anno.coordinate = CLLCoordType;
             anno.title = " Yeni nokta"
             self.mapView.addAnnotation(anno);
             
             fetchUserChoosenLocation(location: newLocation)
-            
+            mapView.centerLocation(newLocation,regionRadius: 3000)
             
         }
     }
     func fetchUserChoosenLocation (location : CLLocation){
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
         let regionRadius: CLLocationDistance = 1000
-        var newNearByPharmacies = [PharmacyNearByAnnotation]()
-        let coordinateRegion = MKCoordinateRegion(
+       let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: regionRadius,
             longitudinalMeters: regionRadius)
@@ -237,25 +254,39 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
     }
+    @objc func updateLocationButtonClicked (){
+        mapView.removeAnnotation(anno)
+        mapView.removeAnnotations(nearByPharmacies)
+        mapView.removeAnnotations(newNearByPharmacies)
+        mapView.removeOverlay(circle)
+        
+        mapView.removeOverlay(circle2)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: getLocation.location, span: span)
+        mapView.setRegion(region, animated: true)
+        let location = CLLocationCoordinate2D(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
+       
+        locationManager.startUpdatingLocation()
+        
+        didPerformGeocode = false
+        //
+        
+        //locationManager.stopUpdatingLocation() // bunu kaldırma
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let group = DispatchGroup()
         
         let location = locations.last
-        let userLocation:CLLocation = locations[0] as CLLocation
+        userLocation = locations[0] as CLLocation
         
         mapView.centerLocation(userLocation)
         getLocation.location = location!.coordinate // mevcut konum bilgisi alarak json datadan gelen konumlara göre getdistance içindeki source'a atıyor
         
         guard  location?.coordinate.latitude != 0, location?.coordinate.longitude != 0 else {
-            let unitAlert = UIAlertController (title:"Konum Hatası",message: "Çok sayıda talep yaptınız.\nBiraz bekledikten sonra deneyin", preferredStyle: .alert)
-            unitAlert.addAction(UIAlertAction (title: "OK", style: .default,handler: { UIAlertAction in
-                
-                
-                // bağlantı yok
-                
-                return
-            }))
-            self.present(unitAlert,animated: true,completion: nil)
+            print("00000")
+            CheckGPSSignal().alert(title: "Konum Hatası", message: "Konum bilgisi hatalı")
+            
+           
             return
         }
         
@@ -264,7 +295,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         didPerformGeocode = true
         
-        group.enter()
+    group.enter()
+        /*
+         getCityAndCountyName > async çalıştığı için dispatchgrup a almalısın
+         yoksa şehir bilgisini açılışta alamazsın
+         
+         */
         getCityAndCountyName { [self] sehir, ilce in
             guard let sehir = sehir else {return}
             
@@ -273,31 +309,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             
             self.fetchPharmacyLocation(location: CLLocation(latitude: self.getLocation.location.latitude, longitude: getLocation.location.longitude) , pharmacyOnDuty: pharmacyOnDuty)
-            group.leave()
+         group.leave()
         }
-        group.notify(queue: .main){
-            self.getData(forCity: self.city)
+        group.notify(queue: .main){ [self] in
+            if self.pharmacyOnDuty.count == 0 {
+             getData(forCity: city)
+        
+           
             print("Sehir--> \(self.city)")
+      }
         }
-        
-        
-        
-        //        fetchPharmacyLocation(location: userLocation)
-        //        group.leave()
-        //
-        //        group.enter()
-        
         GetLocation.sharedInstance.connectionGPSExist = true
-        //        group.leave()
-        
         
         locationManager.stopUpdatingLocation()
-        //        group.notify(queue: .main) { [self] in
-        //
+       
         print(self.city)
-        //getData(forCity: <#T##String#>) sonradan gelcek her şey bitince
         
-        //        }
     }
     func getCityAndCountyName(getCity : @escaping (_ sehir: String?,_ ilce: String?)-> Void) {
         let userLocation =  CLLocation(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
@@ -380,8 +407,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print("Find distance for  -->\(self.pharmacyOnDutyList.numberOfDutyPharmacies() )")
         print("location bilgisi \(getLocation.location)")
         
-        if self.getLocation.eczaneStored.count>0{
+        if self.getLocation.eczaneStored.count > 0{
             getLocation.eczaneStored.removeAll()
+            pharmacyOnDuty.removeAll()
         }
         /*
          asenkron task olduğu için taskın içinde yazılıyor Dikkat !
@@ -424,7 +452,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
             }
         }// for end
-        print(index)
+      
         print("pharmacyOnDuty sayı \(self.pharmacyOnDuty.count)")
         
         sortNearestPharmacy()
@@ -532,7 +560,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         
         nearPharmacyLabelText.text = tutorial[0]
-        nearPharmacyLabelText.contentMode = .scaleAspectFit
+        nearPharmacyLabelText.contentMode = .center
         nearPharmacyLabelText.numberOfLines = 0
         nearPharmacyLabelText.textAlignment = .left
         nearPharmacyLabelText.setMargins(10)
@@ -605,7 +633,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         stackView.axis  = NSLayoutConstraint.Axis.horizontal
         stackView.distribution  = UIStackView.Distribution.equalSpacing
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.spacing   = 16.0
         //stackView.layer.borderWidth = 2
         //stackView.layer.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1)
@@ -616,7 +644,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         stackView.distribution  = UIStackView.Distribution.equalSpacing
         stackViewUp.axis = .horizontal
-        stackViewUp.alignment = .fill
+        stackViewUp.alignment = .center
         stackViewUp.spacing   = 0.0
         //stackViewUp.layer.borderWidth = 2
         //stackViewUp.layer.borderColor = CGColor(red: 255, green:255, blue: 0, alpha: 1)
@@ -734,6 +762,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.5, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.mapView.alpha = CGFloat(1)
+            self.tabBarController?.tabBar.backgroundColor = UIColor(named: "OnboardingColor")
             //self.view.backgroundColor = UIColor.  white.withAlphaComponent(1)
             
         })
@@ -827,7 +856,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let group = DispatchGroup()
         print("fetchPharmacyLocation() calıştı\n")
-        print("\(pharmacyOnDuty) liste \n *************")
+        //print("\(pharmacyOnDuty) liste \n *************")
         
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
         let regionRadius: CLLocationDistance = 1000
@@ -855,7 +884,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
             var travelTimeAnno = ""
             var distanceAnno = 0.0
-            group.enter()
+//            group.enter()
             for item in response.mapItems {
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
                     
@@ -874,9 +903,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         addAnnotations(annos: nearByPharmacies)
                         
                         
-                        print(pharmacyOnDuty.count)
+                      
+                       
+                        
                     }
-                    
+                 
                     
                     
                 }
@@ -884,7 +915,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     print("hata var")
                 }
             }//end loop
-            
+            print("Yakındaki eczane sayısı \(nearByPharmacies.count)")
+//            group.leave()
+//            group.notify(queue: .main){
+//
+//            }
+//
             
         }
         
@@ -919,7 +955,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 if  pharmacy.title == duty.pharmacyName{
                     
                     let newCenter = pharmacy.coordinate
-                    let circle = MKCircle(center: newCenter, radius: 100)
+                  circle = MKCircle(center: newCenter, radius: 100)
                     mapView.addOverlay(circle)
                 }
                 
@@ -933,7 +969,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             circleRenderer.fillColor = UIColor.green.withAlphaComponent(0.2)
             circleRenderer.strokeColor = UIColor.white
             circleRenderer.lineWidth = 1
-            circleRenderer.alpha = 0.7
+           // circleRenderer.alpha = 0.7
             
             return circleRenderer
         }
@@ -964,14 +1000,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         pinView?.glyphTintColor = .blue
         pinView?.glyphImage = UIImage(named: "pharmacyLogo.png")
         pinView?.markerTintColor = UIColor.white
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [self] in
             for duty in self.pharmacyOnDuty {
                 if duty.pharmacyName == pinView?.annotation?.title
                 {
                     pinView?.glyphTintColor = .red
-                    let circle = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 100)
+                    circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 100)
                     DispatchQueue.main.async {
-                        mapView.addOverlay(circle)
+                        mapView.addOverlay(circle2)
                     }
                     
                 }
@@ -1026,20 +1062,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return pinView!
     }
     
-    @objc func updateLocationButtonClicked (){
-        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-        let region = MKCoordinateRegion(center: getLocation.location, span: span)
-        mapView.setRegion(region, animated: true)
-        locationManager.startUpdatingLocation()
-        
-        didPerformGeocode = false
-        //  location = CLLocationCoordinate2D(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
-        
-        //locationManager.stopUpdatingLocation() // bunu kaldırma
-    }
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+    
+        if CLLocationManager.locationServicesEnabled() == false
+        {
+            CheckGPSSignal().alert(title: "Konum", message: "Konum bilgisi yok ⚠️")
+            
+            
+         
+            
+        }
+           
     }
     
     @objc func turnOnAllPharmacyOption (){
@@ -1063,7 +1098,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             choosenLatitude = touchedCoordinates.latitude
             choosenLongtitude = touchedCoordinates.longitude
             
-            let annotation = MKPointAnnotation()
+           
             annotation.coordinate = touchedCoordinates
             self.mapView.addAnnotation(annotation)
         }

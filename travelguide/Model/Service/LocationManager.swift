@@ -14,7 +14,7 @@ class LocationManager : NSObject , CLLocationManagerDelegate {
     static let shared = LocationManager ()
     let locationManager = CLLocationManager()
     var completion: ((CLLocation)-> Void)?
-    var pharmacyFinderManager = PharmacyFinder()
+   
  
     
     public func getUserLocation (completion: @escaping ((CLLocation)-> Void)){
@@ -47,9 +47,7 @@ class LocationManager : NSObject , CLLocationManagerDelegate {
                                                         }
                                                         
                                                         completion(city,county)
-                                                        GetLocation.sharedInstance.connectionGPSExist = true
-                                                        
-                                                      self.pharmacyFinderManager.fetchPharmacy(cityName: city, countyName: county)
+                                                     
                                                     }
       
     }

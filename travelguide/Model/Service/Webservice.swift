@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Webservice {
     
@@ -13,6 +14,8 @@ class Webservice {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("JSON tarafı \(error.localizedDescription)")
+                let alert = UIAlertController(title: "String?", message: "dasd", preferredStyle: .alert)
+                CheckGPSSignal().presentViewController(alert: alert, animated: true, completion: nil)
                 return
             }else if let data = data {
             

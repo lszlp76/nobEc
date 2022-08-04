@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6095D46C72A7330A8C13249D /* Pods_travelguide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1138F71E4C20AC71FA72C5 /* Pods_travelguide.framework */; };
 		F902FDEA28992D9800735BE1 /* Checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F902FDE928992D9800735BE1 /* Checks.swift */; };
+		F902FDEC289B1F2B00735BE1 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F902FDEB289B1F2B00735BE1 /* MapController.swift */; };
 		F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907C6F02867144E0049F4CB /* ResponseJson.swift */; };
 		F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4B285E456300676DCB /* AppDelegate.swift */; };
 		F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C4D285E456300676DCB /* SceneDelegate.swift */; };
@@ -47,6 +48,7 @@
 		7F1138F71E4C20AC71FA72C5 /* Pods_travelguide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_travelguide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7DAFFFBD4F8AF34B451F69D /* Pods-travelguide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travelguide.release.xcconfig"; path = "Target Support Files/Pods-travelguide/Pods-travelguide.release.xcconfig"; sourceTree = "<group>"; };
 		F902FDE928992D9800735BE1 /* Checks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checks.swift; sourceTree = "<group>"; };
+		F902FDEB289B1F2B00735BE1 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		F907C6F02867144E0049F4CB /* ResponseJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseJson.swift; sourceTree = "<group>"; };
 		F9149C48285E456300676DCB /* travelguide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = travelguide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9149C4B285E456300676DCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */,
 				F95E9A4D289130FD004D60FC /* InternetMonitor.swift */,
 				F902FDE928992D9800735BE1 /* Checks.swift */,
+				F902FDEB289B1F2B00735BE1 /* MapController.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -200,8 +203,8 @@
 				F97E3512286DF121003146F2 /* SettingsViewController.swift */,
 				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
-				F9B8DCBC288D882F009E1065 /* OnboardingViewViewController.swift */,
 				F9B8DCBE288D887F009E1065 /* OnBoardingView.swift */,
+				F9B8DCBC288D882F009E1065 /* OnboardingViewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,
 				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
 				F9B8DCBD288D882F009E1065 /* OnboardingViewViewController.swift in Sources */,
+				F902FDEC289B1F2B00735BE1 /* MapController.swift in Sources */,
 				F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */,
 				F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */,
 				F9E5A3272889759B00883D11 /* Webservice.swift in Sources */,

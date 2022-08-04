@@ -39,7 +39,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         eczaneStored.removeAll()
         eczaneStoredByCounty.removeAll()
         eczaneStoredFull.removeAll()
-       
+        view.backgroundColor = UIColor(named: "OnboardingColor")
        
         if eczaneStoredFull.count != nil{
            
@@ -74,7 +74,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         longPressGesture.minimumPressDuration = 1.0
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)
-        
+        tableView.backgroundColor = UIColor(named: "OnboardingColor")
         tableView.delegate = self
         tableView.dataSource = self
        
@@ -133,7 +133,10 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         return headerTitles
     }
     
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        tableView.backgroundColor = UIColor(named: "OnboardingColor")
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
        // let cell = UITableViewCell()
@@ -151,7 +154,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         cell.distanceText.textColor = UIColor.init(named: "ColorForListView")
         cell.timeText.textColor = UIColor.init(named: "ColorForListView")
         cell.countyText.textColor = UIColor.init(named: "ColorForListView")
-        
+        cell.backgroundColor = UIColor(named: "OnboardingColor")
 //        /**
 //         distance yazdırma
 //
@@ -189,7 +192,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
 
             firstLabel.font = UIFont(name: "Arial", size: 18)
             firstLabel.textColor =  UIColor.init(named: "SpesificColor")
-            
+            navigationBar.backgroundColor = UIColor(named: "OnboardingColor")
             navigationBar.addSubview(firstLabel)
             
         

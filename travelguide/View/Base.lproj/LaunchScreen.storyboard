@@ -16,29 +16,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appstore" translatesAutoresizingMaskIntoConstraints="NO" id="WtU-V0-3FA">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genel" translatesAutoresizingMaskIntoConstraints="NO" id="Yzo-6w-NKh">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="tintColor" red="0.84705882349999995" green="0.1058823529" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.97018533945083618" green="0.98876100778579712" blue="0.016063252463936806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WtU-V0-3FA" secondAttribute="bottom" id="I9F-IU-bSp"/>
-                            <constraint firstItem="WtU-V0-3FA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ROb-a3-wAo"/>
-                            <constraint firstItem="WtU-V0-3FA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aTo-Q5-y82"/>
-                            <constraint firstAttribute="trailing" secondItem="WtU-V0-3FA" secondAttribute="trailing" id="bZn-Ij-UTe"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6St-MO-1cN"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="89p-tE-FMx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yzo-6w-NKh" secondAttribute="trailing" id="I10-NS-hDI"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ibu-o2-jLa"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JiC-9C-nrg"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sgx-l7-gmv"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zxv-jW-S2I"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cRw-jq-ZAq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yzo-6w-NKh" secondAttribute="bottom" id="dNt-dR-I1q"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="grA-H8-m35"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yzo-6w-NKh" secondAttribute="trailing" id="lXo-Ca-Aqd"/>
+                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ttL-Lb-TSm"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="appstore" width="1024" height="1024"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <image name="genel" width="596" height="842"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

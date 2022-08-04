@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             })
             
             window?.rootViewController = tabBar
-           
+            tabBar.tabBar.backgroundColor = UIColor(named: "OnboardingColor")
             tabBar.selectedIndex = 0 // her zaman konum sayfası önce açılsın
            
         } else

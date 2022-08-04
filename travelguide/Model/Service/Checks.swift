@@ -6,10 +6,34 @@
 //
 
 import Foundation
+import UIKit
 
 
 class CheckGPSSignal {
-    
+    func showAlertController () -> UIViewController{
+        
+        var topController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+        while ((topController?.presentedViewController) != nil){
+            topController = topController?.presentedViewController
+        }
+        return topController!
+        
+    }
+
+    func alert(title : String, message :String){
+        let alert = UIAlertController( title: title, message: message , preferredStyle: .alert)
+        let cancelAction : UIAlertAction = UIAlertAction(title: "OK", style: .cancel)
+        { action -> Void in
+            
+        }
+        alert.addAction(cancelAction)
+      
+        showAlertController().present(alert, animated: true, completion: nil)
+        
+    }
+    func presentViewController( alert : UIAlertController, animated flag : Bool, completion : (()-> Void)?) -> Void{
+        UIApplication.shared.keyWindow?.window?.rootViewController!.present(alert,animated: flag,completion: completion)
+    }
     
 }
 

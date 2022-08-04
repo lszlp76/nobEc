@@ -24,6 +24,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
             
         }
     }
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -54,7 +55,9 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        let navigationBar = self.navigationController?.navigationBar
+        view.backgroundColor = UIColor(named: "OnboardingColor")
+        navigationBar!.backgroundColor = UIColor(named: "OnboardingColor")
         configureSettingsList()
     }
     func configureSettingsList () {
@@ -73,6 +76,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let headerTitles = "AYARLAR"
         
+        
         return headerTitles
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,9 +88,15 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         header.textLabel?.textColor = UIColor.init(named: "SpesificColor")
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         header.textLabel?.frame = header.bounds
+        header.backgroundColor = UIColor(named: "OnboardingColor")
+        
         // header.textLabel?.textAlignment = .center
         
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        tableView.backgroundColor = UIColor(named: "OnboardingColor")
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -130,6 +140,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
             settingsCell.toggleSwitch.isHidden = true
             
         }
+        settingsCell.backgroundColor = UIColor(named: "OnboardingColor")
         
         return settingsCell
         

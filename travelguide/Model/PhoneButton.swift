@@ -38,12 +38,14 @@ class PharmacyNearByAnnotation: NSObject,MKAnnotation {
      
 }
 
-class deneme : NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
-    var travelTime: String?
-    init(coordinate:CLLocationCoordinate2D) {
-        self.coordinate = coordinate
+class AnnoDeneme : MKPointAnnotation {
+  
+    internal init(coordinate: CLLocationCoordinate2D, image: UIImage? = nil) {
+        
+        self.image = image
     }
+    
+      var image : UIImage?
 }
 
 

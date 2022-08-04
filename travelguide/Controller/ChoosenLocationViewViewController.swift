@@ -14,23 +14,35 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
     var annotationLongitude = Double()
     var annotationTravelTime = String()
     var annotationPhoneNumber = String()
-    
+    var userLocation = CLLocation()
     var selectedTitle = ""
     var selectedTitleID: UUID?
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         mapView.delegate = self
-        print(annotationTitle,annotationLatitude,annotationLongitude)
+      
+//        let  locaManager = LocationManager.shared
+        let selectedCoordinate = CLLocationCoordinate2D(latitude: annotationLatitude, longitude: annotationLongitude)
+//
+//        locaManager.getUserLocation { [self] location in
+//
+//            self.userLocation = CLLocation (latitude: location.coordinate.latitude,longitude: location.coordinate.longitude)
+//
+//
+//        }
+//
+//
+//       self.mapView.showRouteOnMap(pickupCoordinate: self.userLocation.coordinate, destinationCoordinate: selectedCoordinate)
+//        print(annotationTitle,annotationLatitude,annotationLongitude)
         let annotation = MKPointAnnotation()
         let title = String(annotationTitle + "\n" + annotationPhoneNumber)
         print("başlık \(title)")
-        
-        annotation.title = annotationTitle
+         annotation.title = annotationTitle
         annotation.subtitle = annotationPhoneNumber
-        let selectedCoordinate = CLLocationCoordinate2D(latitude: annotationLatitude, longitude: annotationLongitude)
-        annotation.coordinate = selectedCoordinate
+         annotation.coordinate = selectedCoordinate
         self.mapView.addAnnotation(annotation)
         //zoomlamak için
         mapView.selectAnnotation(mapView.annotations[0], animated: true)
@@ -40,55 +52,18 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
         let region = MKCoordinateRegion(center: selectedCoordinate, span: span)
         
         mapView.setRegion(region, animated: true)
+       
+        
     }
-    /*
-     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-     let annotationIdentifier = "MyCustomAnnotation"
-     guard !annotation.isKind(of: MKUserLocation.self) else {
-     return nil
-     }
-     
-     var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
-     if annotationView == nil {
-     annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-     if case let annotationView as CustomAnnotationView = annotationView {
-     annotationView.isEnabled = true
-     annotationView.canShowCallout = false
-     annotationView.label = UILabel(frame: CGRect(x: -5.5, y: 11.0, width: 22.0, height: 16.5))
-     if let label = annotationView.label {
-     label.font = UIFont(name: "HelveticaNeue", size: 16.0)
-     label.textAlignment = .center
-     label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-     label.adjustsFontSizeToFitWidth = true
-     annotationView.addSubview(label)
-     }
-     }
-     }
-     
-     if case let annotationView as CustomAnnotationView = annotationView {
-     annotationView.annotation = annotation
-     annotationView.image = #imageLiteral(resourceName: "YourPinImage")
-     if let title = annotation.title,
-     let label = annotationView.label {
-     label.text = title
-     }
-     }
-     
-     return annotationView
-     
-     
-     
-     
-     }
-     */
+   
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //MKAnnotationview döndürmek ister
         
         let phoneButton = PhoneCallButton(type: .custom)
         
         
-        if annotation is MKUserLocation {
-             // kullanıcı yerini pin le göstermek istemezsen
+        if annotation is AnnoDeneme
+        {
         }
         let reuseId = "MyAnnotation"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
@@ -241,6 +216,65 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
         }
     }
      */
-    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+         let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.fillColor = UIColor.yellow
+        renderer.lineWidth = 10.0
+        return renderer
+    }
     
 }
+extension MKMapView {
+
+  func showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+    let sourcePlacemark = MKPlacemark(coordinate: pickupCoordinate, addressDictionary: nil)
+    let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate, addressDictionary: nil)
+    
+    let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+    let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+    
+    let sourceAnnotation = MKPointAnnotation()
+    
+    if let location = sourcePlacemark.location {
+        sourceAnnotation.coordinate = location.coordinate
+    }
+    
+    let destinationAnnotation = MKPointAnnotation()
+    
+    if let location = destinationPlacemark.location {
+        destinationAnnotation.coordinate = location.coordinate
+    }
+    
+    self.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
+    
+    let directionRequest = MKDirections.Request()
+    directionRequest.source = sourceMapItem
+    directionRequest.destination = destinationMapItem
+      directionRequest.requestsAlternateRoutes = true
+    directionRequest.transportType = .automobile
+    
+    // Calculate the direction
+    let directions = MKDirections(request: directionRequest)
+    
+    directions.calculate {
+        (response, error) -> Void in
+        
+        guard let response = response else {
+            if let error = error {
+                print("Error: \(error)")
+            }
+            
+            return
+        }
+         let route = response.routes
+            let sortedRoutes = route.sorted(by: { $0.distance < $1.distance}) // en küçüğe göre sort ediyor
+            let shortestRoute = sortedRoutes.first // sonra o dizinin ilk elemanını alıyor, böylece en kısa mesafeyi buluş oluyor
+            
+        
+        self.addOverlay((shortestRoute?.polyline) as! MKOverlay, level: MKOverlayLevel.aboveRoads)
+        let rect = shortestRoute!.polyline.boundingMapRect
+        self.setRegion(MKCoordinateRegion(rect), animated: true)
+    }
+}}
+

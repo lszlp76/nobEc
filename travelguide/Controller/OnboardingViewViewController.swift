@@ -10,6 +10,9 @@ import paper_onboarding
 
 
 class OnboardingViewController: UIViewController , PaperOnboardingDataSource, PaperOnboardingDelegate{
+
+    
+    var image1 : UIImage!
     
     
     func onboardingItemsCount() -> Int {
@@ -26,12 +29,18 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
     @IBOutlet weak var onBoardingView: OnboardingView!
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
-        let bgcolor2 = UIColor( red:0/255, green: 0/255, blue :100/255,alpha: 1)
+        
+        let width = onBoardingView.bounds.width
+        let heigth = onBoardingView.bounds.height
+        let bgcolor2 = UIColor( red:255/255, green: 217/255, blue :255/255,alpha: 1)
        // let bgcolor1 = UIColor( red: 200/255, green: 89/255, blue : 92/255,alpha: 1)
         
        // let titleFont = UIFont(name: "AvenirNext-Bold", size: 24)!
        // let descFont = UIFont(name: "AvenirNext-Regular",size: 18)!
-        let rocket  = UIImage(systemName: "circle.fill") as UIImage?
+        image1 = UIImage(named: "page1")
+        
+    
+      
         let rocket3 = UIImage(named: "pharmacyRedLogo") as UIImage?
         let rocket2 = UIImage(named: "pharmacyBlueLogo" ) as UIImage?
         let icon = UIImage(named: "pharmacy") as UIImage?
@@ -40,7 +49,7 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
         
         return [
             OnboardingItemInfo(
-                informationImage: rocket!, title: "Konumunuza en yakın eczaneler",
+                informationImage: image1!, title: "Konumunuza en yakın eczaneler",
                                      description: "Bulunduğunuz bölgedeki en yakın eczaneleri harita üzerinde gösterir. Telefon numaraları ve mesafeyi hızlıca görebilirsin. ",                                     pageIcon: icon!,
                                      color: bgcolor2,
                                      titleColor: fontColor2,
@@ -81,7 +90,11 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
         onBoardingView.delegate = self
         
         onBoardingButton.alpha = 0
-        
+        let image = UIImage(named: "back")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: onBoardingView.bounds.width,  height:onBoardingView.bounds.height))
+        imageView.image = image
+       
+        onBoardingView.addSubview(imageView)
         
     }
     
