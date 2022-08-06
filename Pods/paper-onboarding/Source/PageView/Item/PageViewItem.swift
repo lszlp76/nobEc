@@ -67,6 +67,7 @@ extension PageViewItem {
     fileprivate func createBorderView() -> UIView {
         let view = Init(UIView(frame: CGRect.zero)) {
             $0.backgroundColor = .blue
+            
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         addSubview(view)
@@ -75,6 +76,7 @@ extension PageViewItem {
         let currentRadius = select == true ? selectedCircleRadius : circleRadius
         let circleLayer = createCircleLayer(currentRadius, lineWidth: lineWidth)
         view.layer.addSublayer(circleLayer)
+        
         self.circleLayer = circleLayer
 
         // add constraints
@@ -109,6 +111,8 @@ extension PageViewItem {
             $0.contentMode = .scaleAspectFit
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.alpha = select == true ? 1 : 0
+            
+            
         }
         addSubview(imageView)
 

@@ -148,6 +148,20 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         cell.phoneNumberText.text = eczaneStored[indexPath.row].phoneNumber
          cell.countyText.text = eczaneStored[indexPath.row].pharmacyCounty
         cell.timeText.text = eczaneStored[indexPath.row].travelTime! + " dak."
+       
+//        self.findDistanceForPharmacyOnDuty(endLocation: CLLocationCoordinate2D( latitude: eczaneStored[indexPath.row].pharmacyLatitude, longitude: eczaneStored[indexPath.row].pharmacyLongitude)) { distance, travelTime in
+//            guard let distance = distance else {
+//                return
+//            }
+//            cell.distanceText.text = String(format: "%.1f",distance as! CVarArg) + " km"
+//
+//        }
+//
+        
+           
+    
+        
+        
         cell.distanceText.text = String(format: "%.1f", eczaneStored[indexPath.row].distance as! CVarArg) + " km"
         cell.pharmacyNameText.textColor = UIColor.init(named: "ColorForListView")
         cell.phoneNumberText.textColor = UIColor.init(named: "ColorForListView")

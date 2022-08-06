@@ -74,6 +74,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let stackView = UIStackView()
     let stackViewUp = UIStackView()
     let updateLocationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    
+    var openingTime = Date()
+    var didUpdateLocationDemanded = Bool()
+    var firstOpen = Bool()
     @IBOutlet weak var update: UIImageView!
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,6 +120,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print("viewdidLoad çalıştır")
         
         self.tabBarController?.delegate = self
+        
+        // 1. Choose a date
+        openingTime = Date.now
+    didUpdateLocationDemanded = false
+        firstOpen = true
+        print(openingTime)
         
         if userDefault.getValueForSwitch(keyName: "tutorial")! ||
             !(userDefault.getValueForSwitch(keyName: "firstUsage")! ) {
@@ -205,6 +215,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             self.mapView.addAnnotation(anno);
             
             fetchUserChoosenLocation(location: newLocation)
+          
             mapView.centerLocation(newLocation,regionRadius: 3000)
             
         }
@@ -233,6 +244,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 print( error)
                 return
             }
+            print("yakın eczane sayısı \(response.mapItems.count))")
             
             for item in response.mapItems {
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
@@ -255,23 +267,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     @objc func updateLocationButtonClicked (){
-        mapView.removeAnnotation(anno)
-        mapView.removeAnnotations(nearByPharmacies)
-        mapView.removeAnnotations(newNearByPharmacies)
-        mapView.removeOverlay(circle)
+        /*
+         60 sn. ara ile map API'den veri alman lazım , yoksa hata verir
+         */
         
-        mapView.removeOverlay(circle2)
-        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-        let region = MKCoordinateRegion(center: getLocation.location, span: span)
-        mapView.setRegion(region, animated: true)
-        let location = CLLocationCoordinate2D(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
-       
-        locationManager.startUpdatingLocation()
+        mapView.centerLocation(userLocation)
+        let currentTime = Date.now
+        print("openning time \(openingTime)")
+        print("current time \(currentTime)")
+        let diffTime = currentTime.timeIntervalSinceReferenceDate - openingTime.timeIntervalSinceReferenceDate
+        if diffTime > 60 {
+            mapView.removeAnnotation(anno)
+            mapView.removeAnnotations(nearByPharmacies)
+            mapView.removeAnnotations(newNearByPharmacies)
+            mapView.removeOverlay(circle)
+            mapView.removeOverlay(circle2)
+            locationManager.startUpdatingLocation()
+            
+            self.openingTime = currentTime //açılış saatini en son değer yaıyor
+        }
         
-        didPerformGeocode = false
-        //
-        
-        //locationManager.stopUpdatingLocation() // bunu kaldırma
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let group = DispatchGroup()
@@ -290,10 +305,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         
-        guard !didPerformGeocode else {
-            return
-        }
-        didPerformGeocode = true
+      
         
     group.enter()
         /*
@@ -304,21 +316,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         getCityAndCountyName { [self] sehir, ilce in
             guard let sehir = sehir else {return}
             
+            
             self.city = sehir
             self.county = ilce!
             
+            //getData(forCity: city)
+            group.leave()
             
-            self.fetchPharmacyLocation(location: CLLocation(latitude: self.getLocation.location.latitude, longitude: getLocation.location.longitude) , pharmacyOnDuty: pharmacyOnDuty)
-         group.leave()
-        }
-        group.notify(queue: .main){ [self] in
-            if self.pharmacyOnDuty.count == 0 {
-             getData(forCity: city)
-        
            
-            print("Sehir--> \(self.city)")
-      }
         }
+        group.notify(queue: .main)
+        { [self] in  // notify yapmazsan getdata,fetch in öne geçer
+            guard !userDefault.getValueForSwitch(keyName: "tutorial")! else {return}
+                    print("Açılış verisi")
+                    self.fetchPharmacyLocation(location: CLLocation(latitude: self.getLocation.location.latitude, longitude: getLocation.location.longitude) , pharmacyOnDuty: pharmacyOnDuty)
+                    getData(forCity: self.city)
+                 firstOpen = false
+                    
+                
+            }
+        
+            
+            
         GetLocation.sharedInstance.connectionGPSExist = true
         
         locationManager.stopUpdatingLocation()
@@ -328,7 +347,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     func getCityAndCountyName(getCity : @escaping (_ sehir: String?,_ ilce: String?)-> Void) {
         let userLocation =  CLLocation(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
-        
+        print("get city 0")
         GetLocation.sharedInstance.connectionGPSExist = true
         let geoCoder = CLGeocoder()
         var sehir = ""
@@ -340,7 +359,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             guard let place = placemarks?.first , error == nil else { return}
             
             
-            print("getCity çalıştı ")
+            print("getCity çalıştı completion ")
             sehir = place.administrativeArea!
             ilce = place.subAdministrativeArea!
             
@@ -356,43 +375,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //        self.mapView.addAnnotation(pin)
         //
     }
-    func getData(forCity : String){
-        
+    func getData(forCity : String )
+    {
+        print("getdata 2 ")
+        let gp = DispatchGroup()
+    
         let url = URL(string: ("https://www.nosyapi.com/apiv2/pharmacyLink?apikey=x58j5AeEFXqvorUFG7X3o5QzGXqcThj8ncFGre0nucdVQYsuZKgfZ8ZKUf8y&city=" + (TurkishConverter().convertToLatin(word: forCity))))
-        
+      
         Webservice().downloadPharmacyInCity(url: (url)!) { pharmacyList in
             if let pharmacyList = pharmacyList {
                 //3 burada da initilize et
-                
+             
                 self.pharmacyOnDutyList = PharmacyListViewModel(pharmacy: pharmacyList)
                 
-                DispatchQueue.main.async { [self] in
                 // tableview güncellemesi burada yapılır
                 
                 print("************WEEEE************")
+                    
                 print(self.pharmacyOnDutyList.numberOfDutyPharmacies())
-                
+               
                 self.findDistanceForPharmacyOnDuty()
-                }
-                
-                /**
-                 Bu fonksiyonu eczaneler listesine  taşı. Burada nöbetçi eczanlerin yollarını hesaplatma
-                 //self.findDistanceForPharmacyOnDuty()
-                 */
-                
-                /* EczaneStored oluşturma*/
-                //        for index in 0...self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 {
-                //            let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
-                //
-                //            let eczaneStored = EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: 0.0, travelTime: "0" ,pharmacyCounty: phar.pharmacyCounty, phoneNumber: phar.pharmacyPhoneNumber ?? "mevcut değil", pharmacyAddress: phar.pharmacyAddress)
-                //            self.pharmacyOnDuty.append(eczaneStored)
-                //            self.getLocation.eczaneStored = pharmacyOnDuty
-                //        }
-                
-                
-                // }
+            
             }
+           
+            
         }
+       
         
     }
     /// performRequest ten gelen ph adlı JSON objesinin bilgilerine göre her bir datanın
@@ -404,6 +412,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     ///  yazar.
     func findDistanceForPharmacyOnDuty()
     {
+        
+        // Apple MAp APİ'de 50 istek sınırı var. O nedenle sayının 50 yi geçmemesi lazım.
+        print("find pharmacy 4")
         print("Find distance for  -->\(self.pharmacyOnDutyList.numberOfDutyPharmacies() )")
         print("location bilgisi \(getLocation.location)")
         
@@ -468,14 +479,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let request = MKDirections.Request()
         
-        let source = MKPlacemark( coordinate: sourceLocation)//CLLocationCoordinate2D(latitude: 40.2145, longitude: 28.981821))
+        let source = MKPlacemark( coordinate: sourceLocation)
+            
+         // //CLLocationCoordinate2D(latitude: 40.2145, longitude: 28.981821))
         // MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 40.2145, longitude: 28.981821))
         
         var msf : Double?
         var travelTime : String?
         
         let destination = MKPlacemark( coordinate: endLocation)
-        
+       // let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude))
         request.source =  MKMapItem(placemark: source)
         request.destination = MKMapItem(placemark: destination)
         //  print("request değerleri --> \(request.destination) \(destination.location?.coordinate)")
@@ -483,24 +496,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         request.requestsAlternateRoutes = true
         
         let directions = MKDirections ( request: request)
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             directions.calculate { (response, error) in
                 
                 if let error = error {
                     
                     print("Pharmacy --> \(destination.coordinate.latitude ) Distance directions calculation error\n \(error.localizedDescription)")
-                    return
+                     return
                 }
                 if let route = response?.routes {
                     let sortedRoutes = route.sorted(by: { $0.distance < $1.distance}) // en küçüğe göre sort ediyor
                     let shortestRoute = sortedRoutes.first // sonra o dizinin ilk elemanını alıyor, böylece en kısa mesafeyi buluş oluyor
                     msf = shortestRoute!.distance/1000
                     travelTime = String(format: "%.0f",shortestRoute!.expectedTravelTime/60)
-                    print("Pharmacy ok --> \(destination.title)")
+                   // print("Pharmacy ok --> \(destination.title)")
                 }
                 completion  (msf,travelTime)
             }
-        }
+//        }
         
     }
     
@@ -714,7 +727,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             locateButton.isHidden = true
             demandTutorial = true
             userDefault.setValueForAllPharmacyOption(value: false, keyName: "tutorial")
-            
+
             stackViewUp.isHidden = true
             stackView.isHidden = true
             removeAnimate()
@@ -782,7 +795,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                     
                     
-                    self.findDistanceForPharmacyOnDuty()
+                    //self.findDistanceForPharmacyOnDuty()
                     
                     
                 }
@@ -855,9 +868,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func fetchPharmacyLocation(location : CLLocation,regionRadius : CLLocationDistance = 100000, pharmacyOnDuty : [EczaneVeri] ) {
         
         let group = DispatchGroup()
-        print("fetchPharmacyLocation() calıştı\n")
-        //print("\(pharmacyOnDuty) liste \n *************")
-        
+         
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
         let regionRadius: CLLocationDistance = 1000
         
@@ -885,7 +896,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var travelTimeAnno = ""
             var distanceAnno = 0.0
 //            group.enter()
+            print("yakındaki eczane sayısı \(response.mapItems.count)")
+            
+            
+            var itemLimit = 0  //==> en fazla 10 tane al
+          
             for item in response.mapItems {
+                guard itemLimit != 10 else {return} //==> en fazla 10 tane al
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
                     
                     getDistance(sourceLocation: GetLocation.sharedInstance.location ,endLocation: location.coordinate)
@@ -901,19 +918,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime: travelTimeAnno + " dak.", distance: distanceAnno, coordinate: location.coordinate))
                         nearByPharmacies.append(localPharmacies)
                         addAnnotations(annos: nearByPharmacies)
-                        
-                        
-                      
-                       
-                        
-                    }
-                 
-                    
-                    
-                }
+                      }
+                 }
                 else {
                     print("hata var")
                 }
+                itemLimit += 1
+                
             }//end loop
             print("Yakındaki eczane sayısı \(nearByPharmacies.count)")
 //            group.leave()

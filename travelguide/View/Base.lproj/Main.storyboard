@@ -456,9 +456,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lcy-r3-Zkt"/>
         <segue reference="PFk-Ew-Zb3"/>
-        <segue reference="9nJ-5P-Sf6"/>
+        <segue reference="K8K-UJ-6gL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="car" catalog="system" width="128" height="93"/>

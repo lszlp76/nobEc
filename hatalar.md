@@ -96,3 +96,18 @@ Pharmacy --> 40.192716 Distance directions calculation error
  Directions Not Available
 Pharmacy --> 40.179541 Distance directions calculation error
  Directions Not Available
+
+
+        let constraint = NSLayoutConstraint(
+            item: view, attribute: NSLayoutConstraint.Attribute.height,
+            relatedBy: NSLayoutConstraint.Relation.equal,
+            toItem: view, attribute: NSLayoutConstraint.Attribute.width,
+             multiplier: 3, constant: 0.0)
+        let backgroundImage = UIImage(named: "back")
+        let backgroundImageView = Init(UIImageView(frame: CGRect.zero)) {
+            $0.contentMode = .scaleAspectFill
+            $0.layer.borderWidth = 3
+            $0.addConstraint(constraint)
+            $0.image = backgroundImage
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }

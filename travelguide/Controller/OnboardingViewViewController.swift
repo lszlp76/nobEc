@@ -13,7 +13,8 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
 
     
     var image1 : UIImage!
-    
+    var image2 : UIImage!
+    var image3 : UIImage!
     
     func onboardingItemsCount() -> Int {
         return 3 // 2 sayfa olacak
@@ -32,14 +33,17 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
         
         let width = onBoardingView.bounds.width
         let heigth = onBoardingView.bounds.height
-        let bgcolor2 = UIColor( red:255/255, green: 217/255, blue :255/255,alpha: 1)
+        
+        let bgcolor2 = UIColor( red:248/255, green: 239/255, blue :237/255,alpha: 1)
        // let bgcolor1 = UIColor( red: 200/255, green: 89/255, blue : 92/255,alpha: 1)
         
        // let titleFont = UIFont(name: "AvenirNext-Bold", size: 24)!
        // let descFont = UIFont(name: "AvenirNext-Regular",size: 18)!
         image1 = UIImage(named: "page1")
+        image2 = UIImage(named: "araba")
         
-    
+       
+        
       
         let rocket3 = UIImage(named: "pharmacyRedLogo") as UIImage?
         let rocket2 = UIImage(named: "pharmacyBlueLogo" ) as UIImage?
@@ -56,7 +60,7 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
                                      descriptionColor: fontColor2,
                                      titleFont: UIFont(name: "AvenirNext-Bold", size: 24)!,
                                      descriptionFont: UIFont(name: "AvenirNext-Regular", size: 18)!),
-            OnboardingItemInfo(informationImage: rocket2!,
+            OnboardingItemInfo(informationImage: image2!,
                                      title: "Nöbetçi eczaneleri listeler",
                                      description: "O günkü nöbetçi eczaneleri bulunduğunuz konuma göre listeler.",
                                      pageIcon: icon!,
@@ -90,13 +94,12 @@ class OnboardingViewController: UIViewController , PaperOnboardingDataSource, Pa
         onBoardingView.delegate = self
         
         onBoardingButton.alpha = 0
-        let image = UIImage(named: "back")
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: onBoardingView.bounds.width,  height:onBoardingView.bounds.height))
-        imageView.image = image
+
        
-        onBoardingView.addSubview(imageView)
-        
-    }
+
+        }
+      
+    
     
     func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
         

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,43 +11,30 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleAspectFit" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genel" translatesAutoresizingMaskIntoConstraints="NO" id="Yzo-6w-NKh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <color key="tintColor" red="0.84705882349999995" green="0.1058823529" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenNobEc" translatesAutoresizingMaskIntoConstraints="NO" id="yjL-dQ-3mA">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="tintColor" red="0.97018533945083618" green="0.98876100778579712" blue="0.016063252463936806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6St-MO-1cN"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="89p-tE-FMx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yzo-6w-NKh" secondAttribute="trailing" id="I10-NS-hDI"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ibu-o2-jLa"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JiC-9C-nrg"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sgx-l7-gmv"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zxv-jW-S2I"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cRw-jq-ZAq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yzo-6w-NKh" secondAttribute="bottom" id="dNt-dR-I1q"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="grA-H8-m35"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yzo-6w-NKh" secondAttribute="trailing" id="lXo-Ca-Aqd"/>
-                            <constraint firstItem="Yzo-6w-NKh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ttL-Lb-TSm"/>
+                            <constraint firstAttribute="bottom" secondItem="yjL-dQ-3mA" secondAttribute="bottom" constant="34" id="7Bl-Hs-9d6"/>
+                            <constraint firstItem="yjL-dQ-3mA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Hae-Zn-AjT"/>
+                            <constraint firstItem="yjL-dQ-3mA" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="44" id="Mez-UI-wVc"/>
+                            <constraint firstAttribute="trailing" secondItem="yjL-dQ-3mA" secondAttribute="trailing" id="c6f-53-A1F"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
         </scene>
     </scenes>
     <resources>
-        <image name="genel" width="596" height="842"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="SplashScreenNobEc" width="547" height="750"/>
     </resources>
 </document>

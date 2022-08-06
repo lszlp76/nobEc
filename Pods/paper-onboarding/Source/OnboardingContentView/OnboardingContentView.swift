@@ -57,10 +57,16 @@ extension OnboardingContentView {
 extension OnboardingContentView {
 
     class func contentViewOnView(_ view: UIView, delegate: OnboardingContentViewDelegate, itemsCount: Int, bottomConstant: CGFloat) -> OnboardingContentView {
+       
+//
+
+       
         let contentView = Init(OnboardingContentView(itemsCount: itemsCount, delegate: delegate)) {
             $0.backgroundColor = .clear
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+       
+     
         view.addSubview(contentView)
 
         // add constraints
