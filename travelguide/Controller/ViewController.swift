@@ -440,7 +440,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var eczaneVeri = [EczaneVeri]()
        
         for index in 0...(self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ) {
-            grup.enter()
+           
             let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
             
             getDistance(sourceLocation: getLocation.location, endLocation: CLLocationCoordinate2DMake(
@@ -455,11 +455,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                 {  self.pharmacyOnDuty.append (EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance ,travelTime: travelTime!,pharmacyCounty: phar.pharmacyCounty, phoneNumber: phar.pharmacyPhoneNumber ?? "Mevcut değil", pharmacyAddress: phar.pharmacyAddress))
                     
-                
+                    self.addNearestPharmacyToMap()
                     
                 }
-            
-                //completion(eczaneVeri)
+                
+                
                 else {
                     self.getLocation.connectionGPSExist  = false
                     //    print("\(String(describing: //)) hata var !")
@@ -469,13 +469,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.getLocation.eczaneStored = pharmacyOnDuty
                 self.changePinToDutyPharmacy(localPharmacies: self.nearByPharmacies, pharmacyOnDuty: self.getLocation.eczaneStored)
             }
-           
+            
           
         }// for end
-       
-            
-           
-           
+        
        
 //
 //        self.getLocation.connectionGPSExist  = true
@@ -520,6 +517,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     let shortestRoute = sortedRoutes.first // sonra o dizinin ilk elemanını alıyor, böylece en kısa mesafeyi buluş oluyor
                     msf = shortestRoute!.distance/1000
                     travelTime = String(format: "%.0f",shortestRoute!.expectedTravelTime/60)
+                    
                    // print("Pharmacy ok --> \(destination.title)")
                 }
                 completion  (msf,travelTime)
@@ -950,11 +948,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func   addNearestPharmacyToMap(){
         
        
-        let bestPharmacyOption = (getLocation.eczaneStored).sorted(by:
+        let bestPharmacyOption = pharmacyOnDuty.sorted(by:
                                                                 { Double($0.travelTime!)!  < Double($1.travelTime! )! })
         let bestToShow = bestPharmacyOption.first
         
-        let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: bestToShow?.travelTime, distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude))
+        let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: (bestToShow?.travelTime)! + ".dak", distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude))
         
         self.mapView.addAnnotation(bestToShowAnnotation)
         
@@ -1030,7 +1028,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         pinView?.markerTintColor = UIColor.white
         DispatchQueue.global().async { [self] in
             for duty in self.pharmacyOnDuty {
-                if duty.pharmacyName == pinView?.annotation?.title
+                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude 
                 {
                     pinView?.glyphTintColor = .red
                     circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 100)
