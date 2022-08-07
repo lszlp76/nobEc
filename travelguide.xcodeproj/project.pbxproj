@@ -19,6 +19,8 @@
 		F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9149C59285E456400676DCB /* LaunchScreen.storyboard */; };
 		F9149C63285E692700676DCB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9149C62285E692700676DCB /* FirstViewController.swift */; };
 		F91589C9286355670018181C /* PharmacyFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91589C8286355670018181C /* PharmacyFinder.swift */; };
+		F945BF35289FDC86000EF9FB /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F945BF34289FDC86000EF9FB /* OnboardingPageViewController.swift */; };
+		F945BF37289FE416000EF9FB /* pageThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F945BF36289FE416000EF9FB /* pageThreeViewController.swift */; };
 		F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94CB9B6286E12F40038D47B /* UserDefaults.swift */; };
 		F94CB9BA2870F92D0038D47B /* PhoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94CB9B92870F92D0038D47B /* PhoneButton.swift */; };
 		F95AF9FA28988EDD0076D90B /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95AF9F928988EDD0076D90B /* webViewController.swift */; };
@@ -60,6 +62,8 @@
 		F9149C5C285E456400676DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9149C62285E692700676DCB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		F91589C8286355670018181C /* PharmacyFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyFinder.swift; sourceTree = "<group>"; };
+		F945BF34289FDC86000EF9FB /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		F945BF36289FE416000EF9FB /* pageThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageThreeViewController.swift; sourceTree = "<group>"; };
 		F94CB9B6286E12F40038D47B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		F94CB9B92870F92D0038D47B /* PhoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneButton.swift; sourceTree = "<group>"; };
 		F95AF9F928988EDD0076D90B /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
@@ -201,10 +205,12 @@
 				F9149C62285E692700676DCB /* FirstViewController.swift */,
 				F95AF9F928988EDD0076D90B /* webViewController.swift */,
 				F97E3512286DF121003146F2 /* SettingsViewController.swift */,
+				F945BF36289FE416000EF9FB /* pageThreeViewController.swift */,
 				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
 				F9B8DCBE288D887F009E1065 /* OnBoardingView.swift */,
 				F9B8DCBC288D882F009E1065 /* OnboardingViewViewController.swift */,
+				F945BF34289FDC86000EF9FB /* OnboardingPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
 				F9B8DCBD288D882F009E1065 /* OnboardingViewViewController.swift in Sources */,
 				F902FDEC289B1F2B00735BE1 /* MapController.swift in Sources */,
+				F945BF35289FDC86000EF9FB /* OnboardingPageViewController.swift in Sources */,
 				F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */,
 				F97E3511286CC63A003146F2 /* ChoosenLocationViewViewController.swift in Sources */,
 				F9E5A3272889759B00883D11 /* Webservice.swift in Sources */,
@@ -347,6 +354,7 @@
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,
 				F95E9A4E289130FD004D60FC /* InternetMonitor.swift in Sources */,
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
+				F945BF37289FE416000EF9FB /* pageThreeViewController.swift in Sources */,
 				F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */,
 				F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */,
 				F902FDEA28992D9800735BE1 /* Checks.swift in Sources */,
