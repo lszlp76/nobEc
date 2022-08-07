@@ -43,9 +43,10 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         UIView.animate(withDuration: 0.4, animations: {
             // manuel olarak UIButton2ı bulup yaptım. Otomatik olarak değil
             
-            self.orderedViewControllers[viewControllerIndex].view.subviews[2].subviews.last?.alpha = 1
-            })
-        }
+//            self.orderedViewControllers[viewControllerIndex].view.subviews[2].subviews.last?.alpha = 1
+//            })
+        })
+                       }
         guard orderedViewControllersCount != nextIndex else {
             return nil
         }
