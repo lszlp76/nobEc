@@ -277,7 +277,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         /*
          60 sn. ara ile map API'den veri alman lazım , yoksa hata verir
          */
-        
+        guard (userLocation != nil) else {
+            CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
+            return
+        }
         mapView.centerLocation(userLocation)
         let currentTime = Date.now
         print("openning time \(openingTime)")
@@ -1028,7 +1031,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         pinView?.markerTintColor = UIColor.white
         DispatchQueue.global().async { [self] in
             for duty in self.pharmacyOnDuty {
-                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude 
+                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude
                 {
                     pinView?.glyphTintColor = .red
                     circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 100)
