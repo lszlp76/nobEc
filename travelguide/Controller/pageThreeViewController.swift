@@ -8,18 +8,10 @@
 import UIKit
 
 class pageThreeViewController: UIViewController {
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
+
     @IBAction func buttonClicked(_ sender: Any) {
-        print("ok")
-        UIView.animate(withDuration: 0.25, animations: {
-            
-            self.startButton.alpha = CGFloat(1)
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            
-        })
-        //self.performSegue(withIdentifier: "toTabView2", sender: nil)
+       
+        self.performSegue(withIdentifier: "toTabView2", sender: nil)
     }
     @IBOutlet weak var startButton: UIButton!
     override func viewDidLoad() {
@@ -27,15 +19,7 @@ class pageThreeViewController: UIViewController {
        
     }
     
-    func showAnimate()
-    {
-        
-        UIView.animate(withDuration: 0.85, animations: {
-            
-            self.startButton.alpha = CGFloat(1.0)
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        })
-    }
+    
     /*
     // MARK: - Navigation
 
