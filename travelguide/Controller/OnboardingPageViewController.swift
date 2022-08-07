@@ -28,8 +28,8 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         }
         return orderedViewControllers[previousIndex]
     }
-    
-    
+ 
+        
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
@@ -38,6 +38,14 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
 //        if nextIndex == 3 { title = "Saved Observations"}
         let orderedViewControllersCount = orderedViewControllers.count
         
+        
+        if viewControllerIndex == 2 {
+        UIView.animate(withDuration: 0.4, animations: {
+            // manuel olarak UIButton2ı bulup yaptım. Otomatik olarak değil
+            
+            self.orderedViewControllers[viewControllerIndex].view.subviews[2].subviews.last?.alpha = 1
+            })
+        }
         guard orderedViewControllersCount != nextIndex else {
             return nil
         }
