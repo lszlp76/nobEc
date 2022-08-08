@@ -396,8 +396,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1212"
             endingLineNumber = "1212"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            landmarkName = "goToPharmacy(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1052,8 +1052,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1120"
             endingLineNumber = "1120"
-            landmarkName = "chooseLocation(gestureRecognizer:)"
-            landmarkType = "7">
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1596,7 +1596,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "966"
             endingLineNumber = "966"
-            landmarkName = "addAnnotations(annos:)"
+            landmarkName = "addNearestPharmacyToMap()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1612,8 +1612,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1108"
             endingLineNumber = "1108"
-            landmarkName = "turnOnAllPharmacyOption()"
-            landmarkType = "7">
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

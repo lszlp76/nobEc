@@ -480,7 +480,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "950"
             endingLineNumber = "950"
-            landmarkName = "addNearestPharmacyToMap()"
+            landmarkName = "fetchPharmacyLocation(location:regionRadius:pharmacyOnDuty:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -512,7 +512,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "970"
             endingLineNumber = "970"
-            landmarkName = "addSingleAnnotation(coords:)"
+            landmarkName = "addAnnotations(annos:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -544,7 +544,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "980"
             endingLineNumber = "980"
-            landmarkName = "changePinToDutyPharmacy(localPharmacies:pharmacyOnDuty:)"
+            landmarkName = "addSingleAnnotation(coords:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
