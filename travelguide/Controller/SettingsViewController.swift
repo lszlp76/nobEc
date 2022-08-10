@@ -215,7 +215,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
             
-        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" +  "GZ94AWJKRA") {
+        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" +  "459CS4FAKQ") {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 

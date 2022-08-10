@@ -98,11 +98,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
         
-        guard userLocation != nil else {
-            CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konumuzda herhangi bir veri yok ⚠️")
-            return
-            
-        }
+//        guard userLocation != nil else {
+//            CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konumuzda herhangi bir veri yok ⚠️")
+//            return
+//
+//        }
     }
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear çalıştır")
@@ -218,7 +218,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             
             anno.coordinate = CLLCoordType;
-            anno.title = " Yeni nokta"
+            anno.title = "Seçtiğiniz Nokta"
             self.mapView.addAnnotation(anno);
             
             fetchUserChoosenLocation(location: newLocation)
@@ -291,7 +291,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapView.removeAnnotations(nearByPharmacies)
             mapView.removeAnnotations(newNearByPharmacies)
             mapView.removeOverlay(circle)
-            mapView.removeOverlay(circle2)
+//            mapView.removeOverlay(circle2)
             locationManager.startUpdatingLocation()
             
             self.openingTime = currentTime //açılış saatini en son değer yaıyor
@@ -300,7 +300,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let group = DispatchGroup()
-        
+        print("locationmanager çalıçtı")
         let location = locations.last
         userLocation = locations[0] as CLLocation
         
@@ -403,7 +403,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 print("************WEEEE************")
                     
                 print(self.pharmacyOnDutyList.numberOfDutyPharmacies())
+                if self.pharmacyOnDutyList.numberOfDutyPharmacies() != nil {
                 self.findDistanceForPharmacyOnDuty()
+                }
 //                self.findDistanceForPharmacyOnDuty { eczaneStored in-
 //                    self.pharmacyOnDuty = eczaneStored!
 //                }
@@ -958,6 +960,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: (bestToShow?.travelTime)! + ".dak", distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude))
         
         self.mapView.addAnnotation(bestToShowAnnotation)
+        let newCenter = CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude)
+                          circle = MKCircle(center: newCenter, radius: 86)
+                            mapView.addOverlay(circle)
         
         
            
@@ -979,26 +984,27 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     func changePinToDutyPharmacy(localPharmacies: [PharmacyNearByAnnotation], pharmacyOnDuty: [EczaneVeri]){
-        for pharmacy in localPharmacies{
-            for duty in pharmacyOnDuty {
-                if  pharmacy.title == duty.pharmacyName{
-                    
-                    let newCenter = pharmacy.coordinate
-                  circle = MKCircle(center: newCenter, radius: 100)
-                    mapView.addOverlay(circle)
-                }
+//        for pharmacy in localPharmacies{
+//            for duty in pharmacyOnDuty {
+//                if  pharmacy.title == duty.pharmacyName{
+//
+//                    let newCenter = pharmacy.coordinate
+//                  circle = MKCircle(center: newCenter, radius: 10)
+//                    mapView.addOverlay(circle)
+//                }
                 
-            }
-        }
+//            }
+   //     }
         
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay.isKind(of: MKCircle.self){
             let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = UIColor.green.withAlphaComponent(0.2)
+            circleRenderer.fillColor = UIColor.green.withAlphaComponent(1)
+            
             circleRenderer.strokeColor = UIColor.white
             circleRenderer.lineWidth = 1
-           // circleRenderer.alpha = 0.7
+            circleRenderer.alpha = 0.2
             
             return circleRenderer
         }
@@ -1029,17 +1035,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         pinView?.glyphTintColor = .blue
         pinView?.glyphImage = UIImage(named: "pharmacyLogo.png")
         pinView?.markerTintColor = UIColor.white
-        DispatchQueue.global().async { [self] in
+//        DispatchQueue.global().async { [self] in
+        if self.pharmacyOnDuty != nil {
             for duty in self.pharmacyOnDuty {
-                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude
+                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude && duty.pharmacyLongitude == pinView?.annotation?.coordinate.longitude
                 {
                     pinView?.glyphTintColor = .red
-                    circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 100)
-                    DispatchQueue.main.async {
-                        mapView.addOverlay(circle2)
-                    }
+//                    circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 10)
+//                    DispatchQueue.main.async {
+//                        mapView.addOverlay(circle2)
+//                    }
                     
-                }
+              }
             }
         }
         
@@ -1097,9 +1104,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
         if CLLocationManager.locationServicesEnabled() == false
         {
-            CheckGPSSignal().alert(title: "Konum", message: "Konum bilgisi yok ⚠️")
-            
-            
+             
          
             
         }

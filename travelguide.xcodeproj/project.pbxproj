@@ -64,7 +64,7 @@
 		F95AF9FC289893B70076D90B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F95B919E28718E4100ABE100 /* hatalar.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = hatalar.md; sourceTree = "<group>"; };
 		F95E9A4D289130FD004D60FC /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
-		F97E350B286C8C6D003146F2 /* bursa.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = bursa.gpx; sourceTree = "<group>"; };
+		F97E350B286C8C6D003146F2 /* deneme.crash */ = {isa = PBXFileReference; lastKnownFileType = text; path = deneme.crash; sourceTree = "<group>"; };
 		F97E350C286C9F84003146F2 /* eczane.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = eczane.json; sourceTree = "<group>"; };
 		F97E350E286CB59E003146F2 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosenLocationViewViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				F95B919E28718E4100ABE100 /* hatalar.md */,
 				F97E3514286DF4D5003146F2 /* tumbursa.json */,
 				F97E350C286C9F84003146F2 /* eczane.json */,
-				F97E350B286C8C6D003146F2 /* bursa.gpx */,
+				F97E350B286C8C6D003146F2 /* deneme.crash */,
 				F9149C4A285E456300676DCB /* travelguide */,
 				F9149C49285E456300676DCB /* Products */,
 				B7B25E9B8D1545D398C449FC /* Pods */,
@@ -354,7 +354,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -459,7 +459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -491,7 +491,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -71,32 +71,6 @@ func returnSomeValue(completion:@escaping((String) ->())) {
 }
 
 
-Pharmacy --> 40.26259 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.193781 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.204197 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.2442188 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.205468 Distance directions calculation error
- Directions Not Available
-Pharmacy ok --> Optional("Amerika Birleşik Devletleri")
-Pharmacy --> 40.490967 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.26259 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.2675214 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.190241 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.180573 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.192716 Distance directions calculation error
- Directions Not Available
-Pharmacy --> 40.179541 Distance directions calculation error
- Directions Not Available
-
 
         let constraint = NSLayoutConstraint(
             item: view, attribute: NSLayoutConstraint.Attribute.height,
@@ -111,3 +85,24 @@ Pharmacy --> 40.179541 Distance directions calculation error
             $0.image = backgroundImage
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+
+
+
+0x104487aa8
+
+Thread 8 Crashed:
+0   travelguide                              0x104fe3f20 ViewController.findDistanceForPharmacyOnDuty() + 98080 (ViewController.swift:445)
+1   travelguide                              0x104fe3c68 ViewController.findDistanceForPharmacyOnDuty() + 97384 (ViewController.swift:445)
+2   travelguide                              0x104fe39a0 closure #1 in ViewController.getData(forCity:) + 96672 (ViewController.swift:415)
+3   travelguide                              0x104fd8bf8 closure #1 in Webservice.downloadPharmacyInCity(url:completion:) + 52216 (Webservice.swift:0)
+4   travelguide                              0x104fd8894 thunk for @escaping @callee_guaranteed (@guaranteed Data?, @guaranteed NSURLResponse?, @guaranteed Error?) -> () + 51348 (<compiler-generated>:0)
+5   CFNetwork                                0x18142eb6c 0x18140c000 + 142188
+6   CFNetwork                                0x18143fd80 0x18140c000 + 212352
+7   libdispatch.dylib                        0x1808e7e6c _dispatch_call_block_and_release + 32
+8   libdispatch.dylib                        0x1808e9a30 _dispatch_client_callout + 20
+9   libdispatch.dylib                        0x1808f1124 _dispatch_lane_serial_drain + 668
+10  libdispatch.dylib                        0x1808f1cb4 _dispatch_lane_invoke + 444
+11  libdispatch.dylib                        0x1808fc500 _dispatch_workloop_worker_thread + 648
+12  libsystem_pthread.dylib                  0x1f0c6d0bc _pthread_wqthread + 288
+13  libsystem_pthread.dylib                  0x1f0c6ce5c start_wqthread + 8
+

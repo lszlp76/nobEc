@@ -157,11 +157,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
 //
 //        }
 //
-        
-           
-    
-        
-        
+       
         cell.distanceText.text = String(format: "%.1f", eczaneStored[indexPath.row].distance as! CVarArg) + " km"
         cell.pharmacyNameText.textColor = UIColor.init(named: "ColorForListView")
         cell.phoneNumberText.textColor = UIColor.init(named: "ColorForListView")
