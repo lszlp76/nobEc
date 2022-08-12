@@ -522,8 +522,8 @@
             filePath = "travelguide/Controller/ChoosenLocationViewViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "ChoosenLocationViewViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -538,8 +538,8 @@
             filePath = "travelguide/Controller/ChoosenLocationViewViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "ChoosenLocationViewViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -554,8 +554,8 @@
             filePath = "travelguide/Controller/ChoosenLocationViewViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "ChoosenLocationViewViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -778,8 +778,8 @@
             filePath = "travelguide/Controller/ChoosenLocationViewViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "callPhoneNumber(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1082,8 +1082,8 @@
             filePath = "travelguide/Controller/ChoosenLocationViewViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "mapView(_:viewFor:)"
             landmarkType = "7">
          </BreakpointContent>

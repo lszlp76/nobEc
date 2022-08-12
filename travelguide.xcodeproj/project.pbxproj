@@ -32,6 +32,7 @@
 		F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */; };
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
+		F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
 		F9E3C8D62874AA3900FCD722 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3C8D52874AA3900FCD722 /* LocationManager.swift */; };
 		F9E5A32528896F0300883D11 /* PharmacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */; };
@@ -73,6 +74,7 @@
 		F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModelTableViewCell.swift; sourceTree = "<group>"; };
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyActivityController.swift; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
 		F9E3C8D52874AA3900FCD722 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewModel.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				F9F93C94286736D0001E103A /* TurkishConverter.swift */,
+				F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */,
 				F94CB9B6286E12F40038D47B /* UserDefaults.swift */,
 				F97E351C286E0CD3003146F2 /* Notifications.swift */,
 				F91589C8286355670018181C /* PharmacyFinder.swift */,
@@ -287,6 +290,7 @@
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,
 				F95E9A4E289130FD004D60FC /* InternetMonitor.swift in Sources */,
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
+				F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */,
 				F945BF37289FE416000EF9FB /* pageThreeViewController.swift in Sources */,
 				F97E3513286DF121003146F2 /* SettingsViewController.swift in Sources */,
 				F9149C4E285E456300676DCB /* SceneDelegate.swift in Sources */,

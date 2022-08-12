@@ -7,7 +7,7 @@
 
 import UIKit
 import MapKit
-class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate ,UIGestureRecognizerDelegate{
     var annotationTitle = ""
     var annotationSubtitle = ""
     var annotationLatitude = Double()
@@ -53,9 +53,56 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
         
         mapView.setRegion(region, animated: true)
        
-        
+       
     }
-   
+    @objc func findNearPharmacy(gestureRecognizer : UIGestureRecognizer) {
+        let title = "NöbeEc ➡️ \(annotationTitle)"
+        let icon = UIImage(named: "shareLogo")
+        let text = ("https://maps.apple.com/?daddr=\(annotationLatitude),\(annotationLongitude)")
+
+                // set up activity view controller
+                let textToShare: [Any] = [
+                    MyActivityItemSource( title: title, text: text, icon: icon )
+                ]
+                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                
+                // exclude some activity types from the list (optional)
+              //  activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
+                
+                // present the view controller
+                self.present(activityViewController, animated: true, completion: nil)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+              //  let itemToSend = ["\(annotationTitle)", url] as [Any]
+//
+//
+//                let activityViewController = UIActivityViewController(activityItems: itemToSend ,applicationActivities: nil)
+//        activityViewController.title = "\(annotationTitle) Başlık"
+//                /*
+//                 Share menu if user's Ipad is active
+//                 */
+//                if  ((activityViewController.popoverPresentationController) != nil){
+//                    activityViewController.popoverPresentationController?.sourceView = self.view
+//                    activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
+//                }
+//                // Show the share-view
+//                self.present(activityViewController, animated: true, completion: nil)
+//            }
+            
+       
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //MKAnnotationview döndürmek ister
         
@@ -145,9 +192,14 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
              */
         
         }
+        let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
+        choosenLocationTap.delegate = self
+        choosenLocationTap.minimumPressDuration = 1
+        pinView!.addGestureRecognizer(choosenLocationTap)
         
         return pinView
     }
+    
     @objc func callPhoneNumber (sender: PhoneCallButton) {
         print("tel://\(sender.phoneNumber)")
         if let phoneCallURL = URL(string: "tel://\(sender.phoneNumber)") {
@@ -189,8 +241,10 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
                 }
             }
         }
+        func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped: UIControl) {
+           print("ulas")
     }
-    
+    }
     /**
      alt taraf kullanılmayacak. BUton yerine view atadığın için callOutcalşmıyor, addTaget ile yapmak durumunda kalıyorsun
      

@@ -199,7 +199,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //haritada basılan bir noktada eczane arama
         let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
         choosenLocationTap.delegate = self
-        choosenLocationTap.minimumPressDuration = 2
+        choosenLocationTap.minimumPressDuration = 1
         mapView.addGestureRecognizer(choosenLocationTap)
         
        DispatchQueue.main.async {
