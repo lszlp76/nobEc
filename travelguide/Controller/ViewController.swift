@@ -223,7 +223,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             fetchUserChoosenLocation(location: newLocation)
           
-            mapView.centerLocation(newLocation,regionRadius: regionDiameter)
+            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 4000)
             
         }
     }
@@ -360,8 +360,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print("get city 0")
         GetLocation.sharedInstance.connectionGPSExist = true
         let geoCoder = CLGeocoder()
-        var sehir = ""
-        var ilce = ""
+//        var sehir = ""
+//        var ilce = ""
         geoCoder.reverseGeocodeLocation(userLocation,
                                         completionHandler:
                                             { [self] placemarks, error in
@@ -370,10 +370,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             
             print("getCity çalıştı completion ")
-            sehir = place.administrativeArea!
-            ilce = place.subAdministrativeArea!
             
-            getCity(sehir,ilce)
+            if let sehir = place.administrativeArea , let ilce = place.subAdministrativeArea{
+//                sehir = place.administrativeArea!
+//                ilce = place.subAdministrativeArea!
+                
+                getCity(sehir,ilce)
+            }
+                else { CheckGPSSignal().alert(title: "Konum hatası", message: "Konum verisi mevcut değil")
+                return
+            }
+           
             
         })
         
@@ -392,24 +399,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
         let url = URL(string: ("https://www.nosyapi.com/apiv2/pharmacyLink?apikey=x58j5AeEFXqvorUFG7X3o5QzGXqcThj8ncFGre0nucdVQYsuZKgfZ8ZKUf8y&city=" + (TurkishConverter().convertToLatin(word: forCity))))
       
-        Webservice().downloadPharmacyInCity(url: (url)!) { pharmacyList in
-            if let pharmacyList = pharmacyList {
-                //3 burada da initilize et
-             
-                self.pharmacyOnDutyList = PharmacyListViewModel(pharmacy: pharmacyList)
+        Webservice().downloadPharmacyInCity(url: (url)!) {
+            result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                return
+            case .success(let pharmacyList):
                 
-                // tableview güncellemesi burada yapılır
-                
-                print("************WEEEE************")
-                    
-                print(self.pharmacyOnDutyList.numberOfDutyPharmacies())
-                if self.pharmacyOnDutyList.numberOfDutyPharmacies() != nil {
-                self.findDistanceForPharmacyOnDuty()
-                }
-//                self.findDistanceForPharmacyOnDuty { eczaneStored in-
-//                    self.pharmacyOnDuty = eczaneStored!
-//                }
-                
+                if let pharmacyList = pharmacyList {
+                   self.pharmacyOnDutyList = PharmacyListViewModel(pharmacy: pharmacyList)
+                  
+                    if self.pharmacyOnDutyList.numberOfDutyPharmacies() != nil
+                        
+                    {
+                        self.findDistanceForPharmacyOnDuty()
+                    }
+          
             
             }
            
@@ -417,6 +423,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
        
         
+    }
     }
     /// performRequest ten gelen ph adlı JSON objesinin bilgilerine göre her bir datanın
     /// mesafe ve yolculuk süresini hesaplatarak eczaneStored objecsine yazan fonksiyon
@@ -427,6 +434,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     ///  yazar.
     func findDistanceForPharmacyOnDuty()
     {
+       
         
         // Apple MAp APİ'de 50 istek sınırı var. O nedenle sayının 50 yi geçmemesi lazım.
         print("find pharmacy 3")
@@ -443,8 +451,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let grup = DispatchGroup()
         let  index = Int()
         var eczaneVeri = [EczaneVeri]()
-       
-        for index in 0...(self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ) {
+        
+        for index in stride (from: 0, to: (self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ), by: 1) { //0...(self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ) {
            
             let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
             
@@ -1093,9 +1101,39 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         viewPhone.addSubview(phoneButton)
         pinView?.leftCalloutAccessoryView = view
         pinView?.rightCalloutAccessoryView = viewPhone
+        
+        /** Annotationa uzun basma özelliği verir */
+        let choosenLocationTap =  MyLongGestureRecongnizer ( target: self, action: #selector(shareChoosenPharmacy(gestureRecognizer: )))
+        choosenLocationTap.delegate = self
+        choosenLocationTap.title = annotation.title!
+        choosenLocationTap.locationLatitude = annotation.coordinate.latitude
+        choosenLocationTap.locationLongitude = annotation.coordinate.longitude
+        choosenLocationTap.minimumPressDuration = 1
+        pinView!.addGestureRecognizer(choosenLocationTap)
+        
         return pinView
         
     }
+    @objc func shareChoosenPharmacy(gestureRecognizer : MyLongGestureRecongnizer) {
+        
+        let title = "NöbEc ➡️ \( gestureRecognizer.title)"
+        let icon = UIImage(named: "pharmacyRedLogo")
+        let text = ("https://maps.apple.com/?daddr=\(gestureRecognizer.locationLatitude),\(gestureRecognizer.locationLongitude)")
+
+                // set up activity view controller
+                let textToShare: [Any] = [
+                    MyActivityItemSource( title: title, text: text, icon: icon )
+                ]
+                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        if  ((activityViewController.popoverPresentationController) != nil){
+                          activityViewController.popoverPresentationController?.sourceView = self.view
+                          activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
+                      }
+          self.present(activityViewController, animated: true, completion: nil)
+        
+    }
+    
+    
     func checkNearPharmacyIsDuty (annotation : PharmacyNearByAnnotation) -> MKMarkerAnnotationView {
         let reuseId = "checkAnno"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView

@@ -69,42 +69,8 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
                           activityViewController.popoverPresentationController?.sourceView = self.view
                           activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
                       }
-   //             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                
-                // exclude some activity types from the list (optional)
-              //  activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
-                
-                // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+          self.present(activityViewController, animated: true, completion: nil)
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
-              //  let itemToSend = ["\(annotationTitle)", url] as [Any]
-//
-//
-//                let activityViewController = UIActivityViewController(activityItems: itemToSend ,applicationActivities: nil)
-//        activityViewController.title = "\(annotationTitle) Başlık"
-//                /*
-//                 Share menu if user's Ipad is active
-//                 */
-//                if  ((activityViewController.popoverPresentationController) != nil){
-//                    activityViewController.popoverPresentationController?.sourceView = self.view
-//                    activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
-//                }
-//                // Show the share-view
-//                self.present(activityViewController, animated: true, completion: nil)
-//            }
-            
-       
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -196,6 +162,7 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
              */
         
         }
+        /** Annotationa uzun basma özelliği verir */
         let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
         choosenLocationTap.delegate = self
         choosenLocationTap.minimumPressDuration = 1

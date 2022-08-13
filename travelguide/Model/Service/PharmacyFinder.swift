@@ -319,8 +319,4 @@ func isConnectionGPSOK() -> Bool {
     return false
 }
 
-enum ResponseJSONError : Error {
-    case badURL
-    case noDATA
-}
 

@@ -14,6 +14,12 @@ class PhoneCallButton : UIButton {
     
 }
 
+class MyLongGestureRecongnizer : UILongPressGestureRecognizer {
+    var locationLatitude = CLLocationDegrees ()
+    var locationLongitude = CLLocationDegrees ()
+    var title = String()
+}
+
 class CarButton : UIButton {
      var location = CLLocation()
      var pinName = String()

@@ -31,6 +31,10 @@ struct ResponseJson : Decodable {
     }
 }
 
+enum ResponseJSONError : Error {
+    case badURL
+    case noDATA
+}
 
 struct PharmacyData : Decodable {
     let pharmacy : ResponseJson

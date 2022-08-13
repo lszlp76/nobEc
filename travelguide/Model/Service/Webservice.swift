@@ -10,19 +10,20 @@ import UIKit
 
 class Webservice {
     
-    func downloadPharmacyInCity(url : URL, completion: @escaping (ResponseJson?)->()){
+    func downloadPharmacyInCity(url : URL, completion: @escaping (Result<ResponseJson?,ResponseJSONError>)->()){
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("JSON tarafı \(error.localizedDescription)")
-                let alert = UIAlertController(title: "String?", message: "dasd", preferredStyle: .alert)
-                CheckGPSSignal().presentViewController(alert: alert, animated: true, completion: nil)
+//                let alert = UIAlertController(title: "String?", message: "dasd", preferredStyle: .alert)
+//                CheckGPSSignal().presentViewController(alert: alert, animated: true, completion: nil)
+                completion(.failure(.noDATA))
                 return
             }else if let data = data {
             
                 let pharmacyList = try? JSONDecoder().decode(ResponseJson.self,from :data)
               //  print(pharmacyList)
                 if let pharmacyList = pharmacyList {
-                    completion(pharmacyList)
+                    completion(.success(pharmacyList))
                 }
             }
         }.resume()
