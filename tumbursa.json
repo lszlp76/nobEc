@@ -4,16 +4,18 @@
    "rowCount":33,
    "data":[
       {
-         "EczaneAdi":"Akbük Eczanesi",
+         "EczaneAdi":"Eda Eczanesi",
          "Adresi":"Orhan Mahallesi, Dr. \u0130brahim \u00d6ktem Caddesi, No:35 B\u00fcy\u00fckorhan \/ Bursa",
          "Semt":"",
          "YolTarifi":"",
          "Telefon":"0(506)226-03-44",
          "Telefon2":"",
          "Sehir":"Bursa",
-         "ilce":"B\u00fcy\u00fckorhan",
-         "latitude":39.775239,
-         "longitude":28.882006
+         "ilce":"Nilüfer",
+         "latitude":40.224374,
+         "longitude":28.980899
+         
+         
       },
       {
          "EczaneAdi":"Gemlik Sa\u011fl\u0131k Eczanesi",
@@ -160,7 +162,7 @@
          "longitude":28.9127694
       },
       {
-         "EczaneAdi":"Eczane Derya Gülpınar",
+         "EczaneAdi":"Eczane Deryapınar",
          "Adresi":"Bar\u0131\u015f Mahallesi, Icar Sokak, No:4 Nil\u00fcfer \/ Bursa",
          "Semt":"",
          "YolTarifi":"Ac\u0131badem Hastanesi Kar\u015f\u0131s\u0131",

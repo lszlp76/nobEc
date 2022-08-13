@@ -25,24 +25,6 @@ class CarButton : UIButton {
      var pinName = String()
 }
 
-class PharmacyNearByAnnotation: NSObject,MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var travelTime: String?
-    var distance: Double?
-    var subtitle : String?
-    
-    init(title: String?,subtitle: String?, travelTime: String?, distance:Double?,coordinate:CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-        self.title = title
-        self.travelTime = travelTime
-        self.distance = distance
-        self.subtitle = subtitle
-        
-        super.init()
-    }
-     
-}
 
 class AnnoDeneme : MKPointAnnotation {
   

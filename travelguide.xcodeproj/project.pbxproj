@@ -32,6 +32,7 @@
 		F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */; };
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
+		F9A0459E28A7C79A005FF6A6 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */; };
 		F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */; };
 		F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F9B2F5EC28A682B20002EDAE /* bursa.gpx */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		F97E3518286E01BA003146F2 /* SettingsCellModelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModelTableViewCell.swift; sourceTree = "<group>"; };
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
 		F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyActivityController.swift; sourceTree = "<group>"; };
 		F9B2F5EC28A682B20002EDAE /* bursa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bursa.gpx; path = ../../../Downloads/bursa.gpx; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				F907C6F02867144E0049F4CB /* ResponseJson.swift */,
 				F97E351A286E0560003146F2 /* SettingsModelStructure.swift */,
 				F94CB9B92870F92D0038D47B /* PhoneButton.swift */,
+				F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				F97E350F286CB59E003146F2 /* CellModel.swift in Sources */,
 				F91589C9286355670018181C /* PharmacyFinder.swift in Sources */,
 				F907C6F12867144E0049F4CB /* ResponseJson.swift in Sources */,
+				F9A0459E28A7C79A005FF6A6 /* PharmacyView.swift in Sources */,
 				F9E5A32528896F0300883D11 /* PharmacyViewModel.swift in Sources */,
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
 				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,

@@ -98,27 +98,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
         
-//        guard userLocation != nil else {
-//            CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konumuzda herhangi bir veri yok ⚠️")
-//            return
-//
-//        }
+
     }
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear çalıştır")
         
         mapView?.delegate = self
+      
+        
+        //bu çalışmıyor
+//        mapView.register(
+//            PharmacyMarkerView.self,
+//          forAnnotationViewWithReuseIdentifier:
+//            MKMapViewDefaultAnnotationViewReuseIdentifier)
+//
         if userDefault.getValueForSwitch(keyName: "tutorial")! ||
             !(userDefault.getValueForSwitch(keyName: "firstUsage")! )  { tutorialActivate() }
         
-        //        guard  connectionManager.isNetworkAvailable()  else {
-        //            print("no connection to şnternet")
-        //            showSimpleAlert(title: "İnternet Bağlantısı", message: "Bağlantı yok!")
-        //           return
-        //        }
+        
         if didPerformGeocode == true
         {
         }
+        
     }
     
     override func viewDidLoad() {
@@ -179,10 +180,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
         
-        //---> şehir bilgisi yok hala
-       //getDataFromLocal()
-        
-        
+       
         /***Tutorial Kısmı****/
         /*
          İlk defa kullanırken ve ayarlardan isterse açılacak
@@ -196,15 +194,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView?.delegate = self
         //mapView.showsUserLocation = true
         
+       
         //haritada basılan bir noktada eczane arama
         let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
         choosenLocationTap.delegate = self
         choosenLocationTap.minimumPressDuration = 1
         mapView.addGestureRecognizer(choosenLocationTap)
         
-       DispatchQueue.main.async {
-            print("bitti")    }
-        
+       
     }
     @objc func findNearPharmacy(gestureRecognizer : UIGestureRecognizer) {
         //1 basıldığını kontrol et
@@ -223,7 +220,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             fetchUserChoosenLocation(location: newLocation)
           
-            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 4000)
+            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 1000)
             
         }
     }
@@ -258,7 +255,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                     
                     
-                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate))
+                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  false))
                     print(item.phoneNumber)
                     newNearByPharmacies.append(localPharmacies)
                     addAnnotations(annos: newNearByPharmacies)
@@ -281,7 +278,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
             return
         }
-        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
+        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 1000)
         let currentTime = Date.now
         print("openning time \(openingTime)")
         print("current time \(currentTime)")
@@ -290,7 +287,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapView.removeAnnotation(anno)
             mapView.removeAnnotations(nearByPharmacies)
             mapView.removeAnnotations(newNearByPharmacies)
-            mapView.removeOverlay(circle)
+//            mapView.removeOverlay(circle)
 //            mapView.removeOverlay(circle2)
             locationManager.startUpdatingLocation()
             
@@ -303,8 +300,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print("locationmanager çalıçtı")
         let location = locations.last
         userLocation = locations[0] as CLLocation
-        
-        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
+        let CLLCoordType = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude,
+                                                  longitude: userLocation.coordinate.longitude);
+        let anno = MKPointAnnotation();
+        anno.coordinate = CLLCoordType;
+        anno.title = "Buradasınız"
+        self.mapView.addAnnotation(anno);
+        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 1000)
         getLocation.location = location!.coordinate // mevcut konum bilgisi alarak json datadan gelen konumlara göre getdistance içindeki source'a atıyor
         
         guard  location?.coordinate.latitude != 0, location?.coordinate.longitude != 0 else {
@@ -340,7 +342,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             guard !userDefault.getValueForSwitch(keyName: "tutorial")! else {return}
                     print("Açılış verisi")
                     self.fetchPharmacyLocation(location: CLLocation(latitude: self.getLocation.location.latitude, longitude: getLocation.location.longitude) , pharmacyOnDuty: pharmacyOnDuty)
-                    getData(forCity: self.city)
+            getDataFromLocal()
+              //      getData(forCity: self.city)
                  firstOpen = false
                     
                 
@@ -351,7 +354,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         GetLocation.sharedInstance.connectionGPSExist = true
         
         locationManager.stopUpdatingLocation()
-       
+        
         print(self.city)
         
     }
@@ -383,14 +386,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
            
             
         })
-        
-        addSingleAnnotation(coords: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude))
-        //        let pin = MKPointAnnotation()
-        //        pin.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-        //        pin.title = "Buradasınız"
-        //
-        //        self.mapView.addAnnotation(pin)
-        //
+    
+       
     }
     func getData(forCity : String )
     {
@@ -449,13 +446,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
          asenkron task olduğu için taskın içinde yazılıyor Dikkat !
          */
         let grup = DispatchGroup()
-        let  index = Int()
+     
         var eczaneVeri = [EczaneVeri]()
         
         for index in stride (from: 0, to: (self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ), by: 1) { //0...(self.pharmacyOnDutyList.numberOfDutyPharmacies() - 1 ) {
            
             let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
-            
+         
             getDistance(sourceLocation: getLocation.location, endLocation: CLLocationCoordinate2DMake(
                 phar.pharmacyLatitude, phar.pharmacyLongitude))
             
@@ -468,8 +465,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                 {  self.pharmacyOnDuty.append (EczaneVeri(pharmacyLatitude: phar.pharmacyLatitude, pharmacyLongitude: phar.pharmacyLongitude, pharmacyName: phar.pharmacyName,distance: distance ,travelTime: travelTime!,pharmacyCounty: phar.pharmacyCounty, phoneNumber: phar.pharmacyPhoneNumber ?? "Mevcut değil", pharmacyAddress: phar.pharmacyAddress))
                     
-                    self.addNearestPharmacyToMap()
                     
+                    self.addNearestPharmacyToMap()
                 }
                 
                 
@@ -480,18 +477,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
                 // burada stored çalışıyorne
                 self.getLocation.eczaneStored = pharmacyOnDuty
-                self.changePinToDutyPharmacy(localPharmacies: self.nearByPharmacies, pharmacyOnDuty: self.getLocation.eczaneStored)
-            }
-            
-          
+                }
+           
         }// for end
+    
         
-       
-//
-//        self.getLocation.connectionGPSExist  = true
-//
-//
-//        }
     }
     
     func getDistance (sourceLocation : CLLocationCoordinate2D, endLocation : CLLocationCoordinate2D,  completion: @escaping (_ distance: Double?,_ travelTime : String?) -> (Void))
@@ -564,22 +554,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         demandTutorial = false// tutorial isteğini sonlandırır
         // view dersen tabview olarak alıyor
         let tutorial = ["Bulunduğunuz konuma en yakın eczaneleri harita üzerinde gösterir","Bulunduğunuz şehirdeki, o güne ait nöbetçi eczaneleri listeler","Kullanım ile ilgili ayarlar ","Konumunuzu günceller"]
+       
+        /*** IMAGEVİEW oluşturma */
         
-        //        mapView.alpha = 0.5
-        //        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        //        //İmageView leri oluşturma
         nearPharmacyTab = UIImageView(frame: CGRect(x: mapView.bounds.width*0.025, y: mapView.bounds.height*0.99, width: mapView.bounds.width, height: 75))
         pharmacyDutyListTab = UIImageView(frame: CGRect(x: mapView.bounds.width*0.12, y: mapView.bounds.height*0.84, width: mapView.bounds.width, height: 75))
         settingsTab = UIImageView(frame: CGRect(x: mapView.bounds.width*0.250, y: mapView.bounds.height*0.84, width: mapView.bounds.width, height: 75))
         locateButton = UIImageView(frame: CGRect(x: 0, y: mapView.bounds.height*0.05, width: mapView.bounds.width, height: 75))
         let boxWidth = mapView.bounds.width*0.90
+        
+        
         print(boxWidth)
-        // resimleri yerleştirme
+       
+        /*** Resimleri oluşturma ve IMAGEVİEW lere yerleştirme */
         
         nearPharmacyTab.image = UIImage(named: "leftBottom")
         nearPharmacyTab.tintColor = UIColor(named: "ColorForTabsBallons")
-        
-        
         pharmacyDutyListTab.image = UIImage(named: "middle")
         pharmacyDutyListTab.tintColor = UIColor(named: "ColorForTabsBallons")
         settingsTab.image = UIImage(named: "rightbottom")
@@ -587,6 +577,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locateButton.image = UIImage(named: "upperleft")
         locateButton.tintColor = UIColor(named: "ColorForTabsBallons")
         
+        /*** LABELTEXT leri oluşturma */
         
         var nearPharmacyLabelText = UILabel(frame: CGRect(x: mapView.bounds.width*0.025, y: 0, width: mapView.bounds.width*0.94, height: 90))
         let pharmacyDutyListTabLabelText = UILabel(frame: CGRect(x: mapView.bounds.width*0.045, y: 0, width: boxWidth, height: 90))
@@ -624,6 +615,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locateButtonLabelText.textColor = UIColor(named: "TutorialColors")
         locateButtonLabelText.setMargins(15)
         //        locateButtonLabelText.layer.borderWidth = 2
+        
         
         nearPharmacyTab.addSubview(nearPharmacyLabelText)
         pharmacyDutyListTab.addSubview(pharmacyDutyListTabLabelText)
@@ -804,29 +796,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     /// Test için local jsonüzerinden çalışmak için
     func getDataFromLocal (){
-        LocalService().getPharmacyListFromLocalJsonFile { pharmacyList in
+        LocalService().getPharmacyListFromLocalJsonFile { [self] pharmacyList in
             if let pharmacyList = pharmacyList {
                 //3 burada da initilize et
                 
                 self.pharmacyOnDutyList = PharmacyListViewModel(pharmacy: pharmacyList)
-                DispatchQueue.main.async {
-                    // tableview güncellemesi burada yapılır
-                    
-                    print("************WEEEE************")
-                    print(self.pharmacyOnDutyList.numberOfDutyPharmacies())
-                    
-                    
-                    
-               //     self.findDistanceForPharmacyOnDuty()
+                print("getdatfromlocalden gelen veri sayısı-> \(pharmacyOnDutyList.numberOfDutyPharmacies())")
+                print(self.pharmacyOnDutyList.pharmacy.data[0].EczaneAdi)
+                self.findDistanceForPharmacyOnDuty()
                     
                     
                 }
             }
             
         }
-      
-        
-    }
+ 
     /// web Api üzerinden veri çekme metodu
     /// - Parameter forCity: String
     func   findDistanceForPharmacyOnDuty(endLocation : CLLocationCoordinate2D , completion : @escaping (_ distance: Double?,_ travelTime: String?) -> (Void)){
@@ -887,12 +871,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     ///   - regionRadius: <#regionRadius description#>
     ///   - request.naturalLanguageQuery = "Eczaneler"   buradaki anahtar kelimeye göre arama yapar
     ///   - localPharmacies -> PharmacyNearByAnnotation objesidir. Daha sonra annotation olarak kullanabilmek için içine bulduğu eczanenin verilerini atar.
-    func fetchPharmacyLocation(location : CLLocation,regionRadius : CLLocationDistance = 100000, pharmacyOnDuty : [EczaneVeri] ) {
+    func fetchPharmacyLocation(location : CLLocation,regionRadius : CLLocationDistance = 10000, pharmacyOnDuty : [EczaneVeri] ) {
         
         let group = DispatchGroup()
          
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
-        let regionRadius: CLLocationDistance = 1000
+        let regionRadius: CLLocationDistance = 10000
         
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
@@ -937,7 +921,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         if let error = error {
                             print("yakındaki eczaneleri oluşutururken hata \(error.localizedDescription)")
                         }
-                        let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime: travelTimeAnno + " dak.", distance: distanceAnno, coordinate: location.coordinate))
+                        let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime: travelTimeAnno + " dak.", distance: distanceAnno, coordinate: location.coordinate,isOnDuty: false))
                         nearByPharmacies.append(localPharmacies)
                         addAnnotations(annos: nearByPharmacies)
                       }
@@ -958,26 +942,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         
     }
+    
+    private var regionDiameterIsCalculated = false
     func   addNearestPharmacyToMap(){
         
-       
+        guard pharmacyOnDuty.count != 0 else { return}
         let bestPharmacyOption = pharmacyOnDuty.sorted(by:
                                                                 { Double($0.travelTime!)!  < Double($1.travelTime! )! })
         let bestToShow = bestPharmacyOption.first
         
-        let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: (bestToShow?.travelTime)! + ".dak", distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude))
+        let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: (bestToShow?.travelTime)! + ".dak", distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude),isOnDuty: true)
         
         let loc1 = CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
         let loc2 = CLLocation(latitude : bestToShowAnnotation.coordinate.latitude , longitude:bestToShowAnnotation.coordinate.longitude)
         
+        
             regionDiameter = loc1.distance(from: loc2)
             print((regionDiameter/1000).rounded(), " km")
+      
+            self.mapView.addAnnotation(bestToShowAnnotation)
         
-        
-        self.mapView.addAnnotation(bestToShowAnnotation)
-        let newCenter = CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude)
-                          circle = MKCircle(center: newCenter, radius: 86)
-                            mapView.addOverlay(circle)
+//            let newCenter = CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude)
+//                              circle = MKCircle(center: newCenter, radius: 86)
+//                                mapView.addOverlay(circle)
+//
+        if regionDiameter != nil {
+            regionDiameterIsCalculated = true
+            
+        }
+       
         
         
            
@@ -1035,85 +1028,106 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let button = CarButton(type: .custom)
         
         guard let annotation = annotation as? PharmacyNearByAnnotation else {
+            
             let reuseId = "pin"
             let pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView.markerTintColor = UIColor.red
-            pinView.largeContentTitle = "Buradasınız"
+            pinView.markerTintColor = UIColor.yellow
             pinView.glyphTintColor = .blue
             return pinView
+            
         }
         
-        let reuseId = "MyAnnotation"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
-        pinView = MKMarkerAnnotationView(annotation: annotation , reuseIdentifier: reuseId)
-        pinView?.canShowCallout = true // baloncukla bilrlikte ekstra bilgi gösterir
-        pinView?.glyphTintColor = .blue
-        pinView?.glyphImage = UIImage(named: "pharmacyLogo.png")
-        pinView?.markerTintColor = UIColor.white
-//        DispatchQueue.global().async { [self] in
-        if self.pharmacyOnDuty != nil {
-            for duty in self.pharmacyOnDuty {
-                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude && duty.pharmacyLongitude == pinView?.annotation?.coordinate.longitude
-                {
-                    pinView?.glyphTintColor = .red
-//                    circle2 = MKCircle(center: (pinView?.annotation!.coordinate)!, radius: 10)
-//                    DispatchQueue.main.async {
-//                        mapView.addOverlay(circle2)
-//                    }
-                    
-              }
+        let identifier = "Pharmacy"
+        var pinView : PharmacyView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(
+              withIdentifier: identifier) as? MKMarkerAnnotationView {
+              dequeuedView.annotation = annotation
+            pinView = dequeuedView as! PharmacyView
+            
+            }else {
+                
+                pinView = PharmacyView(
+                  annotation: annotation,
+                  reuseIdentifier: identifier)
+               
+                let smallSquare = CGSize(width: 50, height: 30)
+                let view = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
+                let labelView = UILabel(frame: CGRect(origin: CGPoint(x: 0.0, y: 30.0), size: CGSize(width: 50, height: 20)))
+                button.frame =  CGRect(origin: CGPoint(x: 00.0, y:0.0), size: smallSquare)
+                
+                let viewPhone = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
+                //  let labelViewPhoneNumber = UILabel(frame: CGRect(origin: CGPoint(x: 00.0, y: 30.0), size: CGSize(width: 80, height: 20)))
+                
+                phoneButton.frame = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50))
+                viewPhone.backgroundColor = .blue
+                phoneButton.setBackgroundImage(UIImage(systemName: "phone"), for: .normal)
+                button.setBackgroundImage(UIImage(systemName: "car"), for: .normal)
+                
+                let location = CLLocation(latitude: (pinView.annotation?.coordinate.latitude)!, longitude: (pinView.annotation?.coordinate.longitude)!)
+                
+                button.location = location
+                button.pinName = annotation.title!
+                button.addTarget(self, action: #selector(goToPharmacy(sender: )), for: .touchUpInside)
+                button.tintColor = .white
+                button.backgroundColor = .blue
+                phoneButton.tintColor = .white
+                phoneButton.backgroundColor = .blue
+                phoneButton.phoneNumber = annotation.subtitle!
+                phoneButton.addTarget(self, action: #selector(callPhoneNumber(sender:)), for: .touchUpInside)
+                view.backgroundColor = .orange
+                viewPhone.backgroundColor = .orange
+                labelView.text = annotation.travelTime!
+                labelView.font = UIFont(name: "arial", size: 14)
+                labelView.textColor = .white
+                labelView.textAlignment = .center
+                labelView.backgroundColor = .blue
+                button.addSubview(labelView)
+                view.addSubview(button)
+                viewPhone.addSubview(phoneButton)
+                pinView.leftCalloutAccessoryView = view
+                pinView.rightCalloutAccessoryView = viewPhone
+                
+                /** Annotationa uzun basma özelliği verir */
+                let choosenLocationTap =  MyLongGestureRecongnizer ( target: self, action: #selector(shareChoosenPharmacy(gestureRecognizer: )))
+                choosenLocationTap.delegate = self
+                choosenLocationTap.title = annotation.title!
+                choosenLocationTap.locationLatitude = annotation.coordinate.latitude
+                choosenLocationTap.locationLongitude = annotation.coordinate.longitude
+                choosenLocationTap.minimumPressDuration = 1
+                pinView.addGestureRecognizer(choosenLocationTap)
+                
+                
             }
-        }
         
-        let smallSquare = CGSize(width: 50, height: 30)
-        let view = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
-        let labelView = UILabel(frame: CGRect(origin: CGPoint(x: 0.0, y: 30.0), size: CGSize(width: 50, height: 20)))
-        button.frame =  CGRect(origin: CGPoint(x: 00.0, y:0.0), size: smallSquare)
         
-        let viewPhone = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
-        //  let labelViewPhoneNumber = UILabel(frame: CGRect(origin: CGPoint(x: 00.0, y: 30.0), size: CGSize(width: 80, height: 20)))
-        
-        phoneButton.frame = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50))
-        viewPhone.backgroundColor = .blue
-        phoneButton.setBackgroundImage(UIImage(systemName: "phone"), for: .normal)
-        button.setBackgroundImage(UIImage(systemName: "car"), for: .normal)
-        
-        let location = CLLocation(latitude: (pinView?.annotation?.coordinate.latitude)!, longitude: (pinView?.annotation?.coordinate.longitude)!)
-        
-        button.location = location
-        button.pinName = annotation.title!
-        button.addTarget(self, action: #selector(goToPharmacy(sender: )), for: .touchUpInside)
-        button.tintColor = .white
-        button.backgroundColor = .blue
-        phoneButton.tintColor = .white
-        phoneButton.backgroundColor = .blue
-        phoneButton.phoneNumber = annotation.subtitle!
-        phoneButton.addTarget(self, action: #selector(callPhoneNumber(sender:)), for: .touchUpInside)
-        view.backgroundColor = .orange
-        viewPhone.backgroundColor = .orange
-        labelView.text = annotation.travelTime!
-        labelView.font = UIFont(name: "arial", size: 14)
-        labelView.textColor = .white
-        labelView.textAlignment = .center
-        labelView.backgroundColor = .blue
-        button.addSubview(labelView)
-        view.addSubview(button)
-        viewPhone.addSubview(phoneButton)
-        pinView?.leftCalloutAccessoryView = view
-        pinView?.rightCalloutAccessoryView = viewPhone
-        
-        /** Annotationa uzun basma özelliği verir */
-        let choosenLocationTap =  MyLongGestureRecongnizer ( target: self, action: #selector(shareChoosenPharmacy(gestureRecognizer: )))
-        choosenLocationTap.delegate = self
-        choosenLocationTap.title = annotation.title!
-        choosenLocationTap.locationLatitude = annotation.coordinate.latitude
-        choosenLocationTap.locationLongitude = annotation.coordinate.longitude
-        choosenLocationTap.minimumPressDuration = 1
-        pinView!.addGestureRecognizer(choosenLocationTap)
         
         return pinView
         
+//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+//        pinView = MKMarkerAnnotationView(annotation: annotation , reuseIdentifier: reuseId)
+//        pinView?.canShowCallout = true // baloncukla bilrlikte ekstra bilgi gösterir
+//     //   pinView?.glyphTintColor = .blue
+//    //pinView?.glyphImage = UIImage(named: "pharmacyLogo.png")
+//    //pinView?.markerTintColor = UIColor.white
+//        print("\(annotation.title) \(annotation.isOnDuty)" )
+////        DispatchQueue.global().async { [self] in
+//        if self.pharmacyOnDuty != nil {
+//            for duty in self.pharmacyOnDuty {
+//                if duty.pharmacyName == pinView?.annotation?.title && duty.pharmacyLatitude == pinView?.annotation?.coordinate.latitude && duty.pharmacyLongitude == pinView?.annotation?.coordinate.longitude
+//                {
+//
+//       // to do
+//
+//              }
+//            }
+//        }
+//
+//
+//
+//        return pinView
+        
     }
+    
     @objc func shareChoosenPharmacy(gestureRecognizer : MyLongGestureRecongnizer) {
         
         let title = "NöbEc ➡️ \( gestureRecognizer.title)"
@@ -1268,13 +1282,13 @@ private extension MKMapView {
     /// Verilen bir konum bilgisini göstermek için kullanılır
     /// location : CLLocation olmalı, region yarıçapı 1000 m olarak default ayarlıdır.
     func centerLocation (_ location: CLLocation,
-                         regionRadius: CLLocationDistance  // 1000 m yarıçapında bir alan
+                         regionRadius: CLLocationDistance   //yarıçapında bir alan
     )
     {
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius)
+            latitudinalMeters: regionRadius*1.2,
+            longitudinalMeters: regionRadius*1.2)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.009)
         let region = MKCoordinateRegion(center: location.coordinate, span : span)
