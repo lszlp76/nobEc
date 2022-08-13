@@ -27,6 +27,7 @@ class MyActivityItemSource: NSObject, UIActivityItemSource {
         return text
     }
     func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
+       
         return icon
     }
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
@@ -36,7 +37,9 @@ class MyActivityItemSource: NSObject, UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
         metadata.title = title
-        metadata.iconProvider = NSItemProvider(object: icon as! NSItemProviderWriting)
+        
+        metadata.imageProvider = NSItemProvider(object: icon as! NSItemProviderWriting)
+        
        // metadata.iconProvider = NSItemProvider(object: UIImage(systemName: "text.bubble")!)
         //This is a bit ugly, though I could not find other ways to show text content below title.
         //https://stackoverflow.com/questions/60563773/ios-13-share-sheet-changing-subtitle-item-description

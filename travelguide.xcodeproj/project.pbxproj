@@ -33,6 +33,7 @@
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */; };
+		F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F9B2F5EC28A682B20002EDAE /* bursa.gpx */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
 		F9E3C8D62874AA3900FCD722 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E3C8D52874AA3900FCD722 /* LocationManager.swift */; };
 		F9E5A32528896F0300883D11 /* PharmacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */; };
@@ -65,7 +66,6 @@
 		F95AF9FC289893B70076D90B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F95B919E28718E4100ABE100 /* hatalar.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = hatalar.md; sourceTree = "<group>"; };
 		F95E9A4D289130FD004D60FC /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
-		F97E350B286C8C6D003146F2 /* deneme.crash */ = {isa = PBXFileReference; lastKnownFileType = text; path = deneme.crash; sourceTree = "<group>"; };
 		F97E350C286C9F84003146F2 /* eczane.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = eczane.json; sourceTree = "<group>"; };
 		F97E350E286CB59E003146F2 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosenLocationViewViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +75,7 @@
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyActivityController.swift; sourceTree = "<group>"; };
+		F9B2F5EC28A682B20002EDAE /* bursa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bursa.gpx; path = ../../../Downloads/bursa.gpx; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
 		F9E3C8D52874AA3900FCD722 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F9E5A32428896F0300883D11 /* PharmacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyViewModel.swift; sourceTree = "<group>"; };
@@ -109,7 +110,7 @@
 				F95B919E28718E4100ABE100 /* hatalar.md */,
 				F97E3514286DF4D5003146F2 /* tumbursa.json */,
 				F97E350C286C9F84003146F2 /* eczane.json */,
-				F97E350B286C8C6D003146F2 /* deneme.crash */,
+				F9B2F5EC28A682B20002EDAE /* bursa.gpx */,
 				F9149C4A285E456300676DCB /* travelguide */,
 				F9149C49285E456300676DCB /* Products */,
 				B7B25E9B8D1545D398C449FC /* Pods */,
@@ -259,6 +260,7 @@
 				F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */,
 				F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */,
 				F9149C53285E456300676DCB /* Main.storyboard in Resources */,
+				F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +465,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -495,7 +497,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

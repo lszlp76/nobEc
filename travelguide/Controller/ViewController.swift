@@ -74,7 +74,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let stackView = UIStackView()
     let stackViewUp = UIStackView()
     let updateLocationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-    
+    var regionDiameter : CLLocationDistance!
     var openingTime = Date()
     var didUpdateLocationDemanded = Bool()
     var firstOpen = Bool()
@@ -223,7 +223,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             fetchUserChoosenLocation(location: newLocation)
           
-            mapView.centerLocation(newLocation,regionRadius: 3000)
+            mapView.centerLocation(newLocation,regionRadius: regionDiameter)
             
         }
     }
@@ -281,7 +281,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
             return
         }
-        mapView.centerLocation(userLocation)
+        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
         let currentTime = Date.now
         print("openning time \(openingTime)")
         print("current time \(currentTime)")
@@ -304,7 +304,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let location = locations.last
         userLocation = locations[0] as CLLocation
         
-        mapView.centerLocation(userLocation)
+        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
         getLocation.location = location!.coordinate // mevcut konum bilgisi alarak json datadan gelen konumlara göre getdistance içindeki source'a atıyor
         
         guard  location?.coordinate.latitude != 0, location?.coordinate.longitude != 0 else {
@@ -959,6 +959,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let bestToShowAnnotation = PharmacyNearByAnnotation (title: bestToShow?.pharmacyName, subtitle: bestToShow?.phoneNumber, travelTime: (bestToShow?.travelTime)! + ".dak", distance: bestToShow?.distance, coordinate: CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude))
         
+        let loc1 = CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let loc2 = CLLocation(latitude : bestToShowAnnotation.coordinate.latitude , longitude:bestToShowAnnotation.coordinate.longitude)
+        
+            regionDiameter = loc1.distance(from: loc2)
+            print((regionDiameter/1000).rounded(), " km")
+        
+        
         self.mapView.addAnnotation(bestToShowAnnotation)
         let newCenter = CLLocationCoordinate2D(latitude: bestToShow!.pharmacyLatitude, longitude: bestToShow!.pharmacyLongitude)
                           circle = MKCircle(center: newCenter, radius: 86)
@@ -1223,7 +1230,7 @@ private extension MKMapView {
     /// Verilen bir konum bilgisini göstermek için kullanılır
     /// location : CLLocation olmalı, region yarıçapı 1000 m olarak default ayarlıdır.
     func centerLocation (_ location: CLLocation,
-                         regionRadius: CLLocationDistance = 1000 // 1000 m yarıçapında bir alan
+                         regionRadius: CLLocationDistance  // 1000 m yarıçapında bir alan
     )
     {
         let coordinateRegion = MKCoordinateRegion(
@@ -1233,7 +1240,7 @@ private extension MKMapView {
         
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.009)
         let region = MKCoordinateRegion(center: location.coordinate, span : span)
-        setRegion(region, animated: true)
+        setRegion(coordinateRegion, animated: true)
     }
     
 }

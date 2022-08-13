@@ -56,8 +56,8 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
        
     }
     @objc func findNearPharmacy(gestureRecognizer : UIGestureRecognizer) {
-        let title = "NöbeEc ➡️ \(annotationTitle)"
-        let icon = UIImage(named: "shareLogo")
+        let title = "NöbEc ➡️ \(annotationTitle)"
+        let icon = UIImage(named: "pharmacyRedLogo")
         let text = ("https://maps.apple.com/?daddr=\(annotationLatitude),\(annotationLongitude)")
 
                 // set up activity view controller
@@ -65,7 +65,11 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
                     MyActivityItemSource( title: title, text: text, icon: icon )
                 ]
                 let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        if  ((activityViewController.popoverPresentationController) != nil){
+                          activityViewController.popoverPresentationController?.sourceView = self.view
+                          activityViewController.popoverPresentationController?.sourceRect = CGRect(x:self.view.bounds.midX, y: self.view.bounds.midY, width: 0,height: 0)
+                      }
+   //             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 
                 // exclude some activity types from the list (optional)
               //  activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
