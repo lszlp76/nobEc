@@ -226,7 +226,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     func fetchUserChoosenLocation (location : CLLocation){
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
-        let regionRadius: CLLocationDistance = 1000
+        let regionRadius: CLLocationDistance = 3000
        let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: regionRadius,

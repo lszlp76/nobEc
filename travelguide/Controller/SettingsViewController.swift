@@ -71,6 +71,7 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uygulamayı değerlendir", settingsIcon: UIImage(named: "star")!))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Uydu sinyal seviyesi",settingsIcon: UIImage(named: "satel")!))
         self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Policy",settingsIcon: UIImage(named: "policy")!))
+        self.settingsListElement.append(SettingsModelStructure(switchOff: false, settingsCellText: "Hakkında", settingsIcon:  UIImage(named: "About")!))
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -115,6 +116,8 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
             self.performSegue(withIdentifier: "toWebView", sender: nil)
             
             break
+        case 4 :
+            self.performSegue(withIdentifier: "toAboutView", sender: nil)
         default : ( print("default"))
         }
     }

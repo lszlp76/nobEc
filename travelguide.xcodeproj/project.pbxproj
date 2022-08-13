@@ -33,6 +33,7 @@
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9A0459E28A7C79A005FF6A6 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */; };
+		F9A045A028A84E87005FF6A6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */; };
 		F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */; };
 		F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F9B2F5EC28A682B20002EDAE /* bursa.gpx */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
+		F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyActivityController.swift; sourceTree = "<group>"; };
 		F9B2F5EC28A682B20002EDAE /* bursa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bursa.gpx; path = ../../../Downloads/bursa.gpx; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
 				F945BF34289FDC86000EF9FB /* OnboardingPageViewController.swift */,
+				F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
 				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,
 				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
+				F9A045A028A84E87005FF6A6 /* AboutViewController.swift in Sources */,
 				F902FDEC289B1F2B00735BE1 /* MapController.swift in Sources */,
 				F945BF35289FDC86000EF9FB /* OnboardingPageViewController.swift in Sources */,
 				F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */,
