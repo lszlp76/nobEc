@@ -22,30 +22,42 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        mapView.delegate = self
+        
       
-//        let  locaManager = LocationManager.shared
+        let  locaManager = LocationManager.shared
         let selectedCoordinate = CLLocationCoordinate2D(latitude: annotationLatitude, longitude: annotationLongitude)
 //
-//        locaManager.getUserLocation { [self] location in
+     locaManager.getUserLocation { [self] location in
+
+           self.userLocation = CLLocation (latitude: location.coordinate.latitude,longitude: location.coordinate.longitude)
+       
+         let annotation = PharmacyNearByAnnotation(title: annotationTitle, subtitle: annotationSubtitle, travelTime: annotationTravelTime, distance: 0.0, coordinate: selectedCoordinate, isOnDuty: true)
+     //
+                       annotation.title = annotationTitle
+              annotation.subtitle = annotationPhoneNumber
+     //        annotation.coordinate = selectedCoordinate
+             let annos = [annotation]
+              mapView.delegate = self
+             self.mapView.addAnnotations(annos)
+            
+             //zoomlamak için
+             mapView.selectAnnotation(mapView.annotations[0], animated: true)
+         
+         let userLocationAnnotation = MKPointAnnotation()
+         print(userLocation)
+         userLocationAnnotation.coordinate = userLocation.coordinate
+         userLocationAnnotation.title = "Buradasınız"
+         self.mapView.addAnnotation(userLocationAnnotation)
+
+     
+     
+         self.mapView.showRouteOnMap(pickupCoordinate: self.userLocation.coordinate, destinationCoordinate: selectedCoordinate)
+     }
 //
-//            self.userLocation = CLLocation (latitude: location.coordinate.latitude,longitude: location.coordinate.longitude)
 //
-//
-//        }
-//
-//
-//       self.mapView.showRouteOnMap(pickupCoordinate: self.userLocation.coordinate, destinationCoordinate: selectedCoordinate)
+      
 //        print(annotationTitle,annotationLatitude,annotationLongitude)
-        let annotation = MKPointAnnotation()
-        let title = String(annotationTitle + "\n" + annotationPhoneNumber)
-        print("başlık \(title)")
-         annotation.title = annotationTitle
-        annotation.subtitle = annotationPhoneNumber
-         annotation.coordinate = selectedCoordinate
-        self.mapView.addAnnotation(annotation)
-        //zoomlamak için
-        mapView.selectAnnotation(mapView.annotations[0], animated: true)
+   
         
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         
@@ -79,20 +91,23 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
         let phoneButton = PhoneCallButton(type: .custom)
         
         
-        if annotation is AnnoDeneme
+        if annotation is MKPointAnnotation
         {
+            let reuseId = "pin"
+            let pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView.markerTintColor = UIColor.yellow
+            pinView.glyphTintColor = .blue
+            return pinView
         }
         let reuseId = "MyAnnotation"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
-        if pinView == nil {
-            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView?.canShowCallout = true// baloncukla bilrlikte ekstra bilgi gösterir
-          
-            pinView?.autoresizesSubviews = true
-           
-            pinView?.glyphImage = UIImage(named: "pharmacyRedLogo")
-            // let button1 = UIButton(type: UIButton.ButtonType.detailDisclosure)
-            
+        var pinView :PharmacyView
+        if let dequeudView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+        {
+            dequeudView.annotation = annotation
+            pinView = dequeudView as! PharmacyView
+        }
+        else {
+            pinView = PharmacyView (annotation: annotation, reuseIdentifier: reuseId)
             let smallSquare = CGSize(width: 50, height: 30)
             let view = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
             let labelView = UILabel(frame: CGRect(origin: CGPoint(x: 0.0, y: 30.0), size: CGSize(width: 50, height: 20)))
@@ -114,7 +129,7 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
             button.tintColor = .white
             button.backgroundColor = .blue
             
-            button.addTarget(self, action: #selector(goToPharmacy), for: .touchUpInside)
+            button.addTarget(self, action: #selector(gotoPharmacy(sender: )), for: .touchUpInside)
             
             phoneButton.tintColor = .white
             phoneButton.backgroundColor = .blue
@@ -127,46 +142,21 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
             labelView.textColor = .white
             labelView.textAlignment = .center
             labelView.backgroundColor = .blue
-            // labelView.center = CGPoint(x: view.center.x, y: view.center.y)
-            //önce butonu label view un üstüne ekle
-            
-            
+           
             button.addSubview(labelView)
             
             view.addSubview(button)
             viewPhone.addSubview(phoneButton)
-            
-            //  pinView!.detailCalloutAccessoryView = self.configureDetailView(annotationView: pinView!)
-            pinView?.leftCalloutAccessoryView = view
-            pinView?.rightCalloutAccessoryView = viewPhone
-            
-            //pinView?.addSubview(labelView)
-            //pinView?.addSubview(view)
-            // pinView?.addSubview(labelViewPhoneNumber)
-            //pinView?.addSubview(labelViewPhoneNumber)
-            //   labelViewPhoneNumber.leadingAnchor.constraint(equalTo: phoneButton.trailingAnchor, constant: 10).isActive = true
-            
-            /*10
-             labelView.bottomAnchor.constraint(equalTo: pinView!.bottomAnchor).isActive = true
-             labelView.leftAnchor.constraint(equalTo: pinView!.leftAnchor, constant: 5).isActive = true
-             labelView.rightAnchor.constraint(equalTo: pinView!.rightAnchor, constant: -5).isActive = true
-             
-             
-             
-             */
-            
-            
-            // callout içindeki buton basıldığında callOutAccesoryControltapped çalışır
-            /*
-             ancak burada button yerine view atadık, o nedenle çalışmıyor, adDtarget ile düzelttik.
-             */
-        
+     
+            pinView.leftCalloutAccessoryView = view
+            pinView.rightCalloutAccessoryView = viewPhone
+          
+            let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
+            choosenLocationTap.delegate = self
+            choosenLocationTap.minimumPressDuration = 1
+            pinView.addGestureRecognizer(choosenLocationTap)
+           
         }
-        /** Annotationa uzun basma özelliği verir */
-        let choosenLocationTap =  UILongPressGestureRecognizer ( target: self, action: #selector(findNearPharmacy(gestureRecognizer: )))
-        choosenLocationTap.delegate = self
-        choosenLocationTap.minimumPressDuration = 1
-        pinView!.addGestureRecognizer(choosenLocationTap)
         
         return pinView
     }
@@ -197,7 +187,7 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
         //do your work
         return snapshotView
     }
-    @objc func goToPharmacy() {
+    @objc func gotoPharmacy(sender: CarButton) {
         let  requestLocation = CLLocation(latitude: annotationLatitude, longitude: annotationLongitude)
         
         CLGeocoder().reverseGeocodeLocation(requestLocation) { (placemarks, error) in
@@ -212,9 +202,6 @@ class ChoosenLocationViewViewController: UIViewController, MKMapViewDelegate, CL
                 }
             }
         }
-        func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped: UIControl) {
-           print("ulas")
-    }
     }
     /**
      alt taraf kullanılmayacak. BUton yerine view atadığın için callOutcalşmıyor, addTaget ile yapmak durumunda kalıyorsun
