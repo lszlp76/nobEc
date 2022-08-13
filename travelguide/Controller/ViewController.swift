@@ -359,8 +359,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             guard !userDefault.getValueForSwitch(keyName: "tutorial")! else {return}
                     print("Açılış verisi")
                     self.fetchPharmacyLocation(location: CLLocation(latitude: self.getLocation.location.latitude, longitude: getLocation.location.longitude) , pharmacyOnDuty: pharmacyOnDuty)
-            getDataFromLocal()
-              //      getData(forCity: self.city)
+           // getDataFromLocal()
+                    getData(forCity: self.city)
                  firstOpen = false
                     
                 

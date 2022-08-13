@@ -15,17 +15,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenNobEc" translatesAutoresizingMaskIntoConstraints="NO" id="yjL-dQ-3mA">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1bc-ZU-VAk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenNobEc" translatesAutoresizingMaskIntoConstraints="NO" id="yjL-dQ-3mA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.3.1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hH-fo-lex">
+                                <rect key="frame" x="312.33333333333331" y="439.66666666666669" width="50.666666666666686" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" red="0.85060344139999999" green="0.22288447810000001" blue="0.42582405680000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="yjL-dQ-3mA" secondAttribute="bottom" constant="34" id="7Bl-Hs-9d6"/>
-                            <constraint firstItem="yjL-dQ-3mA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Hae-Zn-AjT"/>
-                            <constraint firstItem="yjL-dQ-3mA" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="44" id="Mez-UI-wVc"/>
-                            <constraint firstAttribute="trailing" secondItem="yjL-dQ-3mA" secondAttribute="trailing" id="c6f-53-A1F"/>
+                            <constraint firstAttribute="trailing" secondItem="1bc-ZU-VAk" secondAttribute="trailing" id="8Pv-aa-BaV"/>
+                            <constraint firstItem="1bc-ZU-VAk" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Izz-er-u0O"/>
+                            <constraint firstItem="1bc-ZU-VAk" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="RfR-0T-g1C"/>
+                            <constraint firstAttribute="bottom" secondItem="1bc-ZU-VAk" secondAttribute="bottom" id="iZo-Oj-yZN"/>
+                            <constraint firstItem="2hH-fo-lex" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="45" id="wl4-37-mmk"/>
+                            <constraint firstItem="2hH-fo-lex" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="150" id="zak-eH-Fv6"/>
                         </constraints>
                     </view>
                 </viewController>
