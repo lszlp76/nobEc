@@ -249,26 +249,43 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 return
             }
             print("yakın eczane sayısı \(response.mapItems.count))")
-            
+            var itemLimit = 0  //==> en fazla 10 tane al
             for item in response.mapItems {
+                guard itemLimit != 10 else {return} //==> en fazla 10 tane al
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
                     
                     
                     
-                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  false))
-                    print(item.phoneNumber)
+                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  defineNearPharmacy(newNearPharmacy: item.name! , pharmacyOnDutyList: pharmacyOnDutyList)))
+                  
                     newNearByPharmacies.append(localPharmacies)
+                   
+                    
+                    
                     addAnnotations(annos: newNearByPharmacies)
-                    
-                    
-                    
                 } else {
                     print("hata var")
                 }
+                itemLimit += 1
             }//end loop
             
-            
+            print(nearByPharmacies)
         }
+    }
+    func defineNearPharmacy  (newNearPharmacy : String, pharmacyOnDutyList : PharmacyListViewModel) -> Bool? {
+     
+        for index in stride (from: 0, to: pharmacyOnDutyList.numberOfDutyPharmacies(), by: 1) {
+            let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
+            if newNearPharmacy == phar.pharmacyOnDuty?.EczaneAdi{
+                print(newNearPharmacy)
+                return true
+            
+            }else {
+               
+            }
+        
+        }
+        return false
     }
     @objc func updateLocationButtonClicked (){
         /*
