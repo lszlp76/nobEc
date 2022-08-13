@@ -86,7 +86,7 @@ class PharmacyView: MKAnnotationView {
         canShowCallout = true
         tintColor = pharmacy.markerTintColor
         image = pharmacy.image
-        
+        largeContentTitle = "ulas"
     }
   }
     

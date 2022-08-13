@@ -1049,17 +1049,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 pinView = PharmacyView(
                   annotation: annotation,
                   reuseIdentifier: identifier)
-               
+                pinView.annotation?.title
                 let smallSquare = CGSize(width: 50, height: 30)
                 let view = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
                 let labelView = UILabel(frame: CGRect(origin: CGPoint(x: 0.0, y: 30.0), size: CGSize(width: 50, height: 20)))
                 button.frame =  CGRect(origin: CGPoint(x: 00.0, y:0.0), size: smallSquare)
                 
                 let viewPhone = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
-                //  let labelViewPhoneNumber = UILabel(frame: CGRect(origin: CGPoint(x: 00.0, y: 30.0), size: CGSize(width: 80, height: 20)))
-                
                 phoneButton.frame = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50))
-                viewPhone.backgroundColor = .blue
+                if  annotation.isOnDuty == true {
+                viewPhone.backgroundColor = .red
+                    phoneButton.backgroundColor = .red
+                    button.backgroundColor = .red
+                    labelView.backgroundColor = .red
+                }
+                else {
+                    viewPhone.backgroundColor = .blue
+                    phoneButton.backgroundColor = .blue
+                    button.backgroundColor = .blue
+                    labelView.backgroundColor = .blue
+                }
                 phoneButton.setBackgroundImage(UIImage(systemName: "phone"), for: .normal)
                 button.setBackgroundImage(UIImage(systemName: "car"), for: .normal)
                 
@@ -1069,18 +1078,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 button.pinName = annotation.title!
                 button.addTarget(self, action: #selector(goToPharmacy(sender: )), for: .touchUpInside)
                 button.tintColor = .white
-                button.backgroundColor = .blue
+               
                 phoneButton.tintColor = .white
-                phoneButton.backgroundColor = .blue
+             
                 phoneButton.phoneNumber = annotation.subtitle!
                 phoneButton.addTarget(self, action: #selector(callPhoneNumber(sender:)), for: .touchUpInside)
-                view.backgroundColor = .orange
-                viewPhone.backgroundColor = .orange
+                
                 labelView.text = annotation.travelTime!
                 labelView.font = UIFont(name: "arial", size: 14)
                 labelView.textColor = .white
                 labelView.textAlignment = .center
-                labelView.backgroundColor = .blue
+               
                 button.addSubview(labelView)
                 view.addSubview(button)
                 viewPhone.addSubview(phoneButton)
