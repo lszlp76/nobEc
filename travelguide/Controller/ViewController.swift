@@ -220,7 +220,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             fetchUserChoosenLocation(location: newLocation)
           
-            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 1000)
+            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 3000)
             
         }
     }
