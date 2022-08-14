@@ -394,8 +394,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1348"
-            endingLineNumber = "1348"
+            startingLineNumber = "1360"
+            endingLineNumber = "1360"
             landmarkName = "goToPharmacy(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,8 +570,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -650,8 +650,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1347"
-            endingLineNumber = "1347"
+            startingLineNumber = "1359"
+            endingLineNumber = "1359"
             landmarkName = "goToPharmacy(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,8 +730,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1351"
-            endingLineNumber = "1351"
+            startingLineNumber = "1363"
+            endingLineNumber = "1363"
             landmarkName = "MKMapView"
             landmarkType = "21">
             <Locations>
@@ -794,8 +794,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1360"
-            endingLineNumber = "1360"
+            startingLineNumber = "1372"
+            endingLineNumber = "1372"
             landmarkName = "centerLocation(_:regionRadius:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1002,8 +1002,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1256"
-            endingLineNumber = "1256"
+            startingLineNumber = "1268"
+            endingLineNumber = "1268"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1018,8 +1018,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1382"
-            endingLineNumber = "1382"
+            startingLineNumber = "1394"
+            endingLineNumber = "1394"
             landmarkName = "setMargins(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1034,8 +1034,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1383"
-            endingLineNumber = "1383"
+            startingLineNumber = "1395"
+            endingLineNumber = "1395"
             landmarkName = "setMargins(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1066,8 +1066,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1276"
-            endingLineNumber = "1276"
+            startingLineNumber = "1288"
+            endingLineNumber = "1288"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1322,8 +1322,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1331"
-            endingLineNumber = "1331"
+            startingLineNumber = "1343"
+            endingLineNumber = "1343"
             landmarkName = "goToPharmacy(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1370,8 +1370,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1386,8 +1386,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1039"
-            endingLineNumber = "1039"
+            startingLineNumber = "1051"
+            endingLineNumber = "1051"
             landmarkName = "addNearestPharmacyToMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1402,8 +1402,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1252"
-            endingLineNumber = "1252"
+            startingLineNumber = "1264"
+            endingLineNumber = "1264"
             landmarkName = "turnOnAllPharmacyOption()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1418,8 +1418,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1041"
-            endingLineNumber = "1041"
+            startingLineNumber = "1053"
+            endingLineNumber = "1053"
             landmarkName = "addNearestPharmacyToMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1434,8 +1434,8 @@
             filePath = "travelguide/Controller/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1244"
-            endingLineNumber = "1244"
+            startingLineNumber = "1256"
+            endingLineNumber = "1256"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>

@@ -34,6 +34,9 @@
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9A0459E28A7C79A005FF6A6 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */; };
 		F9A045A028A84E87005FF6A6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */; };
+		F9A045A328A8FC3B005FF6A6 /* NormalPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A045A228A8FC3B005FF6A6 /* NormalPopUpViewController.swift */; };
+		F9A045A528A8FC49005FF6A6 /* PopUpActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A045A428A8FC49005FF6A6 /* PopUpActionViewController.swift */; };
+		F9A045A728A8FC60005FF6A6 /* CustomView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A045A628A8FC60005FF6A6 /* CustomView.storyboard */; };
 		F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */; };
 		F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F9B2F5EC28A682B20002EDAE /* bursa.gpx */; };
 		F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BA4A7B28800A6E000B295F /* Assets.xcassets */; };
@@ -78,6 +81,9 @@
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
 		F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		F9A045A228A8FC3B005FF6A6 /* NormalPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalPopUpViewController.swift; sourceTree = "<group>"; };
+		F9A045A428A8FC49005FF6A6 /* PopUpActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpActionViewController.swift; sourceTree = "<group>"; };
+		F9A045A628A8FC60005FF6A6 /* CustomView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomView.storyboard; sourceTree = "<group>"; };
 		F9B2F5EA28A551ED0002EDAE /* ModifyActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyActivityController.swift; sourceTree = "<group>"; };
 		F9B2F5EC28A682B20002EDAE /* bursa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bursa.gpx; path = ../../../Downloads/bursa.gpx; sourceTree = "<group>"; };
 		F9BA4A7B28800A6E000B295F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 			children = (
 				F9149C4B285E456300676DCB /* AppDelegate.swift */,
 				F9149C4D285E456300676DCB /* SceneDelegate.swift */,
+				F9A045A128A8FC08005FF6A6 /* Custom Tutorial Grup */,
 				F97E3508286C47D9003146F2 /* Model */,
 				F97E3507286C47C6003146F2 /* View */,
 				F97E3509286C47FB003146F2 /* Controller */,
@@ -203,6 +210,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		F9A045A128A8FC08005FF6A6 /* Custom Tutorial Grup */ = {
+			isa = PBXGroup;
+			children = (
+				F9A045A228A8FC3B005FF6A6 /* NormalPopUpViewController.swift */,
+				F9A045A428A8FC49005FF6A6 /* PopUpActionViewController.swift */,
+				F9A045A628A8FC60005FF6A6 /* CustomView.storyboard */,
+			);
+			path = "Custom Tutorial Grup";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -264,6 +281,7 @@
 				F97E3515286DF4D5003146F2 /* tumbursa.json in Resources */,
 				F97E350D286C9F84003146F2 /* eczane.json in Resources */,
 				F9149C5B285E456400676DCB /* LaunchScreen.storyboard in Resources */,
+				F9A045A728A8FC60005FF6A6 /* CustomView.storyboard in Resources */,
 				F9BA4A7C28800A6E000B295F /* Assets.xcassets in Resources */,
 				F9149C53285E456300676DCB /* Main.storyboard in Resources */,
 				F9B2F5ED28A682B20002EDAE /* bursa.gpx in Resources */,
@@ -293,12 +311,14 @@
 				F9E5A3272889759B00883D11 /* Webservice.swift in Sources */,
 				F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */,
 				F94CB9BA2870F92D0038D47B /* PhoneButton.swift in Sources */,
+				F9A045A528A8FC49005FF6A6 /* PopUpActionViewController.swift in Sources */,
 				F9149C63285E692700676DCB /* FirstViewController.swift in Sources */,
 				F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */,
 				F9F93C95286736D0001E103A /* TurkishConverter.swift in Sources */,
 				F9149C56285E456300676DCB /* travelguide.xcdatamodeld in Sources */,
 				F9149C50285E456300676DCB /* ViewController.swift in Sources */,
 				F95E9A4E289130FD004D60FC /* InternetMonitor.swift in Sources */,
+				F9A045A328A8FC3B005FF6A6 /* NormalPopUpViewController.swift in Sources */,
 				F9149C4C285E456300676DCB /* AppDelegate.swift in Sources */,
 				F9B2F5EB28A551ED0002EDAE /* ModifyActivityController.swift in Sources */,
 				F945BF37289FE416000EF9FB /* pageThreeViewController.swift in Sources */,

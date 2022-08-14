@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
 
     }
+    //<UIStoryboard: 0x600001568a20>
 
     // MARK: UISceneSession Lifecycle
 

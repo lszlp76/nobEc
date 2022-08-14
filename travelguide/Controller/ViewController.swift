@@ -12,7 +12,7 @@ import Network
 
 
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate ,UITextFieldDelegate,UIGestureRecognizerDelegate, UITabBarControllerDelegate
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate ,UITextFieldDelegate,UIGestureRecognizerDelegate, UITabBarControllerDelegate, PopUpProtocol
 {
     @IBOutlet weak var saveButton: UIButton!
     /*
@@ -22,6 +22,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
      
      // }
      */
+    let url: String = "https://www.apple.com/in/ios/app-store/"
     private var demandTutorial = false
     private var didPerformGeocode = false
     var connectionManager = CheckInternetConnection()
@@ -771,6 +772,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         /****************/
         
     }
+    func handleAction(action: Bool) {
+          
+          //opening a link to the app store if the user clickes on the go to app store button
+          if (action) {
+              guard let url = URL(string: url) else {
+                  return
+              }
+              UIApplication.shared.open(url, options: [:], completionHandler: nil)
+          }
+      }
     @objc func tappedImage (sender: MyTapGesture){
         
         var senderTitle = String()
@@ -781,6 +792,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             pharmacyDutyListTab.isHidden = false
             settingsTab.isHidden = true
             locateButton.isHidden = true
+            NormalPopUpViewController.showPopup(parentVC: self)
             break
         case "phar":
             nearPharmacyTab.isHidden = true

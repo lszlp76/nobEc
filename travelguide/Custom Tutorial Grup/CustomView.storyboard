@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--NormalPopUpViewController-->
+        <scene sceneID="KcC-n2-C74">
+            <objects>
+                <viewController storyboardIdentifier="NormalPopUpViewController" title="NormalPopUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3w9-et-3sD" customClass="NormalPopUpViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="DialogBoxView" id="adf-38-cCv" userLabel="Dialog Box View" colorLabel="IBBuiltInLabel-Red">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-sX-gJ3">
+                                <rect key="frame" x="0.0" y="150" width="414" height="596"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="T8R-76-sW8">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="400" id="cOJ-bS-SrL"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ulZ-4b-nke" userLabel="text">
+                                        <rect key="frame" x="0.0" y="402" width="414" height="194"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2o1-Gt-PX4">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qD4-LE-frk">
+                                                <rect key="frame" x="269" y="144" width="145" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiV-7u-o36">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.5" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="Pf0-if-qzv"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="⬅️Geri"/>
+                                                        <connections>
+                                                            <action selector="backButtonClicked:" destination="3w9-et-3sD" eventType="touchUpInside" id="xbj-Ul-wv3"/>
+                                                            <action selector="buttonTap:" destination="3w9-et-3sD" eventType="touchUpInside" id="qRL-ce-bV1"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9Y-dw-MwC">
+                                                        <rect key="frame" x="73.5" y="0.0" width="71.5" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="T74-uJ-K05"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="İleri ➡️"/>
+                                                        <connections>
+                                                            <action selector="buttonTap:" destination="3w9-et-3sD" eventType="touchUpInside" id="TXq-Ms-SYG"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2o1-Gt-PX4" firstAttribute="top" secondItem="ulZ-4b-nke" secondAttribute="top" id="NoG-Kz-S9K"/>
+                                            <constraint firstItem="2o1-Gt-PX4" firstAttribute="leading" secondItem="ulZ-4b-nke" secondAttribute="leading" id="hv1-9H-Jjl"/>
+                                            <constraint firstAttribute="trailing" secondItem="2o1-Gt-PX4" secondAttribute="trailing" id="rIq-tU-oSF"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ulZ-4b-nke" firstAttribute="top" secondItem="T8R-76-sW8" secondAttribute="bottom" constant="2" id="0xu-el-32o"/>
+                                    <constraint firstItem="ulZ-4b-nke" firstAttribute="leading" secondItem="TRS-sX-gJ3" secondAttribute="leading" id="2Ie-Nb-uGG"/>
+                                    <constraint firstAttribute="bottom" secondItem="ulZ-4b-nke" secondAttribute="bottom" constant="20" symbolic="YES" id="6MC-zA-gbk"/>
+                                    <constraint firstAttribute="trailing" secondItem="T8R-76-sW8" secondAttribute="trailing" id="CfZ-sE-hQj"/>
+                                    <constraint firstAttribute="trailing" secondItem="ulZ-4b-nke" secondAttribute="trailing" id="Gau-fY-s6k"/>
+                                    <constraint firstItem="ulZ-4b-nke" firstAttribute="top" secondItem="T8R-76-sW8" secondAttribute="bottom" constant="2" id="Rhk-XX-qXf"/>
+                                    <constraint firstItem="T8R-76-sW8" firstAttribute="top" secondItem="TRS-sX-gJ3" secondAttribute="top" id="TSh-mf-CuD"/>
+                                    <constraint firstItem="T8R-76-sW8" firstAttribute="leading" secondItem="TRS-sX-gJ3" secondAttribute="leading" id="zdQ-TR-uqg"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0cc-Bi-FKT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0cc-Bi-FKT" firstAttribute="bottom" secondItem="TRS-sX-gJ3" secondAttribute="bottom" constant="116" id="6sj-Wm-cwg"/>
+                            <constraint firstItem="TRS-sX-gJ3" firstAttribute="leading" secondItem="adf-38-cCv" secondAttribute="leading" id="JND-Ni-rq2"/>
+                            <constraint firstItem="TRS-sX-gJ3" firstAttribute="leading" secondItem="0cc-Bi-FKT" secondAttribute="leading" id="MY0-VF-65v"/>
+                            <constraint firstAttribute="bottom" secondItem="TRS-sX-gJ3" secondAttribute="bottom" constant="150" id="RhH-P8-IO7"/>
+                            <constraint firstItem="TRS-sX-gJ3" firstAttribute="top" secondItem="adf-38-cCv" secondAttribute="top" constant="150" id="it4-Mn-9C8"/>
+                            <constraint firstItem="TRS-sX-gJ3" firstAttribute="trailing" secondItem="0cc-Bi-FKT" secondAttribute="trailing" id="nCn-F5-Kgs"/>
+                            <constraint firstAttribute="trailing" secondItem="TRS-sX-gJ3" secondAttribute="trailing" id="o2r-Gc-OiI"/>
+                            <constraint firstItem="TRS-sX-gJ3" firstAttribute="top" secondItem="0cc-Bi-FKT" secondAttribute="top" constant="106" id="oK6-DO-l1S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="IiV-7u-o36" id="JdH-qX-72I"/>
+                        <outlet property="dialogBoxView" destination="adf-38-cCv" id="JtS-pu-q6q"/>
+                        <outlet property="imageView" destination="T8R-76-sW8" id="je1-4Z-iHB"/>
+                        <outlet property="label" destination="2o1-Gt-PX4" id="cQc-gm-3QS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="45b-mY-2r3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742.02898550724649" y="44.866071428571423"/>
+        </scene>
+        <!--PopUpActionViewController-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="PopUpActionViewController" title="PopUpActionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PopUpActionViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" userLabel="Dialog Box View">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="zAD-ib-v8K">
+                                <rect key="frame" x="0.0" y="39" width="414" height="816.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6eq-0b-Ddk">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="691"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Cu-48-XcF">
+                                        <rect key="frame" x="0.0" y="728" width="414" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sk-WE-1Fs">
+                                        <rect key="frame" x="0.0" y="785.5" width="414" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                        <connections>
+                                            <action selector="buttonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4Km-EB-5tR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="6eq-0b-Ddk" id="M9T-Lq-yLB"/>
+                        <outlet property="labelText" destination="8Cu-48-XcF" id="GfV-u3-Hjy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28" y="17"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Tutorial" width="1170" height="1170"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
