@@ -83,7 +83,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
 //        }
    
         
-        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+        let longPressGesture: MyLongGestureRecongnizer = MyLongGestureRecongnizer (target: self, action: #selector(longPress(_:)))
         longPressGesture.minimumPressDuration = 1.0
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)
@@ -290,21 +290,23 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         
         }
     }
-    @objc func longPress(_ longPressGestureRecognizer : UILongPressGestureRecognizer){
+    @objc func longPress(_ longPressGestureRecognizer : MyLongGestureRecongnizer){
         if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
             // Make the activityViewContoller which shows the share-view
             let touchPoint = longPressGestureRecognizer.location(in: tableView)
            
             if let indexPath = tableView.indexPathForRow(at: touchPoint){
-                let url = ("https://maps.apple.com/?daddr=\(eczaneStored[indexPath.row].pharmacyLatitude),\(eczaneStored[indexPath.row].pharmacyLongitude)")
                 
-                print("-->\(url)")
-                // let url = "http://maps.apple.com/maps?saddr=\(from.latitude),\(from.longitude)&daddr=\(to.latitude),\(to.longitude)"
-                
-                let itemToSend = ["\(eczaneStored[indexPath.row].pharmacyName)", url] as [Any]
                 
                
-                let activityViewController = UIActivityViewController(activityItems: itemToSend ,applicationActivities: nil)
+                let title = "NöbEc ➡️ \(eczaneStored[indexPath.row].pharmacyName)"
+                let icon = UIImage(named: "pharmacyRedLogo")
+                let url = ("https://maps.apple.com/?daddr=\(eczaneStored[indexPath.row].pharmacyLatitude),\(eczaneStored[indexPath.row].pharmacyLongitude)")
+                let textToShare: [Any] = [
+                    MyActivityItemSource( title: title, text: url, icon: icon )
+                ]
+              
+                let activityViewController = UIActivityViewController(activityItems: textToShare ,applicationActivities: nil)
                
                 /*
                  Share menu if user's Ipad is active

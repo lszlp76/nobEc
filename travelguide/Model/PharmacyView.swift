@@ -9,21 +9,24 @@ import Foundation
 import MapKit
 
 class PharmacyMarkerView: MKMarkerAnnotationView {
-    var dene : String?
+    
   override var annotation: MKAnnotation? {
     willSet {
       // 1
       guard let pharmacyMarker = newValue as? PharmacyNearByAnnotation else {
         return
       }
-       canShowCallout = true
-     
-        markerTintColor = pharmacyMarker.markerTintColor
         
+       canShowCallout = true
        
-        if let letter = pharmacyMarker.title?.first {
-        glyphText = String(letter)
-        }
+        //markerTintColor = pharmacyMarker.markerTintColor
+        image = pharmacyMarker.image
+        largeContentTitle = pharmacyMarker.title
+        self.glyphText = ""
+        self.glyphTintColor = UIColor.clear
+        self.markerTintColor = UIColor.clear
+        
+        
     }
   }
     
@@ -51,8 +54,8 @@ class PharmacyNearByAnnotation: NSObject,MKAnnotation {
       switch isOnDuty {
       case true :
           
-          return UIImage(named: "pharmacyRedLogo")!
-          // 60 x 60 ideal ölçü resim boyunda
+          return resizeAnnotationImage(image: UIImage(named: "pharmacyRedLogo")!)//UIImage(named: "pharmacyRedLogo")!
+          // 60 x 60 ideal ölçü resim boyunda MKAnnotationView kullanırsan.
       case false :
         return UIImage(named: "pharmacyBlueLogo")!
       default:
@@ -72,6 +75,16 @@ class PharmacyNearByAnnotation: NSObject,MKAnnotation {
         
         
     }
+    private func resizeAnnotationImage (image : UIImage) -> UIImage {
+        
+        // resimi assete kayıt ederken Orijinal olarak işaretle. yoksa görüntü alamazsın
+        let size = CGSize(width: 70, height: 70)
+        UIGraphicsBeginImageContext(size)
+        image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        return resizedImage!
+
+    }
 
 }
 class PharmacyView: MKAnnotationView {
@@ -86,7 +99,7 @@ class PharmacyView: MKAnnotationView {
         canShowCallout = true
         tintColor = pharmacy.markerTintColor
         image = pharmacy.image
-        largeContentTitle = "ulas"
+        
     }
   }
     

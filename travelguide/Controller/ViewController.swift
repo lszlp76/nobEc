@@ -218,11 +218,37 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             anno.title = "Seçtiğiniz Nokta"
             self.mapView.addAnnotation(anno);
             
-            fetchUserChoosenLocation(location: newLocation)
-          
-            mapView.centerLocation(newLocation,regionRadius: regionDiameter ?? 3000)
+            self.fetchUserChoosenLocation(location: newLocation)
             
-        }
+//            getCityFromChoosenLocation(newLocation: newLocation) { [self] sehir, ilce in
+//                guard let sehir = sehir,let ilce = ilce else { return }
+//                    self.city = sehir
+//                self.county = ilce
+//                print("seçilen şehir \(sehir)")
+//                let currentTime = Date.now
+//                let diffTime = currentTime.timeIntervalSinceReferenceDate - self.openingTime.timeIntervalSinceReferenceDate
+//
+//                if  diffTime > 60 {
+//                    self.fetchPharmacyLocation(location: CLLocation(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude) , pharmacyOnDuty: pharmacyOnDuty)
+//
+//                    getLocation.location = newLocation.coordinate
+//                   // getData(forCity: self.city) GetData yaparsak listelerde değişecek
+//                }
+//                else {
+//
+//                    CheckGPSSignal().alert(title: "Konum", message: "\((60 - diffTime).rounded()).sn sonra tekrar deneyin")
+//
+//                }
+//
+//
+//                mapView.centerLocation(newLocation,regionRadius: 1500)
+//
+//            }
+//                }
+//
+//
+//
+    }
     }
     func fetchUserChoosenLocation (location : CLLocation){
         let span = MKCoordinateSpan(latitudeDelta: 0.115, longitudeDelta: 0.115)
@@ -251,15 +277,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             print("yakın eczane sayısı \(response.mapItems.count))")
             var itemLimit = 0  //==> en fazla 10 tane al
             for item in response.mapItems {
-                guard itemLimit != 10 else {return} //==> en fazla 10 tane al
-                if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
+                guard itemLimit != 5 else {return} //==> en fazla 10 tane al
+                if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location , let list = pharmacyOnDutyList{
                     
                     
                     
                     let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  defineNearPharmacy(newNearPharmacy: item.name! , pharmacyOnDutyList: pharmacyOnDutyList)))
                   
                     newNearByPharmacies.append(localPharmacies)
-                   
+                    newNearByPharmacies.sorted { ($0.distance! < $1.distance! )
+                        
+                    }
                     
                     
                     addAnnotations(annos: newNearByPharmacies)
@@ -295,7 +323,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
             return
         }
-        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 1000)
         let currentTime = Date.now
         print("openning time \(openingTime)")
         print("current time \(currentTime)")
@@ -310,7 +337,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             self.openingTime = currentTime //açılış saatini en son değer yaıyor
         }
-        
+        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
+       
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let group = DispatchGroup()
@@ -375,13 +403,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         print(self.city)
         
     }
+    func getCityFromChoosenLocation(newLocation: CLLocation,
+        getCity :@escaping (_ sehir: String?,_ ilce: String?)->Void){
+        
+        
+        let choosenLocation = CLLocation(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(choosenLocation) { placemarks, error in
+            guard let place = placemarks?.first , error == nil else { return}
+            if let sehir = place.administrativeArea , let ilce = place.subAdministrativeArea{
+                getCity(sehir,ilce)
+            }
+                else { CheckGPSSignal().alert(title: "Konum hatası", message: "Konum verisi mevcut değil")
+                return
+            }
+            
+        }
+        
+        
+        }
     func getCityAndCountyName(getCity : @escaping (_ sehir: String?,_ ilce: String?)-> Void) {
         let userLocation =  CLLocation(latitude: getLocation.location.latitude, longitude: getLocation.location.longitude)
-        print("get city 0")
+       
         GetLocation.sharedInstance.connectionGPSExist = true
         let geoCoder = CLGeocoder()
-//        var sehir = ""
-//        var ilce = ""
+
         geoCoder.reverseGeocodeLocation(userLocation,
                                         completionHandler:
                                             { [self] placemarks, error in
@@ -389,13 +436,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             guard let place = placemarks?.first , error == nil else { return}
             
             
-            print("getCity çalıştı completion ")
-            
             if let sehir = place.administrativeArea , let ilce = place.subAdministrativeArea{
-//                sehir = place.administrativeArea!
-//                ilce = place.subAdministrativeArea!
-                
-                getCity(sehir,ilce)
+          getCity(sehir,ilce)
             }
                 else { CheckGPSSignal().alert(title: "Konum hatası", message: "Konum verisi mevcut değil")
                 return
@@ -530,7 +572,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 if let error = error {
                     
                     print("Pharmacy --> \(destination.coordinate.latitude ) Distance directions calculation error\n \(error.localizedDescription)")
-                     return
+                    
+                    return
                 }
                 if let route = response?.routes {
                     let sortedRoutes = route.sorted(by: { $0.distance < $1.distance}) // en küçüğe göre sort ediyor
@@ -925,7 +968,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var itemLimit = 0  //==> en fazla 10 tane al
           
             for item in response.mapItems {
-                guard itemLimit != 10 else {return} //==> en fazla 10 tane al
+                guard itemLimit != 5 else {return} //==> en fazla 10 tane al
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location {
                     
                     getDistance(sourceLocation: GetLocation.sharedInstance.location ,endLocation: location.coordinate)
@@ -940,6 +983,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         }
                         let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime: travelTimeAnno + " dak.", distance: distanceAnno, coordinate: location.coordinate,isOnDuty: false))
                         nearByPharmacies.append(localPharmacies)
+                        nearByPharmacies.sorted(by:
+                                                    { ($0.distance!)  < ($1.distance! ) })
                         addAnnotations(annos: nearByPharmacies)
                       }
                  }
@@ -1055,18 +1100,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         
         let identifier = "Pharmacy"
-        var pinView : PharmacyView
+        var pinView : PharmacyMarkerView
         if let dequeuedView = mapView.dequeueReusableAnnotationView(
               withIdentifier: identifier) as? MKMarkerAnnotationView {
               dequeuedView.annotation = annotation
-            pinView = dequeuedView as! PharmacyView
+            pinView = dequeuedView as! PharmacyMarkerView
             
             }else {
                 
-                pinView = PharmacyView(
+                pinView = PharmacyMarkerView(
                   annotation: annotation,
                   reuseIdentifier: identifier)
-                pinView.annotation?.title
+                
+               
+                
                 let smallSquare = CGSize(width: 50, height: 30)
                 let view = UIView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: CGSize(width: 50, height: 50)))
                 let labelView = UILabel(frame: CGRect(origin: CGPoint(x: 0.0, y: 30.0), size: CGSize(width: 50, height: 20)))
