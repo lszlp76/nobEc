@@ -276,14 +276,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 return
             }
             print("yakın eczane sayısı \(response.mapItems.count))")
-            var itemLimit = 0  //==> en fazla 10 tane al
+            var itemLimit = 0  //==> en fazla 5 tane al
             for item in response.mapItems {
                 guard itemLimit != 5 else {return} //==> en fazla 10 tane al
                 if let name = item.name,let phoneNumber = item.phoneNumber  , let location = item.placemark.location , let list = pharmacyOnDutyList{
                     
                     
                     
-                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  defineNearPharmacy(newNearPharmacy: item.name! , pharmacyOnDutyList: pharmacyOnDutyList)))
+                    let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  defineNearPharmacy(newNearPharmacy: item.name! ,phoneNumber: item.phoneNumber!, pharmacyOnDutyList: pharmacyOnDutyList)))
                   
                     newNearByPharmacies.append(localPharmacies)
                     newNearByPharmacies.sorted { ($0.distance! < $1.distance! )
@@ -301,18 +301,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             print(nearByPharmacies)
         }
     }
-    func defineNearPharmacy  (newNearPharmacy : String, pharmacyOnDutyList : PharmacyListViewModel) -> Bool? {
+    /**
+         * yakındaki eczanenin nöbetçi listesinde aynı ad ve telefon nosu
+     ile olduğunu inceleyip,bilgi gönderir .
+     true ise eczane nöbetçi
+     false ise eczane nöbetçi değil
+     
+     bu bilgiyi PharmacyNearByAnnotations içinde kullanmak için gönderir
+     
+     */
+    func defineNearPharmacy  (newNearPharmacy : String,phoneNumber: String, pharmacyOnDutyList : PharmacyListViewModel) -> Bool? {
      
         for index in stride (from: 0, to: pharmacyOnDutyList.numberOfDutyPharmacies(), by: 1) {
             let phar = self.pharmacyOnDutyList.pharmacyAtIndex(index)
-            if newNearPharmacy == phar.pharmacyOnDuty?.EczaneAdi{
+            guard phar.pharmacyOnDuty?.Telefon != nil else
+            { return false }// telefon yoksa çökmesin
+            if newNearPharmacy == phar.pharmacyOnDuty?.EczaneAdi && phoneNumber == phar.pharmacyOnDuty?.Telefon {
                 print(newNearPharmacy)
                 return true
             
-            }else {
-               
             }
-        
         }
         return false
     }
@@ -792,7 +800,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             pharmacyDutyListTab.isHidden = false
             settingsTab.isHidden = true
             locateButton.isHidden = true
-            NormalPopUpViewController.showPopup(parentVC: self)
+        //    NormalPopUpViewController.showPopup(parentVC: self)
             break
         case "phar":
             nearPharmacyTab.isHidden = true
@@ -818,7 +826,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             stackView.isHidden = true
             removeAnimate()
             
-            
+            locationManager.startUpdatingLocation()
             break
         default:
             nearPharmacyTab.isHidden = false
@@ -1031,8 +1039,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let loc2 = CLLocation(latitude : bestToShowAnnotation.coordinate.latitude , longitude:bestToShowAnnotation.coordinate.longitude)
         
         
-            regionDiameter = loc1.distance(from: loc2)
-            print((regionDiameter/1000).rounded(), " km")
+           // regionDiameter = loc1.distance(from: loc2)
+            //print((regionDiameter/1000).rounded(), " km")
       
             self.mapView.addAnnotation(bestToShowAnnotation)
         

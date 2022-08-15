@@ -50,7 +50,6 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         eczaneStoredFull.removeAll()
         view.backgroundColor = UIColor(named: "OnboardingColor")
         
-      
         
         initSearchController()
         
@@ -90,6 +89,7 @@ class FirstViewController: UIViewController , UITableViewDelegate,
         tableView.backgroundColor = UIColor(named: "OnboardingColor")
         tableView.delegate = self
         tableView.dataSource = self
+        print("eczane sayısı -> \(eczaneStored.count)")
        
         tableView.reloadData()
     }
