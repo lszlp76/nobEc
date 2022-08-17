@@ -106,3 +106,14 @@ Thread 8 Crashed:
 12  libsystem_pthread.dylib                  0x1f0c6d0bc _pthread_wqthread + 288
 13  libsystem_pthread.dylib                  0x1f0c6ce5c start_wqthread + 8
 
+        updateLocationButton.label = .none
+        updateLocationButton.icon = .arrowFilled
+      
+        updateLocationButton.cornerRadius = 25.0
+        updateLocationButton.tintColor = .white
+        updateLocationButton.addTarget(self, action: #selector(updateLocationButtonClicked), for: .touchUpInside)
+        
+        mapView.addSubview(updateLocationButton)
+        updateLocationButton.topAnchor.constraint(equalTo: mapView.topAnchor,constant: 0).isActive = true
+        
+        

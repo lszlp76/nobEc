@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreLocationUI
 import Network
 
 
@@ -74,7 +75,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     let stackView = UIStackView()
     let stackViewUp = UIStackView()
-    let updateLocationButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    
+    let updateLocationButton = CLLocationButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     var regionDiameter : CLLocationDistance!
     var openingTime = Date()
     var didUpdateLocationDemanded = Bool()
@@ -145,14 +147,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
         self.tabBarController?.tabBar.tintColor = UIColor(named: "SpesificColor")
+        self.tabBarController?.tabBar.items![0].image = UIImage(named: "locate")
+        self.tabBarController?.tabBar.items![1].image = UIImage(named: "list")
+        self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+        self.tabBarController?.tabBar.items![2].image = UIImage(named: "settings")
         
-        
-        updateLocationButton.setImage(UIImage(named: "locate"), for: .normal)
-        updateLocationButton.tintColor =  UIColor(named: "SpesificColor")
+//        updateLocationButton.setImage(UIImage(named: "locate"), for: .normal)
+        updateLocationButton.label = .none
+        updateLocationButton.icon = .arrowFilled
+        updateLocationButton.cornerRadius = 25.0
         updateLocationButton.addTarget(self, action: #selector(updateLocationButtonClicked), for: .touchUpInside)
-        
         mapView.addSubview(updateLocationButton)
         updateLocationButton.topAnchor.constraint(equalTo: mapView.topAnchor,constant: 0).isActive = true
+    
         
         
         
@@ -166,7 +173,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Check for Location Services
         
-        
+        let locationButton = CLLocationButton()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
             
@@ -328,25 +335,29 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         /*
          60 sn. ara ile map API'den veri alman lazım , yoksa hata verir
          */
+//        locationManager.requestWhenInUseAuthorization()
         guard (userLocation != nil) else {
             CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
             return
         }
+        mapView.removeAnnotation(anno)
+        mapView.removeAnnotations(nearByPharmacies)
+        mapView.removeAnnotations(newNearByPharmacies)
         let currentTime = Date.now
         print("openning time \(openingTime)")
         print("current time \(currentTime)")
         let diffTime = currentTime.timeIntervalSinceReferenceDate - openingTime.timeIntervalSinceReferenceDate
         if diffTime > 60 {
-            mapView.removeAnnotation(anno)
-            mapView.removeAnnotations(nearByPharmacies)
-            mapView.removeAnnotations(newNearByPharmacies)
+           
+            
+        
 //            mapView.removeOverlay(circle)
 //            mapView.removeOverlay(circle2)
             locationManager.startUpdatingLocation()
             
             self.openingTime = currentTime //açılış saatini en son değer yaıyor
         }
-        mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 4000)
+      mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 1500)
        
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -356,7 +367,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         userLocation = locations[0] as CLLocation
         let CLLCoordType = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude,
                                                   longitude: userLocation.coordinate.longitude);
-        let anno = MKPointAnnotation();
+
         anno.coordinate = CLLCoordType;
         anno.title = "Buradasınız"
         self.mapView.addAnnotation(anno);
@@ -1379,8 +1390,8 @@ private extension MKMapView {
     {
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
-            latitudinalMeters: regionRadius*1.2,
-            longitudinalMeters: regionRadius*1.2)
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.009)
         let region = MKCoordinateRegion(center: location.coordinate, span : span)
