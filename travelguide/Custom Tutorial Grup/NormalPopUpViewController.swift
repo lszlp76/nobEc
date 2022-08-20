@@ -12,15 +12,29 @@ class NormalPopUpViewController: UIViewController {
    
   
     @IBOutlet weak var backButton: UIButton!
-    
+    private var i = 0
     @IBAction func backButtonClicked(_ sender: Any) {
+        print(i)
         i -= 1
         print(i)
         switch i {
+        case 3 :
+            imageView.image = UIImage(named: "payla")
+            label.text = "Seçtiğiniz eczane ikonuna basılı tuttuğunuzda paylaşım ekranı açılır."
+            backButton.isHidden = false
+            break
+        case 2:
+            imageView.image = UIImage(named: "eczaneDetay")
+            label.text = "Araç butonu, eczaneye giden en kısa yolu otomobil ile tarif eder. Telefon butonu, eczaneyi aramanıza yardımcı olur"
+            backButton.isHidden = false
+           break
         case 1 :
             imageView.image = UIImage(named: "Tutorial")
-            label.text = "Araç butonu, eczaneye giden en kısa yolu otomobil ile tarif eder. Telefon butonu, eczaneyi aramanıza yardımcı olur"
+            label.text = "Konumunuza en yakın nöbetçi eczane kırmızı ile, yakınınızdaki diğer eczaneler mavi ikon ile gösterilir."
+            backButton.isHidden = true
             
+           
+        break
         case 0 :
             imageView.image = UIImage(named: "Tutorial")
             label.text = "Konumunuza en yakın nöbetçi eczane kırmızı ile, yakınınızdaki diğer eczaneler mavi ikon ile gösterilir."
@@ -28,7 +42,7 @@ class NormalPopUpViewController: UIViewController {
         default:
             imageView.image = UIImage(named: "Tutorial")
             label.text = "Konumunuza en yakın nöbetçi eczane kırmızı ile, yakınınızdaki diğer eczaneler mavi ikon ile gösterilir."
-            backButton.isHidden = true
+            backButton.isHidden = false
         }
     }
     static let identifier = "NormalPopUpViewController"
@@ -42,6 +56,8 @@ class NormalPopUpViewController: UIViewController {
             dialogBoxView.layer.borderWidth = 1.2
             dialogBoxView.layer.borderColor = UIColor(named: "ColorForListView")?.cgColor
             label.textColor = UIColor(named: "ColorForTabsBallons")
+        label.text = "Konumunuza en yakın nöbetçi eczane kırmızı ile, yakınınızdaki diğer eczaneler mavi ikon ile gösterilir."
+       
             //customizing the okay button
 //            okayButton.backgroundColor = UIColor(named: "ColorForTabsBallons")?.withAlphaComponent(0.85)
 //             okayButton.setTitleColor(UIColor.white, for: .normal)
@@ -50,7 +66,7 @@ class NormalPopUpViewController: UIViewController {
 //             okayButton.layer.borderColor = UIColor(named: "ColorForListView")?.cgColor
 //        // Do any additional setup after loading the view.
     }
-    private var i = 0
+    
     @IBAction func buttonTap(_ sender: Any) {
         i += 1
         switch i {
@@ -62,7 +78,7 @@ class NormalPopUpViewController: UIViewController {
            
         break
         case 2:
-            imageView.image = UIImage(named: "Tutorial")
+            imageView.image = UIImage(named: "eczaneDetay")
             label.text = "Araç butonu, eczaneye giden en kısa yolu otomobil ile tarif eder. Telefon butonu, eczaneyi aramanıza yardımcı olur"
             backButton.isHidden = false
            break
@@ -71,12 +87,11 @@ class NormalPopUpViewController: UIViewController {
             label.text = "Seçtiğiniz eczane ikonuna basılı tuttuğunuzda paylaşım ekranı açılır."
             backButton.isHidden = false
             break
-        case 4 :
-           PopUpActionViewController.showPopup(parentVC: self)
+       
             
             
         default:
-            imageView.image = UIImage(named: "")
+            imageView.image = UIImage(named: "payla")
             label.text = ""
         }
        //self.dismiss(animated: true, completion: nil)

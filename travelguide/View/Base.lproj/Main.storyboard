@@ -37,7 +37,7 @@
                             <constraint firstItem="e7y-jc-lqN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qkD-MA-5Yg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Yakındakiler" image="pharmacy" id="YW9-2x-jpb"/>
+                    <tabBarItem key="tabBarItem" title="Yakındakiler" id="YW9-2x-jpb"/>
                     <navigationItem key="navigationItem" id="pQx-Ll-DYm"/>
                     <connections>
                         <outlet property="mapView" destination="QRs-2D-LZF" id="ZQ2-Kk-8CE"/>
@@ -612,7 +612,7 @@
                                 <color key="textColor" name="ColorForListView"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.3.1   © 2022 LsZLP" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hr8-bx-s6Z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.3.2 © 2022 LsZLP" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hr8-bx-s6Z">
                                 <rect key="frame" x="0.0" y="243" width="414" height="570"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" name="ColorForListView"/>
@@ -748,7 +748,6 @@
         <image name="location.magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="page1" width="264" height="245"/>
         <image name="page3" width="239.5" height="206"/>
-        <image name="pharmacy" width="64" height="64"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="pi" width="128" height="128"/>
         <namedColor name="ColorForListView">

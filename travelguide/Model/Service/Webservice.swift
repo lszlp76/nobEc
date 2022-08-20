@@ -15,7 +15,7 @@ class Webservice {
             if let error = error {
                 print("JSON tarafı \(error.localizedDescription)")
 //                let alert = UIAlertController(title: "String?", message: "dasd", preferredStyle: .alert)
-//                CheckGPSSignal().presentViewController(alert: alert, animated: true, completion: nil)
+                CheckGPSSignal().alert(title: "Nobetçi Eczane Listesi", message: "Listeye ulaşmak için tekrar bağlantı yapınız")
                 completion(.failure(.noDATA))
                 return
             }else if let data = data {

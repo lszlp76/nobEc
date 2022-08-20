@@ -85,7 +85,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidAppear(_ animated: Bool) {
         
-        print("ulas")
+      
        
         guard  connectionManager.isNetworkAvailable()  else {
             print("no connection to internet")
@@ -149,7 +149,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.tabBarController?.tabBar.tintColor = UIColor(named: "SpesificColor")
         self.tabBarController?.tabBar.items![0].image = UIImage(named: "locate")
         self.tabBarController?.tabBar.items![1].image = UIImage(named: "list")
-        self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+        self.tabBarController?.tabBar.items![1].selectedImage?.withTintColor(UIColor (named: "ColorForListView")!)
         self.tabBarController?.tabBar.items![2].image = UIImage(named: "settings")
         
 //        updateLocationButton.setImage(UIImage(named: "locate"), for: .normal)
@@ -293,7 +293,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime:"⏩", distance: 0.0, coordinate: location.coordinate, isOnDuty:  defineNearPharmacy(newNearPharmacy: item.name! ,phoneNumber: item.phoneNumber!, pharmacyOnDutyList: pharmacyOnDutyList)))
                   
                     newNearByPharmacies.append(localPharmacies)
-                    newNearByPharmacies.sorted { ($0.distance! < $1.distance! )
+                    newNearByPharmacies.sorted { ($0.travelTime! < $1.travelTime! )
                         
                     }
                     
@@ -336,8 +336,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
          60 sn. ara ile map API'den veri alman lazım , yoksa hata verir
          */
 //        locationManager.requestWhenInUseAuthorization()
+       updateLocation()
+    }
+    
+    func updateLocation() {
         guard (userLocation != nil) else {
             CheckGPSSignal().alert(title: "Konum Bilgisi", message: "Konum bilgisi geçerli değil !\nKonum paylaşımını açın yada konumunuzu el ile girin")
+            return
+        }
+        guard  connectionManager.isNetworkAvailable()  else {
+            print("no connection to internet")
+            CheckGPSSignal().alert(title: " İnternet Bağlantısı", message: "Internete bağlı değilsiniz. \nTekrar bağlanıp deneyiniz ⚠️")
             return
         }
         mapView.removeAnnotation(anno)
@@ -596,7 +605,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     return
                 }
                 if let route = response?.routes {
-                    let sortedRoutes = route.sorted(by: { $0.distance < $1.distance}) // en küçüğe göre sort ediyor
+                    let sortedRoutes = route.sorted(by: { $0.expectedTravelTime < $1.expectedTravelTime}) // en küçüğe göre sort ediyor
                     let shortestRoute = sortedRoutes.first // sonra o dizinin ilk elemanını alıyor, böylece en kısa mesafeyi buluş oluyor
                     msf = shortestRoute!.distance/1000
                     travelTime = String(format: "%.0f",shortestRoute!.expectedTravelTime/60)
@@ -632,6 +641,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         
         demandTutorial = false// tutorial isteğini sonlandırır
+       
+        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "ColorForListView")
+        
+        //NormalPopUpViewController.showPopup(parentVC: self)
+        
+        
+        
         // view dersen tabview olarak alıyor
         let tutorial = ["Bulunduğunuz konuma en yakın eczaneleri harita üzerinde gösterir","Bulunduğunuz şehirdeki, o güne ait nöbetçi eczaneleri listeler","Kullanım ile ilgili ayarlar ","Konumunuzu günceller"]
        
@@ -802,7 +818,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
           }
       }
     @objc func tappedImage (sender: MyTapGesture){
-        
+       
         var senderTitle = String()
         senderTitle = sender.title
         switch senderTitle {
@@ -811,13 +827,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             pharmacyDutyListTab.isHidden = false
             settingsTab.isHidden = true
             locateButton.isHidden = true
-        //    NormalPopUpViewController.showPopup(parentVC: self)
+        //
+           
             break
         case "phar":
             nearPharmacyTab.isHidden = true
             pharmacyDutyListTab.isHidden = true
             settingsTab.isHidden = false
             locateButton.isHidden = true
+           
+            
             break
         case "sett":
             nearPharmacyTab.isHidden = true
@@ -837,7 +856,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             stackView.isHidden = true
             removeAnimate()
             
-            locationManager.startUpdatingLocation()
+          updateLocation()
             break
         default:
             nearPharmacyTab.isHidden = false
@@ -860,10 +879,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.mapView.isUserInteractionEnabled = false
         //animasyonu başlat
         
-        UIView.animate(withDuration: 0.25, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             
-            self.mapView.alpha = CGFloat(0.7)
-          //  self.view.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.mapView.alpha = CGFloat(0.5)
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.50)
             
             self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
@@ -1015,7 +1034,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         let localPharmacies = (PharmacyNearByAnnotation(title: item.name, subtitle: item.phoneNumber, travelTime: travelTimeAnno + " dak.", distance: distanceAnno, coordinate: location.coordinate,isOnDuty: false))
                         nearByPharmacies.append(localPharmacies)
                         nearByPharmacies.sorted(by:
-                                                    { ($0.distance!)  < ($1.distance! ) })
+                                                    { ($0.travelTime!)  < ($1.travelTime! ) })
                         addAnnotations(annos: nearByPharmacies)
                       }
                  }
@@ -1164,7 +1183,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     button.backgroundColor = .blue
                     labelView.backgroundColor = .blue
                 }
-                phoneButton.setBackgroundImage(UIImage(systemName: "phone"), for: .normal)
+                phoneButton.setBackgroundImage(UIImage(systemName: "phone.and.waveform"), for: .normal)
                 button.setBackgroundImage(UIImage(systemName: "car"), for: .normal)
                 
                 let location = CLLocation(latitude: (pinView.annotation?.coordinate.latitude)!, longitude: (pinView.annotation?.coordinate.longitude)!)
