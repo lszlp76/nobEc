@@ -665,54 +665,6 @@
             </objects>
             <point key="canvasLocation" x="1034.7826086956522" y="59.598214285714285"/>
         </scene>
-        <!--Onboarding View Controller-->
-        <scene sceneID="mF5-lD-Hlv">
-            <objects>
-                <viewController id="UDr-IU-EWc" customClass="OnboardingViewController" customModule="travelguide" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="D7r-ca-5UW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJr-4R-Nf8" customClass="OnboardingView" customModule="travelguide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANa-vh-CDc">
-                                <rect key="frame" x="107" y="715" width="200" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="cq4-hJ-Z9x"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Başlayalım">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="onBoardingTapped:" destination="UDr-IU-EWc" eventType="touchUpInside" id="78B-Yi-nfV"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="fGc-Wl-k4s"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="UJr-4R-Nf8" firstAttribute="top" secondItem="fGc-Wl-k4s" secondAttribute="top" id="ECY-XV-hvz"/>
-                            <constraint firstItem="UJr-4R-Nf8" firstAttribute="leading" secondItem="fGc-Wl-k4s" secondAttribute="leading" id="GvJ-go-hjC"/>
-                            <constraint firstItem="ANa-vh-CDc" firstAttribute="centerX" secondItem="D7r-ca-5UW" secondAttribute="centerX" id="JP6-1u-BXG"/>
-                            <constraint firstItem="UJr-4R-Nf8" firstAttribute="trailing" secondItem="fGc-Wl-k4s" secondAttribute="trailing" id="ShB-3I-NAZ"/>
-                            <constraint firstItem="fGc-Wl-k4s" firstAttribute="bottom" secondItem="ANa-vh-CDc" secondAttribute="bottom" constant="35" id="bZv-UB-RH3"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="ANa-vh-CDc" secondAttribute="bottom" constant="20" id="gfx-jt-jhO"/>
-                            <constraint firstItem="fGc-Wl-k4s" firstAttribute="bottom" secondItem="UJr-4R-Nf8" secondAttribute="bottom" id="jcm-HK-zit"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="onBoardingButton" destination="ANa-vh-CDc" id="eFN-YX-oYL"/>
-                        <outlet property="onBoardingView" destination="UJr-4R-Nf8" id="Mjc-jL-Qiz"/>
-                        <segue destination="ZGR-tL-Ucr" kind="presentation" identifier="toTabView" modalPresentationStyle="fullScreen" id="K8K-UJ-6gL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ydU-bO-ce4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1239.1304347826087" y="-897.32142857142856"/>
-        </scene>
         <!--Ayarlar-->
         <scene sceneID="l41-nJ-Tee">
             <objects>
@@ -735,7 +687,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PFk-Ew-Zb3"/>
-        <segue reference="K8K-UJ-6gL"/>
+        <segue reference="9nJ-5P-Sf6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="SplashScreenNobEc" width="547" height="750"/>

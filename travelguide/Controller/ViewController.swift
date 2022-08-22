@@ -116,7 +116,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 //            MKMapViewDefaultAnnotationViewReuseIdentifier)
 //
         if userDefault.getValueForSwitch(keyName: "tutorial")! ||
-            !(userDefault.getValueForSwitch(keyName: "firstUsage")! )  { tutorialActivate() }
+            !(userDefault.getValueForSwitch(keyName: "firstUsage")! )  {
+            
+            //tutorialActivate()  __> BURADAKİ COMMENTİ KALDIRIRSAN AÇILIŞTA FORMASYON YAPAR
+            
+        }
         
         
         if didPerformGeocode == true
@@ -349,9 +353,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             CheckGPSSignal().alert(title: " İnternet Bağlantısı", message: "Internete bağlı değilsiniz. \nTekrar bağlanıp deneyiniz ⚠️")
             return
         }
-        mapView.removeAnnotation(anno)
-        mapView.removeAnnotations(nearByPharmacies)
-        mapView.removeAnnotations(newNearByPharmacies)
+//       mapView.removeAnnotation(anno)
+//        mapView.removeAnnotations(nearByPharmacies)
+//        mapView.removeAnnotations(newNearByPharmacies)
         let currentTime = Date.now
         print("openning time \(openingTime)")
         print("current time \(currentTime)")
@@ -365,6 +369,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             locationManager.startUpdatingLocation()
             
             self.openingTime = currentTime //açılış saatini en son değer yaıyor
+        }
+        else {
+        mapView.removeAnnotation(anno)
+           let annox = MKPointAnnotation()
+            annox.title = "Buradasınız"
+            annox.coordinate = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude,
+                                                      longitude: userLocation.coordinate.longitude);
+
+            self.mapView.addAnnotation(annox)
+            
+           
         }
       mapView.centerLocation(userLocation,regionRadius: regionDiameter ?? 1500)
        
@@ -649,7 +664,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         
         // view dersen tabview olarak alıyor
-        let tutorial = ["Bulunduğunuz konuma en yakın eczaneleri harita üzerinde gösterir","Bulunduğunuz şehirdeki, o güne ait nöbetçi eczaneleri listeler","Kullanım ile ilgili ayarlar ","Konumunuzu günceller"]
+        let tutorial = ["Bulunduğunuz konuma en yakın eczaneleri harita üzerinde gösterir   ▶️","Bulunduğunuz şehirdeki, o güne ait nöbetçi eczaneleri listeler   ▶️","Kullanım ile ilgili ayarlar    ▶️ ","Konumunuzu günceller    ▶️"]
        
         /*** IMAGEVİEW oluşturma */
         
@@ -727,12 +742,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let locateButtontutorialImage = MyTapGesture (target: self, action: #selector(self.tappedImage))
         locateButtontutorialImage.title = "loca"
         
+       
+        
         nearPharmacytutorialImage.delegate = self
         pharmacyDutyListTabtutorialImage.delegate = self
         settingsTabtutorialImage.delegate = self
         locateButtontutorialImage.delegate = self
+      
         
-        
+       
         nearPharmacyTab.addGestureRecognizer(nearPharmacytutorialImage)
         pharmacyDutyListTab.addGestureRecognizer(pharmacyDutyListTabtutorialImage)
         settingsTab.addGestureRecognizer(settingsTabtutorialImage)
@@ -742,7 +760,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         pharmacyDutyListTab.isUserInteractionEnabled = true
         settingsTab.isUserInteractionEnabled = true
         locateButton.isUserInteractionEnabled = true
-        
+       
         nearPharmacyTab.isHidden = false
         settingsTab.isHidden = true
         locateButton.isHidden = true
@@ -817,6 +835,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
               UIApplication.shared.open(url, options: [:], completionHandler: nil)
           }
       }
+    @objc func mapViewTutorialTouched (sender:MyTapGesture
+    ){
+        print("ııı")
+    }
+    
     @objc func tappedImage (sender: MyTapGesture){
        
         var senderTitle = String()

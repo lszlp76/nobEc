@@ -62,7 +62,16 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     func configureSettingsList () {
         
-        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç ",settingsIcon: UIImage(named: "teach")!))
+        /*
+         TUTORIAL KISMI AKTİF DEĞİL. COMMENT İFADESİNİ KALDIRIRSAN ÇALIŞIR
+         */
+        
+//        self.settingsListElement.append(SettingsModelStructure(switchOff: true, settingsCellText:  "Uygulama öğreticisini aç ",settingsIcon: UIImage(named: "teach")!))
+//
+        
+        
+        
+        
         /*
          Tüm eczaneleri göster gereksiz bir özellik olduğu için iptal edildi.
          ancak tüm detayları duruyor code içinde
