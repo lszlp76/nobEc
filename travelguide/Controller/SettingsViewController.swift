@@ -112,20 +112,21 @@ class SettingsViewController: UIViewController ,UITableViewDelegate,UITableViewD
         
         
         switch indexPath.row {
-        case 0 :
-            (print("toggle"))
-            break
-        case 1:
+//        case 0 :
+//            (print("toggle"))
+//            break
+//
+        case 0:
             rateApp()
             break
-        case 2:
+        case 1:
             gpsSignalLevel()
             break
-        case 3:
+        case 2:
             self.performSegue(withIdentifier: "toWebView", sender: nil)
             
             break
-        case 4 :
+        case 3 :
             self.performSegue(withIdentifier: "toAboutView", sender: nil)
         default : ( print("default"))
         }

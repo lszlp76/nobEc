@@ -118,6 +118,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if userDefault.getValueForSwitch(keyName: "tutorial")! ||
             !(userDefault.getValueForSwitch(keyName: "firstUsage")! )  {
             
+            
+            
+            //onboarding off burada yapılıyor, ASLINDA TUTORIAL İÇİNDEYDİ, AMA İPTAL EDİLİNCE BURAYA GELDİ
+            if !(userDefault.getValueForSwitch(keyName: "firstUsage")!){
+                UserDefaults().setValueForAllPharmacyOption(value: true, keyName: "firstUsage")
+            }
             //tutorialActivate()  __> BURADAKİ COMMENTİ KALDIRIRSAN AÇILIŞTA FORMASYON YAPAR
             
         }

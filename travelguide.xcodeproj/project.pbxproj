@@ -33,7 +33,6 @@
 		F97E351B286E0560003146F2 /* SettingsModelStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351A286E0560003146F2 /* SettingsModelStructure.swift */; };
 		F97E351D286E0CD3003146F2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E351C286E0CD3003146F2 /* Notifications.swift */; };
 		F9A0459E28A7C79A005FF6A6 /* PharmacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */; };
-		F9A045A028A84E87005FF6A6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */; };
 		F9A045A328A8FC3B005FF6A6 /* NormalPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A045A228A8FC3B005FF6A6 /* NormalPopUpViewController.swift */; };
 		F9A045A528A8FC49005FF6A6 /* PopUpActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A045A428A8FC49005FF6A6 /* PopUpActionViewController.swift */; };
 		F9A045A728A8FC60005FF6A6 /* CustomView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A045A628A8FC60005FF6A6 /* CustomView.storyboard */; };
@@ -80,7 +79,6 @@
 		F97E351A286E0560003146F2 /* SettingsModelStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModelStructure.swift; sourceTree = "<group>"; };
 		F97E351C286E0CD3003146F2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F9A0459D28A7C79A005FF6A6 /* PharmacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyView.swift; sourceTree = "<group>"; };
-		F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		F9A045A228A8FC3B005FF6A6 /* NormalPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalPopUpViewController.swift; sourceTree = "<group>"; };
 		F9A045A428A8FC49005FF6A6 /* PopUpActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpActionViewController.swift; sourceTree = "<group>"; };
 		F9A045A628A8FC60005FF6A6 /* CustomView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomView.storyboard; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 				F9149C4F285E456300676DCB /* ViewController.swift */,
 				F97E3510286CC63A003146F2 /* ChoosenLocationViewViewController.swift */,
 				F945BF34289FDC86000EF9FB /* OnboardingPageViewController.swift */,
-				F9A0459F28A84E87005FF6A6 /* AboutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -303,7 +300,6 @@
 				F9F93C9928676BCD001E103A /* Location.swift in Sources */,
 				F97E3519286E01BA003146F2 /* SettingsCellModelTableViewCell.swift in Sources */,
 				F94CB9B7286E12F40038D47B /* UserDefaults.swift in Sources */,
-				F9A045A028A84E87005FF6A6 /* AboutViewController.swift in Sources */,
 				F902FDEC289B1F2B00735BE1 /* MapController.swift in Sources */,
 				F945BF35289FDC86000EF9FB /* OnboardingPageViewController.swift in Sources */,
 				F9E5A32928897DCC00883D11 /* JSONFile.swift in Sources */,
@@ -494,7 +490,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -528,7 +524,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = lszlp.nobetciEczane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
